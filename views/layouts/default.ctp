@@ -8,6 +8,7 @@
 	</title>
 	<?php
 		echo $html->meta('icon');
+		echo $html->css('pvr');
 		echo $html->css('screen');
 		//echo $html->css('print');
 		echo '<!--[if IE]>';
@@ -20,27 +21,29 @@
 </head>
 <body>
 	<div class="container showgrid">
-		<div class="span-24">
-			<h3>Pvr</h3>
-		</div>
 
-		   <div class="span-24">
-		        Header
+			<div class="span-24">
+		        <div style="margin: 10px 0 50px 50px;">Header</div>
 		    </div>
 		    <div class="span-4">
 		        Left sidebar
+		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
 		    </div>
 		
 		    <div class="span-16">
-		        <div class="span-8">
-		            Box1
-		        </div>
-		        <div class="span-4">
-		            Box2
-		        </div>
-		        <div class="span-4 last">
-		            Box3
-		        </div>
+		    	<div class="clearfix">
+			        <div class="span-8">
+			            <div style="background-color: #ccc; padding-left: 20px;">Box1</div>
+			      	</div>
+			        <div class="span-4">
+			       		Box2
+			        </div>
+			        <div class="span-4 last">
+			            Box3
+			        </div>
+			   	</div>
+
 		        <div class="span-16 last">
 					<?php $session->flash(); ?>
 		
@@ -50,6 +53,7 @@
 		
 		    <div class="span-4 last">
 		        Right sidebar
+		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
 		    </div>
 
 
