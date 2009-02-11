@@ -95,7 +95,7 @@ class User extends AppModel {
 							),
 						);
 //--------------------------------------------------------------------
-    var $actsAs = array('Acl' => array('requester'));
+    //var $actsAs = array('Acl' => array('requester'));
 //--------------------------------------------------------------------    
     function parentNode() {
         if (!$this->id && empty($this->data)) {

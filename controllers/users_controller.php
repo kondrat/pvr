@@ -86,13 +86,16 @@ class UsersController extends AppController {
 		
 
 		if ( !empty($this->data) ) {
-			/*
-			$this->data['User']['group_id'] = 4;
-			*/			
+		
 			$this->User->create();
 
 			if ( $this->User->save( $this->data) ) {
+				
 				$a = $this->User->read();
+				
+				$this->Acl->Aro->create( array('parent_id' => $a['User']['group_id'], 'foreign_key' => $this->User->id, 'model'=> 'User', 'alias' => 'User::'.$this->User->id) );
+				$this->Acl->Aro->save();
+				
 				//debug($a);
 				$this->Auth->login($a);
                	$this->redirect('/users/thanks');
@@ -110,7 +113,8 @@ class UsersController extends AppController {
 		$this->set('groups', $this->User->Group->find('list'));
 
 	}
-
+	function thanks() {
+	}
 //--------------------------------------------------------------------
     function reset() {
 
@@ -172,7 +176,7 @@ class UsersController extends AppController {
 			if ($this->User->save($this->data)) 
             {
                 // we might have to reset the parent aro
-                $this->InheritAcl->checkAroParent('User', $this->data['User']['id'], 'Role', $this->data['User']['role_id']);
+                $this->InheritAcl->checkAroParent('User', $this->data['User']['id'], 'User', $this->data['User']['group_id']);
 				$this->Session->setFlash('The User has been saved');
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
@@ -183,7 +187,7 @@ class UsersController extends AppController {
         {
 			$this->data = $this->User->read(null, $id);
 		}
-		$roles = $this->User->Role->find('list');
+		$roles = $this->User->Group->find('list');
 		$this->set(compact('roles'));
 	}
 
