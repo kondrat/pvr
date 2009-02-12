@@ -23,7 +23,21 @@
 	<div class="container showgrid">
 
 			<div class="span-24">
-		        <div style="margin: 10px 0 50px 50px;">Header</div>
+				<div>
+					<?php
+						if ($session->check('Auth.User.username')) {
+							echo $session->read('Auth.User.username');
+						}
+					?>
+		    	<p>
+		    		<?php 
+		    			echo $html->link('login',array('controller'=>'users','action'=>'login')).'&nbsp';
+		    			echo $html->link('logout',array('controller'=>'users','action'=>'logout')).'&nbsp';
+		    			echo $html->link('group',array('controller'=>'groups','action'=>'index')).'&nbsp';
+		    			echo $html->link('album',array('controller'=>'albums','action'=>'index')).'&nbsp';
+		    			echo $html->link('image',array('controller'=>'images','action'=>'index')).'&nbsp';
+		    		?>
+		    	</p>
 		    </div>
 		    <div class="span-4">
 		        Left sidebar
@@ -46,7 +60,12 @@
 
 		        <div class="span-16 last">
 					<?php $session->flash(); ?>
-		
+					<?php
+						if ($session->check('Message.auth')) {						
+								$session->flash('auth',array('class'=>'error'));							
+						}
+					?>
+
 					<?php echo $content_for_layout; ?>
 		        </div>
 		    </div>

@@ -12,7 +12,7 @@ class AppController extends Controller {
             if($this->viewPath == 'pages' && $this->params['action'] != 'admin_index') {
                 $this->Auth->allow('*');
             } else {
-                $this->Auth->authorize = 'controller';
+                $this->Auth->authorize = 'actions';
 	            if ( in_array( low($this->params['controller']), $this->publicControllers) ) {
                 	//$this->Auth->allow('*');
                 	$this->Auth->deny('pages/admin_index');
@@ -26,7 +26,7 @@ class AppController extends Controller {
 	
 	function isAuthorized() {
 
-            if ($this->Auth->user('role') == 'admin') {
+            if ($this->Auth->user('group_id') == '1') {
                 return true;
             } else {
                 return false;

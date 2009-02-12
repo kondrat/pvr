@@ -12,7 +12,7 @@ class UsersController extends AppController {
 
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow( 'logout', 'reg', 'reset', 'acoset','buildAcl');
+        $this->Auth->allow( 'logout', 'reg', 'reset', 'acoset','aroset','permset'/*,'buildAcl'*/);
         //to Del:
         $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
@@ -93,7 +93,7 @@ class UsersController extends AppController {
 				
 				$a = $this->User->read();
 				
-				$this->Acl->Aro->create( array('parent_id' => $a['User']['group_id'], 'foreign_key' => $this->User->id, 'model'=> 'User', 'alias' => 'User::'.$this->User->id) );
+				$this->Acl->Aro->create( array('parent_id' => $a['User']['group_id'], 'foreign_key' => $this->User->id, 'model'=> 'User', 'alias' => $a['User']['username'].'::'.$this->User->id) );
 				$this->Acl->Aro->save();
 				
 				//debug($a);
@@ -267,7 +267,7 @@ class UsersController extends AppController {
 	}
 //-------------------------------------------------------------------
 	function acoset() {
-		$this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
+		$this->Acl->Aco->create(array('parent_id' => 30, 'alias' => 'Album::'.'4','model'=>'Album','foreign_key' => '4' ));
 		$this->Acl->Aco->save();
 		echo 'aro ok';
 		die;
@@ -281,7 +281,7 @@ class UsersController extends AppController {
 	}
 	function permset() {
 		
-		$this->Acl->allow('admin', 'controllers');
+		$this->Acl->allow('moderator', 'albums');
 
 		echo 'prem ok';
 		die;
@@ -307,7 +307,7 @@ class UsersController extends AppController {
  
         App::import('Core', 'File');
         //$Controllers = Configure::listObjects('controller');
-        $Controllers = array('Categories', 'Gifts', 'News','Users','Orders');
+        $Controllers = array('Users', 'Groups', 'Albums','Images');
         /*
         							[0] => App
     								[1] => Pages
