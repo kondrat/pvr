@@ -8,7 +8,7 @@
 # Target compatibility:         mysqldump+mysqlcli 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0 RC3
-# Date/time:                    2009-02-12 21:44:48
+# Date/time:                    2009-02-13 21:00:41
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0*/;
@@ -36,7 +36,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `acos` (
   `lft` int(10) DEFAULT NULL,
   `rght` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 
 
@@ -47,7 +47,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `acos` (
 LOCK TABLES `acos` WRITE;
 /*!40000 ALTER TABLE `acos` DISABLE KEYS*/;
 REPLACE INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-	(1,NULL,NULL,NULL,'controllers',1,106),
+	(1,NULL,NULL,NULL,'controllers',1,112),
 	(2,1,NULL,NULL,'Users',2,35),
 	(3,2,NULL,NULL,'index',3,4),
 	(4,2,NULL,NULL,'login',5,6),
@@ -99,7 +99,10 @@ REPLACE INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, 
 	(50,41,NULL,NULL,'admin_edit',101,102),
 	(51,41,NULL,NULL,'admin_delete',103,104),
 	(59,30,'Album',5,'Album::5',79,80),
-	(60,30,'Album',4,'Album::4',81,82);
+	(60,30,'Album',4,'Album::4',81,82),
+	(61,1,NULL,NULL,'Pages',106,111),
+	(62,61,NULL,NULL,'display',107,108),
+	(63,61,NULL,NULL,'admin_index',109,110);
 /*!40000 ALTER TABLE `acos` ENABLE KEYS*/;
 UNLOCK TABLES;
 
@@ -116,7 +119,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `albums` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 
 
@@ -149,7 +152,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `aros` (
   `lft` int(10) DEFAULT NULL,
   `rght` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 
 

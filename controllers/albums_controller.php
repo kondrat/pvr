@@ -20,17 +20,26 @@ class AlbumsController extends AppController {
 		
 		$aroAlias = 'user1::3';
 		$acoAlias = 'Album::'.$id;
-
-		if ($this->Acl->check($aroAlias, $acoAlias)) {
-		 
-			if (!$id) {
-				$this->Session->setFlash(__('Invalid Album.', true));
-				$this->redirect(array('action'=>'index'));
-			}
-			$this->set('album', $this->Album->read(null, $id));
-			debug($aroAlias.' '.$acoAlias);
+		$aroPath = $this->Acl->Aro->node($aroAlias);
+		$acoPath = $this->Acl->Aco->node($acoAlias);
+		$foreignKey = $this->Auth->user('id');
+		if (empty($aroPath) || empty($acoPath)) {
+			$this->Session->setFlash(__('ACL check problem.', true));
+			$this->redirect( $this->referer() );
 		} else {
-			$this->redirect(array('controller'=>'albums','action'=>'index') );
+			
+			if ( $this->Acl->check( array('model' => 'User', 'foreign_key' => $foreignKey), $acoAlias) ) {
+			 
+				if (!$id) {
+					$this->Session->setFlash(__('Invalid Album.', true));
+					$this->redirect(array('action'=>'index'));
+				}
+				$this->set('album', $this->Album->read(null, $id));
+				//debug($aroAlias.' '.$acoAlias);
+			} else {
+				$this->redirect(array('controller'=>'albums','action'=>'index') );
+			}
+			
 		}
 		
 		
