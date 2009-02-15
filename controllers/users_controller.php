@@ -12,7 +12,7 @@ class UsersController extends AppController {
 
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow( 'logout', 'reg', 'reset', 'acoset','aroset','permset'/*,'buildAcl'*/);
+        $this->Auth->allow( 'logout', 'reg', 'reset', 'acoset','aroset','permset','buildAcl');
         //to Del:
         $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
@@ -307,7 +307,7 @@ class UsersController extends AppController {
  
         App::import('Core', 'File');
         //$Controllers = Configure::listObjects('controller');
-        $Controllers = array('Users', 'Groups', 'Albums','Images');
+        $Controllers = array('Pages');
         /*
         							[0] => App
     								[1] => Pages

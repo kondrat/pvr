@@ -135,4 +135,5 @@ class AlbumsController extends AppController {
 	}
 
 }
+
 ?>

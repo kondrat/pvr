@@ -8,7 +8,7 @@
 # Target compatibility:         HeidiSQL w/ MySQL Server 4.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0 RC3
-# Date/time:                    2009-02-16 01:03:47
+# Date/time:                    2009-02-16 01:11:58
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
