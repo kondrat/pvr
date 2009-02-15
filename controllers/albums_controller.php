@@ -21,14 +21,14 @@ class AlbumsController extends AppController {
 		$aroAlias = 'user1::3';
 		$acoAlias = 'Album::'.$id;
 
-		if ($this->Acl->check($aroAlias, $acoAlias)) {
+		if ( $this->Acl->check( array('model' => 'User', 'foreign_key' => $this->Auth->user('id') ), array('model' => 'Album', 'foreign_key' => $id) ) ) {
 		 
 			if (!$id) {
 				$this->Session->setFlash(__('Invalid Album.', true));
 				$this->redirect(array('action'=>'index'));
 			}
 			$this->set('album', $this->Album->read(null, $id));
-			debug($aroAlias.' '.$acoAlias);
+			//debug($aroAlias.' '.$acoAlias);
 		} else {
 			$this->redirect(array('controller'=>'albums','action'=>'index') );
 		}
@@ -41,6 +41,7 @@ class AlbumsController extends AppController {
 			$this->Album->create();
 			if ($this->Album->save($this->data)) {
 				$this->Session->setFlash(__('The Album has been saved', true));
+				$this->Acl->allow( array('model' => 'User', 'foreign_key' => $this->Auth->User('id') ), array('model' => 'Album', 'foreign_key' => $this->Album->id),'*' );
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Album could not be saved. Please, try again.', true));
@@ -49,6 +50,7 @@ class AlbumsController extends AppController {
 	}
 
 	function edit($id = null) {
+		debug( $this->Acl->Aco->node( array('model' => 'Album', 'foreign_key' => $id ) ) );
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Album', true));
 			$this->redirect(array('action'=>'index'));
