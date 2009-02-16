@@ -23,14 +23,10 @@
 	<div class="container showgrid">
 
 			<div class="span-24">
-				<div>
-					<?php
-						if ($session->check('Auth.User.username')) {
-							echo $session->read('Auth.User.username');
-						}
-					?>
+
 		    	<p>
 		    		<?php 
+		    			echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'display')).'&nbsp';
 		    			echo $html->link('login',array('controller'=>'users','action'=>'login')).'&nbsp';
 		    			echo $html->link('logout',array('controller'=>'users','action'=>'logout')).'&nbsp';
 		    			echo $html->link('group',array('controller'=>'groups','action'=>'index')).'&nbsp';
@@ -48,7 +44,15 @@
 		    <div class="span-16">
 		    	<div class="clearfix">
 			        <div class="span-8">
-			            <div style="background-color: #ccc; padding-left: 20px;">Box1</div>
+			            <div style="background-color: #ccc; padding-left: 20px;">
+							<?php
+								if ($session->check('Auth.User.username')) {
+									echo $session->read('Auth.User.username');
+								} else {
+									echo 'Username';
+								}
+							?>
+						</div>
 			      	</div>
 			        <div class="span-4">
 			       		Box2
