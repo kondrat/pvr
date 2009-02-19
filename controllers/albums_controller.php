@@ -6,7 +6,7 @@ class AlbumsController extends AppController {
 	
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow( 'index');
+        $this->Auth->allow( 'index','useralbum');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
     }
@@ -15,7 +15,19 @@ class AlbumsController extends AppController {
 		$this->Album->recursive = 0;
 		$this->set('albums', $this->paginate());
 	}
+//--------------------------------------------------------------------
+	function useralbum() {
+		$currentUser = null;
+		$currentUser=$this->Auth->user('id');
+		if( $currentUser != null ){
+			$currentAlbum = $this->Album->find('first',array('conditions'=>array('Album.user_id' => $currentUser),'contain'=>false ) );
+			$this->set('currentAlbum',$currentAlbum);
+			//$this->render('useralbum');
+		}
 
+		$this->set('albums', $currentAlbum );
+	}
+//--------------------------------------------------------------------
 	function view($id = null) {
 		
 		$aroAlias = 'user1::3';

@@ -85,6 +85,14 @@ class User extends AppModel {
 						  );
 //--------------------------------------------------------------------
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	var $hasMany = array('Album' => array('className' => 'Album',
+								'foreignKey' => 'user_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'counterCache' => '')
+						);
+						
 	var $belongsTo = array(
 			'Group' => array('className' => 'Group',
 								'foreignKey' => 'group_id',
@@ -95,7 +103,7 @@ class User extends AppModel {
 							),
 						);
 //--------------------------------------------------------------------
-    //var $actsAs = array('Acl' => array('requester'));
+    var $actsAs = array('Acl' => array('requester'));
 //--------------------------------------------------------------------    
     function parentNode() {
         if (!$this->id && empty($this->data)) {

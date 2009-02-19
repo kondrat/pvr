@@ -46,8 +46,8 @@ class UsersController extends AppController {
 
          			}
 
-					if (isset($this->data['User']['onfly']) && $this->data['User']['onfly'] == true ) {
-						$this->redirect( $this->referer() );	
+					if ($this->referer()=='/') {
+						$this->redirect( array('controller'=>'albums','action'=>'useralbum') );	
 					} else {
 						$this->redirect( $this->Auth->redirect() );
 					}
@@ -81,10 +81,7 @@ class UsersController extends AppController {
 	function reg() {
 		//debug($this->data);
 		$this->pageTitle = 'Регистрация';
-		$this->subheaderTitle = 'РЕГИСТРАЦИЯ';
 		
-		
-
 		if ( !empty($this->data) ) {
 		
 			$this->User->create();
@@ -92,10 +89,13 @@ class UsersController extends AppController {
 			if ( $this->User->save( $this->data) ) {
 				
 				$a = $this->User->read();
-				
-				$this->Acl->Aro->create( array('parent_id' => $a['User']['group_id'], 'foreign_key' => $this->User->id, 'model'=> 'User', 'alias' => $a['User']['username'].'::'.$this->User->id) );
-				$this->Acl->Aro->save();
-				
+				unset($this->data);
+				$this->data['Album']['user_id']=$this->User->id;
+				$this->data['Album']['name'] = 'newAlbum';
+				$this->data['Album']['image'] = 'default.jpg';
+				$this->User->Album->create();
+				if($this->User->Album->save($this->data) ){
+				}
 				//debug($a);
 				$this->Auth->login($a);
                	$this->redirect('/users/thanks');

@@ -3,3 +3,27 @@
 	border: 1px solid #ccc;
 	padding: 5px;
 }
+.signup {
+	border: 1px solid #ccc;
+	background-color: #efe;	
+	margin: 10px 0 0 0;
+	padding: 53px 90px;
+}
+/*albums calsses*/
+p.album_image a img {
+	border: 1px solid #777 ;
+	background-color: white;
+	padding: 0px;
+}
+
+div.album img {
+	padding: 2px 5px 5px 0px;
+	background: url('../img/shadow2.png') no-repeat	;
+}
+.album_p {
+	margin: 0;
+}
+.album_span {
+	color:#2361C7;
+	font-weight: bold;
+}
