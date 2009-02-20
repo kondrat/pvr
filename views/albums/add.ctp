@@ -5,10 +5,11 @@
 	<?php
 		echo $form->input('name');
 		echo $form->input('image');
-		echo $form->input('image_count');
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->submit('Submit',array('class'=>'addAlbum') );?>
+<?php echo $form->end();?>
+<div id="ajax-save-message"></div>
 </div>
 <div class="actions">
 	<ul>

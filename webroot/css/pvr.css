@@ -27,3 +27,9 @@ div.album img {
 	color:#2361C7;
 	font-weight: bold;
 }
+/*ajax*/
+#ajax-save-message {
+	color: red;
+	font-weight: bold;
+	font-size: 30pt;
+}

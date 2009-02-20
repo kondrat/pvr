@@ -47,9 +47,25 @@ class AlbumsController extends AppController {
 		
 		
 	}
-
+//--------------------------------------------------------------------
 	function add() {
 		if (!empty($this->data)) {
+
+			if ($this->RequestHandler->isAjax()) {
+				if ($this->Album->save($this->data)) {
+						echo "successSSS\n<br />";
+				} else {
+					//debug($this->Album->invalidFields());
+					//$this->layout = 'default';
+					//$this->Session->setFlash(__('The Album could not be saved. Please, try again.', true));
+					$errors=$this->Album->invalidFields();
+					echo $errors['name'];//__('The Album could not be saved. Please, try again.');
+				}
+				Configure::write('debug', 0);
+				$this->autoRender = false;
+			 	exit();
+			}
+			
 			$this->Album->create();
 			if ($this->Album->save($this->data)) {
 				$this->Session->setFlash(__('The Album has been saved', true));

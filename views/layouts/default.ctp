@@ -15,7 +15,9 @@
 		echo $html->css('ie');
 		echo '<![endif]-->';
 		//echo $html->css('cake.generic');
-
+		echo $javascript->link('jquery-1.3.2.min');
+		echo $javascript->link('jquery.form');
+		echo $javascript->link('pvr');
 		echo $scripts_for_layout;
 	?>
 </head>
