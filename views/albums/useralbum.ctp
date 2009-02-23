@@ -16,10 +16,13 @@
 			<p><?php echo $html->link(__('Delete', true), array('action'=>'delete', $albums['Album']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $albums['Album']['id'])); ?></p>
 		</div>
 		<div class="span-10 last">
-			<?php echo $form->create('Image', array( 'type' => 'file') );?>
+			<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 				<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>__('Upload Image',true) ) ); ?>
-			<?php echo $form->end(__('Submit',true));?>
+				<?php echo $form->hidden( 'album_id', array('value'=>$albums['Album']['id']) ); ?>
+				<?php echo $form->button('Upload Text',array('onClick'=>'$(\'#storyEditForm\').ajaxSubmit({target: \'#storyTextUpload\',url: \''.$html->url('/images/add').'\'}); return false;')); ?>
+			<?php echo $form->end();?>
 		</div>	
+		<div id="uploadOutput"></div>
 	</div>
 	<div class="actions">
 		<ul>
