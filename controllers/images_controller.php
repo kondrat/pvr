@@ -83,8 +83,9 @@ class ImagesController extends AppController {
 						if ($this->Image->save($this->data)) {
 							echo "successSSS\n<br />";
 							Configure::write('debug', 0);
-							$this->render('useralbum','ajax');
-			 		//exit();				
+							$this->autoRender = false;
+							//$this->render('useralbum','ajax');
+			 				exit();				
 							$this->Session->setFlash( __('The Image has been saved', true) );
 							//$this->redirect( array('controller' => 'albums','action' => 'useralbum',$this->data['Image']['album_id']) );
 						} else {					
