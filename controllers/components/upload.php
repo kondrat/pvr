@@ -122,7 +122,7 @@
 					
 			} else {
 				//debug( $this->upload_error($file['error']) );
-				$this->error('Проблема при загрузке файла: '.$this->upload_error($file['error']) );
+				$this->error('Проблемmmmmа при загрузке файла: '.$this->upload_error($file['error']) );
 			}
 
 			if( $this->errors != false ) {

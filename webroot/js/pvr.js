@@ -15,3 +15,24 @@ jQuery(document).ready( function(){
 		return false;
 	})
 });
+
+//'onClick'=>'$(\'#storyEditForm\').ajaxSubmit({target: \'#storyTextUpload\',url: \''.$html->url('/images/add').'\'}); return false;'
+
+jQuery(document).ready( function(){
+
+	$('#tuda').click(function(){
+
+		$(this).parents("form:first").ajaxSubmit({
+			url: '/pvr/images/addAjax',
+			success: function(responseText, responseCode) {
+				$('#storyTextUpload').hide().html(responseText).fadeIn();
+					setTimeout(function(){
+									$('#storyTextUpload').fadeOut();
+								}, 50000
+					);
+				},
+			resetForm: true
+			});
+		return false;
+	})
+});
