@@ -19,10 +19,12 @@
 			<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 				<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>__('Upload Image',true) ) ); ?>
 				<?php echo $form->hidden( 'album_id', array('value'=>$albums['Album']['id']) ); ?>
-				<?php echo $form->button('Upload Text',array('onClick'=>'$(\'#storyEditForm\').ajaxSubmit({target: \'#storyTextUpload\',url: \''.$html->url('/images/add').'\'}); return false;')); ?>
+				<?php //echo $form->button('Upload Text',array('onClick'=>'$(\'#storyEditForm\').ajaxSubmit({target: \'#storyTextUpload\',url: \''.$html->url('/images/add').'\'}); return false;')); ?>
+				<?php echo $form->submit('tuda',array('id' => 'tuda') );?>
 			<?php echo $form->end();?>
+			
 		</div>	
-		<div id="uploadOutput"></div>
+		<div id="storyTextUpload"></div>
 	</div>
 	<div class="actions">
 		<ul>

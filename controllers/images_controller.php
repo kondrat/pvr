@@ -16,7 +16,9 @@ class ImagesController extends AppController {
 
 	function index() {
 		$this->Image->recursive = 0;
+		$this->paginate['limit']=5;
 		$this->set('images', $this->paginate());
+
 	}
 
 	function view($id = null) {
@@ -27,8 +29,9 @@ class ImagesController extends AppController {
 		$this->set('image', $this->Image->read(null, $id));
 	}
 //--------------------------------------------------------------------
-	function add() {
-		if (!empty($this->data)) { 
+	function addAjax() {
+		Configure::write('debug', 0);
+		if (!empty($this->data) ) {
 			$file = array();
 			// set the upload destination folder
 			$destinationB = WWW_ROOT.'img'.DS.'gallery'.DS.'b'.DS;
@@ -37,8 +40,10 @@ class ImagesController extends AppController {
 			// grab the file
 			$file = $this->data['Image']['userfile'];
 			//debug($file);
-			if ($file['error'] == 4) {	
-				$this->Session->setFlash('Файл не загружен');			
+			if ( !is_array($file) || $file == array() ||$file['error'] == 4) {	
+				echo __('image wasn\'t uploaded');
+				$this->autoRender = false;
+				exit();			
 			} else {									
 					// upload the image using the upload component
 					for ( $i=0; $i<=1; $i++) {
@@ -60,10 +65,10 @@ class ImagesController extends AppController {
 							if( is_array($errors) ) { 
 								$errors = implode("<br />",$errors); 
 							}
-			   
-								$this->Session->setFlash($errors);
 								@unlink($destinationB.$this->data['Image']['image']);
-								$this->redirect(array('action' => 'add'), null, true);
+								echo $errors;
+								$this->autoRender = false;
+				 				exit();
 						}					
 					}
 						
@@ -81,10 +86,11 @@ class ImagesController extends AppController {
 						
 						$this->Image->create();
 						if ($this->Image->save($this->data)) {
-							echo "successSSS\n<br />";
-							Configure::write('debug', 0);
-							$this->render('useralbum','ajax');
-			 		//exit();				
+														
+								echo __('The Image has been saved');
+								$this->autoRender = false;
+				 				exit();
+				 						
 							$this->Session->setFlash( __('The Image has been saved', true) );
 							//$this->redirect( array('controller' => 'albums','action' => 'useralbum',$this->data['Image']['album_id']) );
 						} else {					
@@ -92,6 +98,8 @@ class ImagesController extends AppController {
 							if ($this->Upload->result != null) {
 								@unlink($destinationB.$this->Upload->result);
 								@unlink($destinationS.$this->Upload->result);
+								$this->autoRender = false;
+				 				exit();
 							}
 						}
 						
