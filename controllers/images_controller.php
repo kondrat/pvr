@@ -8,7 +8,7 @@ class ImagesController extends AppController {
   function beforeFilter() {
         $this->Auth->allow('index','add');
         //to Del:
-        //$this->Auth->allowedActions = array('*');
+        $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
     }
@@ -30,6 +30,24 @@ class ImagesController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function addAjax() {
+		//header('Content-type: text/xml'); 
+		//echo '<root><message>' . $_POST['message'] . '</message></root>'; 
+		$po = 'hi';
+		//$arr = array ('message'=> __('The Image has NOT been saved',true), 'kon'=> 'test');
+		//echo  json_encode($arr);
+		//echo '<textarea>'.'{ message: "' . $po . '" }'.'</textarea>';
+		//echo '{"message":1}';
+/*
+		echo '<textarea>'."
+		{
+ 		   message: 'jQuery',
+		    plugin:  'form',
+		    hello:   'goodbye',
+		    tomato:  'tomoto'
+		} ".'</textarea>';
+*/	
+	//	exit;
+		
 		Configure::write('debug', 0);
 		if (!empty($this->data) ) {
 			$file = array();
@@ -40,7 +58,19 @@ class ImagesController extends AppController {
 			// grab the file
 			$file = $this->data['Image']['userfile'];
 			//debug($file);
-			if ( !is_array($file) || $file == array() ||$file['error'] == 4) {	
+			if ( !is_array($file) || $file == array() ||$file['error'] == 4) {
+				//$xhr = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'; 
+				//debug($xhr);
+				/*
+				$arr = array ('message'=> __('The Image has NOT been saved'), 'kon'=> 'test');
+				if (!$xhr) {
+					echo 'blin';
+					echo '<textarea>'. json_encode($arr).'</textarea>';
+				} else {
+					echo 'not blin';
+					echo  json_encode($arr);
+				} 
+				*/		
 				echo __('image wasn\'t uploaded');
 				$this->autoRender = false;
 				exit();			
@@ -49,7 +79,7 @@ class ImagesController extends AppController {
 					for ( $i=0; $i<=1; $i++) {
 						switch($i) {
 							case(0):
-								$result = $this->Upload->upload($file, $destinationB, null, array('type' => 'resize', 'size' => '600' ) );
+								$result = $this->Upload->upload($file, $destinationB, null, array('type' => 'resizecrop', 'size' => array('620','470') ) );
 								if ($result != 1) {
 									$this->data['Image']['image'] = $this->Upload->result;
 								}
@@ -86,8 +116,11 @@ class ImagesController extends AppController {
 						
 						$this->Image->create();
 						if ($this->Image->save($this->data)) {
-														
-								echo __('The Image has been saved');
+										
+								//$arr = array ('message'=> __('The Image has been saved'), 'kon'=> 'test');
+								//echo json_encode($arr);	
+								echo '{"message":"'.__('The Image2 has been saved',true).'"}';					
+								//echo __('The Image has been saved');
 								$this->autoRender = false;
 				 				exit();
 				 						

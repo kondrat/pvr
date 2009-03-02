@@ -28,8 +28,9 @@ div.album img {
 	font-weight: bold;
 }
 /*ajax*/
-#ajax-save-message {
-	color: red;
+#storyTextUpload {
+	color: #eee;
 	font-weight: bold;
-	font-size: 30pt;
+	font-size: 20pt;
 }
+.

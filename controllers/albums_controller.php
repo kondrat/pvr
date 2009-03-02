@@ -20,12 +20,11 @@ class AlbumsController extends AppController {
 		$currentUser = null;
 		$currentUser=$this->Auth->user('id');
 		if( $currentUser != null ){
-			$currentAlbum = $this->Album->find('first',array('conditions'=>array('Album.user_id' => $currentUser),'contain'=>false ) );
+			$currentAlbum = $this->Album->find('first',array('conditions'=>array('Album.user_id' => $currentUser),'contain'=>'Image' ) );
 			$this->set('currentAlbum',$currentAlbum);
 			//$this->render('useralbum');
 		}
-
-		$this->set('albums', $currentAlbum );
+		//$this->set('albums', $currentAlbum );
 	}
 //--------------------------------------------------------------------
 	function view($id = null) {

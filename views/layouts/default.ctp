@@ -29,9 +29,10 @@
 		    	<p>
 		    		<?php 
 		    			echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'display')).'&nbsp';
-		    			echo $html->link('login',array('controller'=>'users','action'=>'login')).'&nbsp';
 		    			if ( $session->check('Auth.User.id') ){
 		    				echo $html->link('logout',array('controller'=>'users','action'=>'logout')).'&nbsp';
+		    			} else {
+		    				echo $html->link('login',array('controller'=>'users','action'=>'login')).'&nbsp';
 		    			}
 		    			echo $html->link('group',array('controller'=>'groups','action'=>'index')).'&nbsp';
 		    			echo $html->link('album',array('controller'=>'albums','action'=>'index')).'&nbsp';
