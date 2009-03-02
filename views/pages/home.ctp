@@ -1,5 +1,6 @@
 <div class="inner_page">
 	<h1> Pvr </h1>
+	<?php if( !$session->check('Auth.User.id') ): ?>
 	<div class="clearfix">
 		<div class="push-1 span-6 append-1">
 			<?php echo $form->create('User', array('action' => 'login' ) ); ?>		
@@ -20,6 +21,7 @@
 			</div>
 		</div>
 	</div>
+	<?php endif ?>
 	<div class="clearfix">
 		<div class="push-1 span-7">
 			<p>

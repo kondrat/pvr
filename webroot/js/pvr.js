@@ -19,20 +19,27 @@ jQuery(document).ready( function(){
 //'onClick'=>'$(\'#storyEditForm\').ajaxSubmit({target: \'#storyTextUpload\',url: \''.$html->url('/images/add').'\'}); return false;'
 
 jQuery(document).ready( function(){
-
+	
 	$('#tuda').click(function(){
-
-		$(this).parents("form:first").ajaxSubmit({
-			url: '/pvr/images/addAjax',
-			success: function(responseText, responseCode) {
-				$('#storyTextUpload').hide().html(responseText).fadeIn();
-					setTimeout(function(){
-									$('#storyTextUpload').fadeOut();
-								}, 50000
-					);
-				},
+		//jQuery('#tuda').html('<img src="img/ajax-loader.gif" />');
+		$("#storyEditForm").ajaxForm({
+			url: '/pvr/images/addAjax',	
+			dataType:  'json',			
+			
+			success: 
+			
+				function(data) {
+					$('#storyTextUpload').hide().html(data.message).fadeIn();
+						setTimeout(function(){
+										$('#storyTextUpload').fadeOut();
+									}, 5000
+						);
+					},
+			
 			resetForm: true
-			});
+				
+				});
 		return false;
-	})
+		
+	});
 });
