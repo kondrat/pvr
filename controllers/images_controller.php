@@ -30,24 +30,6 @@ class ImagesController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function addAjax() {
-		//header('Content-type: text/xml'); 
-		//echo '<root><message>' . $_POST['message'] . '</message></root>'; 
-		$po = 'hi';
-		//$arr = array ('message'=> __('The Image has NOT been saved',true), 'kon'=> 'test');
-		//echo  json_encode($arr);
-		//echo '<textarea>'.'{ message: "' . $po . '" }'.'</textarea>';
-		//echo '{"message":1}';
-/*
-		echo '<textarea>'."
-		{
- 		   message: 'jQuery',
-		    plugin:  'form',
-		    hello:   'goodbye',
-		    tomato:  'tomoto'
-		} ".'</textarea>';
-*/	
-	//	exit;
-		
 		Configure::write('debug', 0);
 		if (!empty($this->data) ) {
 			$file = array();
@@ -59,19 +41,8 @@ class ImagesController extends AppController {
 			$file = $this->data['Image']['userfile'];
 			//debug($file);
 			if ( !is_array($file) || $file == array() ||$file['error'] == 4) {
-				//$xhr = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'; 
-				//debug($xhr);
-				/*
-				$arr = array ('message'=> __('The Image has NOT been saved'), 'kon'=> 'test');
-				if (!$xhr) {
-					echo 'blin';
-					echo '<textarea>'. json_encode($arr).'</textarea>';
-				} else {
-					echo 'not blin';
-					echo  json_encode($arr);
-				} 
-				*/		
-				echo __('image wasn\'t uploaded');
+
+				echo '{"message":"'.__('image wasn\'t uploaded',true).'"}';
 				$this->autoRender = false;
 				exit();			
 			} else {									
@@ -96,7 +67,8 @@ class ImagesController extends AppController {
 								$errors = implode("<br />",$errors); 
 							}
 								@unlink($destinationB.$this->data['Image']['image']);
-								echo $errors;
+								//echo $errors;
+								echo '{"message":"'.$errors.'"}';
 								$this->autoRender = false;
 				 				exit();
 						}					
@@ -117,21 +89,21 @@ class ImagesController extends AppController {
 						$this->Image->create();
 						if ($this->Image->save($this->data)) {
 										
-								//$arr = array ('message'=> __('The Image has been saved'), 'kon'=> 'test');
-								//echo json_encode($arr);	
-								echo '{"message":"'.__('The Image2 has been saved',true).'"}';					
-								//echo __('The Image has been saved');
+								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $this->data['Image']['image']);
+								echo json_encode($arr);						
 								$this->autoRender = false;
 				 				exit();
 				 						
-							$this->Session->setFlash( __('The Image has been saved', true) );
+							//$this->Session->setFlash( __('The Image has been saved', true) );
 							//$this->redirect( array('controller' => 'albums','action' => 'useralbum',$this->data['Image']['album_id']) );
 						} else {					
-							$this->Session->setFlash(__('The Image could not be saved. Please, try again.', true));
+							//$this->Session->setFlash(__('The Image could not be saved. Please, try again.', true));
 							if ($this->Upload->result != null) {
 								@unlink($destinationB.$this->Upload->result);
 								@unlink($destinationS.$this->Upload->result);
 								$this->autoRender = false;
+								$arr = array ('message'=> __('The Image could not be saved. Please, try again.',true), 'kon'=> 'test');
+								echo json_encode($arr);	
 				 				exit();
 							}
 						}
@@ -142,18 +114,8 @@ class ImagesController extends AppController {
 			
 			
 		}
-		/*
-			$this->Image->create();
-			if ($this->Image->save($this->data)) {
-				$this->Session->setFlash(__('The Image has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The Image could not be saved. Please, try again.', true));
-			}
-		}
-		*/
-		$albums = $this->Image->Album->find('list');
-		$this->set(compact('albums'));
+
+
 	}
 //--------------------------------------------------------------------
 	function edit($id = null) {
