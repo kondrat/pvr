@@ -89,13 +89,17 @@ class UsersController extends AppController {
 			if ( $this->User->save( $this->data) ) {
 				
 				$a = $this->User->read();
+				
 				unset($this->data);
 				$this->data['Album']['user_id']=$this->User->id;
 				$this->data['Album']['name'] = 'newAlbum';
 				$this->data['Album']['image'] = 'default.jpg';
 				$this->User->Album->create();
+				
 				if($this->User->Album->save($this->data) ){
 				}
+				$this->Album->firstAlbum($this->data);
+
 				//debug($a);
 				$this->Auth->login($a);
                	$this->redirect('/users/thanks');

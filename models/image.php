@@ -9,7 +9,8 @@ class Image extends AppModel {
 								'foreignKey' => 'album_id',
 								'conditions' => '',
 								'fields' => '',
-								'order' => ''
+								'order' => '',
+								'counterCache' => true,
 			)
 	);
 
