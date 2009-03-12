@@ -6,7 +6,6 @@
 		echo $form->input('id');
 		echo $form->input('name');
 		echo $form->input('image');
-		echo $form->input('image_count');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

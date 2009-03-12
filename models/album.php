@@ -22,7 +22,7 @@ class Album extends AppModel {
 								'offset' => '',
 								'exclusive' => '',
 								'finderQuery' => '',
-								'counterQuery' => ''
+								//'counterQuery' => ''
 			)
 	);
 	
@@ -39,6 +39,22 @@ class Album extends AppModel {
 	function parentNode() {
 		//return array('Album' => array('id' => 30) );
 		return 'Albums';
+	}
+	//----------------------------------------------------------------
+
+	function beforeSave() {
+		return true;
+	}
+
+	//----------------------------------------------------------------
+	function afterSave() {
+		mkdir('img/gallery/'.$this->data['Album']['path'] );
+		mkdir('img/gallery/'.$this->data['Album']['path'].'/b' );
+		mkdir('img/gallery/'.$this->data['Album']['path'].'/s' );
+		mkdir('img/gallery/'.$this->data['Album']['path'].'/org' );
+	}
+	//----------------------------------------------------------------
+	function firstAlbum() {
 	}
 }
 ?>

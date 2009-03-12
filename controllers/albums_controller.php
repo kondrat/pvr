@@ -3,7 +3,7 @@ class AlbumsController extends AppController {
 
 	var $name = 'Albums';
 	var $helpers = array('Html', 'Form');
-	
+
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow( 'index','useralbum');
@@ -17,10 +17,11 @@ class AlbumsController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function useralbum() {
+
 		$currentUser = null;
 		$currentUser=$this->Auth->user('id');
 		if( $currentUser != null ){
-			$currentAlbum = $this->Album->find('first',array('conditions'=>array('Album.user_id' => $currentUser),'contain'=>'Image' ) );
+			$currentAlbum = $this->Album->find('first',array('conditions'=> array('Album.user_id' => $currentUser), 'order' => array('Album.created DESC'),'contain'=>'Image' ) );
 			$this->set('currentAlbum',$currentAlbum);
 			//$this->render('useralbum');
 		}
@@ -49,7 +50,7 @@ class AlbumsController extends AppController {
 //--------------------------------------------------------------------
 	function add() {
 		if (!empty($this->data)) {
-
+			/*
 			if ($this->RequestHandler->isAjax()) {
 				if ($this->Album->save($this->data)) {
 						echo "successSSS\n<br />";
@@ -58,13 +59,16 @@ class AlbumsController extends AppController {
 					//$this->layout = 'default';
 					//$this->Session->setFlash(__('The Album could not be saved. Please, try again.', true));
 					$errors=$this->Album->invalidFields();
-					echo $errors['name'];//__('The Album could not be saved. Please, try again.');
+					//echo $errors['name'];//__('The Album could not be saved. Please, try again.');
+					echo __('The Album could not be saved. Please, try again.',true);
 				}
 				Configure::write('debug', 0);
 				$this->autoRender = false;
 			 	exit();
 			}
-			
+			*/
+			$this->data['Album']['user_id'] = $this->Auth->user('id');
+			$this->data['Album']['path'] = md5( $this->data['Album']['user_id'].'and'.time() );
 			$this->Album->create();
 			if ($this->Album->save($this->data)) {
 				$this->Session->setFlash(__('The Album has been saved', true));
@@ -77,12 +81,14 @@ class AlbumsController extends AppController {
 	}
 
 	function edit($id = null) {
-		debug( $this->Acl->Aco->node( array('model' => 'Album', 'foreign_key' => $id ) ) );
+		//debug( $this->Acl->Aco->node( array('model' => 'Album', 'foreign_key' => $id ) ) );
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Album', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		
 		if (!empty($this->data)) {
+			$this->data['Album']['image'] = str_replace(array("\n\r","\n","\r"), '<br />',$this->data['Album']['image']);
 			if ($this->Album->save($this->data)) {
 				$this->Session->setFlash(__('The Album has been saved', true));
 				$this->redirect(array('action'=>'index'));
