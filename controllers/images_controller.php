@@ -22,6 +22,7 @@ class ImagesController extends AppController {
 	}
 
 	function view($id = null) {
+
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Image.', true));
 			$this->redirect(array('action'=>'index'));
@@ -32,11 +33,17 @@ class ImagesController extends AppController {
 	function addAjax() {
 		Configure::write('debug', 0);
 		if (!empty($this->data) ) {
+			
+			if( $this->Auth->user('id') ) {
+				$path = $this->Image->Album->find('first', array('conditions'=> array('Album.user_id'=> $this->Auth->user('id'),'Album.id'=> $this->data['Image']['album_id']), 'fields'=> array('path'),'contain'=>false ) );
+			}
+
 			$file = array();
 			// set the upload destination folder
-			$destinationB = WWW_ROOT.'img'.DS.'gallery'.DS.'b'.DS;
-			$destinationS = WWW_ROOT.'img'.DS.'gallery'.DS.'s'.DS;
+			$destinationB = WWW_ROOT.'img'.DS.'gallery'.DS.$path['Album']['path'].DS.'b'.DS;
+			$destinationS = WWW_ROOT.'img'.DS.'gallery'.DS.$path['Album']['path'].DS.'s'.DS;
 			//debug($destination );
+			//exit;
 			// grab the file
 			$file = $this->data['Image']['userfile'];
 			//debug($file);
@@ -89,7 +96,7 @@ class ImagesController extends AppController {
 						$this->Image->create();
 						if ($this->Image->save($this->data)) {
 										
-								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $this->data['Image']['image']);
+								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $this->data['Image']['image'],'path'=> $path['Album']['path'] );
 								echo json_encode($arr);						
 								$this->autoRender = false;
 				 				exit();

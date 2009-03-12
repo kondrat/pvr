@@ -285,7 +285,7 @@ class UsersController extends AppController {
 	}
 	function permset() {
 		
-		$this->Acl->allow('moderator', 'albums');
+		$this->Acl->allow(array( 'foreign_key' => 4, 'model'=> 'Group'),'Albums/add' );
 
 		echo 'prem ok';
 		die;

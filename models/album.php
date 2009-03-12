@@ -51,6 +51,7 @@ class Album extends AppModel {
 		mkdir('img/gallery/'.$this->data['Album']['path'] );
 		mkdir('img/gallery/'.$this->data['Album']['path'].'/b' );
 		mkdir('img/gallery/'.$this->data['Album']['path'].'/s' );
+		mkdir('img/gallery/'.$this->data['Album']['path'].'/org' );
 	}
 	//----------------------------------------------------------------
 	function firstAlbum() {

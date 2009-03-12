@@ -3,7 +3,7 @@ class AlbumsController extends AppController {
 
 	var $name = 'Albums';
 	var $helpers = array('Html', 'Form');
-	
+
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow( 'index','useralbum');
@@ -21,7 +21,7 @@ class AlbumsController extends AppController {
 		$currentUser = null;
 		$currentUser=$this->Auth->user('id');
 		if( $currentUser != null ){
-			$currentAlbum = $this->Album->find('first',array('conditions'=>array('Album.user_id' => $currentUser),'contain'=>'Image' ) );
+			$currentAlbum = $this->Album->find('first',array('conditions'=> array('Album.user_id' => $currentUser), 'order' => array('Album.created DESC'),'contain'=>'Image' ) );
 			$this->set('currentAlbum',$currentAlbum);
 			//$this->render('useralbum');
 		}

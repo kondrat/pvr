@@ -9,7 +9,7 @@
 					<?php $b = array_pop($currentAlbum['Image']);
 							//echo '<h1>'.debug($b).'</h1>';
 					 ?>
-						<div style="height:470px; width:630px;"><?php echo $html->image('gallery/b/'.$b['image'],array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
+						<div style="height:470px; width:630px;"><?php echo $html->image('gallery/5deafc7ed6e2376111837c18e2d13f4a/b/'.$b['image'],array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
 					<?php else: ?>
 						<div style="height:470px; width:630px;"><?php echo $html->image('backImg.jpg',array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
 					<?php endif ?>
@@ -19,7 +19,7 @@
 					<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 						<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>__('Upload Image',true) ) ); ?>
 						<?php if( isset($currentAlbum['Album']['id']) ): ?>
-							<?php echo $form->hidden( 'album_id', array('value'=>$currentAlbum['Album']['id']) ); ?>
+							<?php echo $form->hidden( 'album_id', array('value'=> $currentAlbum['Album']['id']) ); ?>
 						<?php endif ?>
 						<?php echo $form->submit('tuda',array('id' => 'tuda') );?>
 					<?php echo $form->end();?>
