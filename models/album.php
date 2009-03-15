@@ -5,8 +5,10 @@ class Album extends AppModel {
 	var $actsAs = array('Containable','Acl' => array('type' => 'controlled'));
 	var $validate = array(
 	    'name' => array(
+	    	/*
 	        'rule' => 'isUnique',
 	        'message' => 'This username has already been taken.'
+	        */
 	    )
 	);
 
@@ -45,16 +47,32 @@ class Album extends AppModel {
 	function beforeSave() {
 		return true;
 	}
-
+	//----------------------------------------------------------------
+	function newAlbum( $data = array() ) {
+			$this->data['Album']['user_id'] = $data['Album']['user_id'];
+			$this->data['Album']['name'] = $data['Album']['name'];
+			
+			if( $data['Album']['image'] == null ) {
+				$this->data['Album']['image'] = 'default.jpg';
+			} else {
+				$this->data['Album']['image'] = $data['Album']['image'];
+			}
+			
+			$this->data['Album']['path'] = md5( $this->data['Album']['user_id'].'and'.time() );
+			if( @mkdir('img/gallery/'.$this->data['Album']['path'] ) ) {
+				if ($this->save($this->data)) {				
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}	
+	}
 	//----------------------------------------------------------------
 	function afterSave() {
-		mkdir('img/gallery/'.$this->data['Album']['path'] );
-		mkdir('img/gallery/'.$this->data['Album']['path'].'/b' );
-		mkdir('img/gallery/'.$this->data['Album']['path'].'/s' );
-		mkdir('img/gallery/'.$this->data['Album']['path'].'/org' );
 	}
 	//----------------------------------------------------------------
-	function firstAlbum() {
-	}
+
 }
 ?>

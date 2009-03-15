@@ -1,11 +1,13 @@
 <div class="images index">
 <h2><?php __('Images');?></h2>
+<img src="http://lh3.ggpht.com/_0IFzeozlLnY/SbGPJv0_ZGI/AAAAAAAAEC0/-4wrRJe4T3w/s288/IMG_2997-1.JPG" />
+<img src="http://lh4.ggpht.com/_0IFzeozlLnY/SbGPhWLxdOI/AAAAAAAAEDY/mHS7r3O0EU0/s288/IMG_3006.JPG" />
+
 <p>
-<?php
-echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-));
-?></p>
+	<?php
+		echo $paginator->counter(array('format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true) ) );
+	?>
+</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>

@@ -49,7 +49,7 @@ class ImagesController extends AppController {
 			//debug($file);
 			if ( !is_array($file) || $file == array() ||$file['error'] == 4) {
 
-				echo '{"message":"'.__('image wasn\'t uploaded',true).'"}';
+				echo '{"message":"'.__('Image wasn\'t uploaded',true).'"}';
 				$this->autoRender = false;
 				exit();			
 			} else {									

@@ -68,14 +68,15 @@ class AlbumsController extends AppController {
 			}
 			*/
 			$this->data['Album']['user_id'] = $this->Auth->user('id');
-			$this->data['Album']['path'] = md5( $this->data['Album']['user_id'].'and'.time() );
-			$this->Album->create();
-			if ($this->Album->save($this->data)) {
+
+			//debug($this->data);
+			if($this->Album->newAlbum( $this->data ) ) {
 				$this->Session->setFlash(__('The Album has been saved', true));
 				$this->Acl->allow( array('model' => 'User', 'foreign_key' => $this->Auth->User('id') ), array('model' => 'Album', 'foreign_key' => $this->Album->id),'*' );
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Album could not be saved. Please, try again.', true));
+				$this->redirect(array('action'=>'index'));
 			}
 		}
 	}

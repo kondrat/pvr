@@ -49,8 +49,9 @@
 			
 			// -- save parameters
 			$this->_file = $file;
-			//debug($file);
+
 			$this->_destination = $destination;
+			
 			if (!is_null($rules)) {
 				$this->_rules = $rules;
 			}
@@ -61,7 +62,7 @@
 				$this->_allowed = array('jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'); 
 			}
 			
-			// -- hack dir if / not provided
+			// -- hack dir if '/' not provided
 			if (substr($this->_destination,-1) != DS) {
 				$this->_destination .= DS;
 			}
@@ -74,13 +75,15 @@
 				} else {
 					 $fileName = $destination . $name;				 
 				}
+				// -- update name
+				$this->_name = $fileName;				
+				
 				$fileTmp = $file['tmp_name'];
 				$fileSize = $file['size'];
 				$fileType = $file['type'];
 				$fileError = $file['error'];
 								
-				// -- update name
-				$this->_name = $fileName;
+
 				
 				// -- error if not correct extension
 				if(!in_array($this->ext($fileName),$this->_allowed)){

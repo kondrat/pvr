@@ -71,9 +71,11 @@
 		        <div class="span-16 last">
 					<?php $session->flash(); ?>
 					<?php
+						/*
 						if ($session->check('Message.auth')) {						
 								$session->flash('auth',array('class'=>'error'));							
 						}
+						*/
 					?>
 
 					<?php echo $content_for_layout; ?>
