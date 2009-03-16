@@ -40,8 +40,7 @@ class ImagesController extends AppController {
 
 			$file = array();
 			// set the upload destination folder
-			$destinationB = WWW_ROOT.'img'.DS.'gallery'.DS.$path['Album']['path'].DS.'b'.DS;
-			$destinationS = WWW_ROOT.'img'.DS.'gallery'.DS.$path['Album']['path'].DS.'s'.DS;
+			$destination = WWW_ROOT.'img'.DS.Configure::read('farm').DS.$this->Auth->user('uuid').DS;
 			//debug($destination );
 			//exit;
 			// grab the file
@@ -57,7 +56,7 @@ class ImagesController extends AppController {
 					for ( $i=0; $i<=1; $i++) {
 						switch($i) {
 							case(0):
-								$result = $this->Upload->upload($file, $destinationB, null, array('type' => 'resizecrop', 'size' => array('620','470') ) );
+								$result = $this->Upload->upload($file, $destination, $org );
 								if ($result != 1) {
 									$this->data['Image']['image'] = $this->Upload->result;
 								}
@@ -97,7 +96,7 @@ class ImagesController extends AppController {
 						if ($this->Image->save($this->data)) {
 
 										
-								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $this->data['Image']['image'],'path'=> $path['Album']['path'] );
+								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $this->data['Image']['image'],'path'=> $this->Auth->user('uuid') );
 								echo json_encode($arr);						
 								$this->autoRender = false;
 				 				exit();
@@ -108,7 +107,6 @@ class ImagesController extends AppController {
 							//$this->Session->setFlash(__('The Image could not be saved. Please, try again.', true));
 							if ($this->Upload->result != null) {
 								@unlink($destinationB.$this->Upload->result);
-								@unlink($destinationS.$this->Upload->result);
 								$this->autoRender = false;
 								$arr = array ('message'=> __('The Image could not be saved. Please, try again.',true), 'kon'=> 'test');
 								echo json_encode($arr);	

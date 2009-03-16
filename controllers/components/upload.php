@@ -42,7 +42,7 @@
 		  *
 		  */
 		
-		function upload ($file, $destination, $name = NULL, $rules = NULL, $allowed = NULL) {
+		function upload ($file, $destination, $org = false) {
 			
 			$this->result = false;
 			$this->errors = false;
@@ -70,11 +70,9 @@
 			if ( isset($file) && is_array($file) && !$this->upload_error($file['error'])) {
 				
 				// -- cool, now set some variables
-				if ( $name == NULL ) {				
-					$fileName = $this->uniquename($destination . $file['name']);
-				} else {
-					 $fileName = $destination . $name;				 
-				}
+								
+				$fileName = $this->uniqueName($destination . $file['name']);
+
 				// -- update name
 				$this->_name = $fileName;				
 				
@@ -87,11 +85,13 @@
 				
 				// -- error if not correct extension
 				if(!in_array($this->ext($fileName),$this->_allowed)){
-					$this->error("File type not allowed.");
+					$this->error( __("File type not allowed.",true) );
 				} else { 
 				
 					// -- it's been uploaded with php
 					if (is_uploaded_file($fileTmp)) {
+						
+						
 						// -- how are we handling this file
 						if ($rules == NULL) {
 							// -- where to put the file?
@@ -101,31 +101,44 @@
 								chmod($output, 0644);
 								$this->result = basename($this->_name);
 							} else {
-								$this->error("Could not move '$fileName' to '$destination'");
+								$this->error(__("Could not move '$fileName' to '$destination'",true) );
 							}
+							
+							
 						} else {
 							// -- gd lib check
 							if (function_exists("imagecreatefromjpeg")) {
-								if (!isset($rules['output'])) $rules['output'] = NULL;
-								if (!isset($rules['quality'])) $rules['quality'] = NULL;
-								// -- handle it based on rules
-								if (isset($rules['type']) && isset($rules['size'])) {
-									$this->image($this->_file, $rules['type'], $rules['size'], $rules['output'], $rules['quality']);
-								} else {
-									$this->error("Invalid \"rules\" parameter");
+								
+								
+								if (!isset($rules['output'])) {
+									$rules['output'] = NULL;
 								}
+								if (!isset($rules['quality'])) {
+									$rules['quality'] = NULL;
+								}
+								
+								
+								
+								
+									$size = array('sq' => '100', 'thm' => array('100','75'), 'sml' => array('180','240'), 'md' => array('500','375'), 'lrg' => array('630','470') );							
+									
+									$this->image($this->_file, $size, $quality );
+									
+									
+									
+					
 							} else {
-								$this->error("GD library is not installed");
+								$this->error(__("GD library is not installed",true) );
 							}
 						}
 					} else {
-						$this->error("Possible file upload attack on '$fileName'");
+						$this->error(__("Possible file upload problem",true) );
 					}
 				}
 					
 			} else {
 				//debug( $this->upload_error($file['error']) );
-				$this->error('Проблемmmmmа при загрузке файла: '.$this->upload_error($file['error']) );
+				$this->error(__('Problem with file upload: '.$this->upload_error($file['error']),true) );
 			}
 
 			if( $this->errors != false ) {
@@ -148,68 +161,43 @@
 			array_push($this->errors, $message);
 		}	
 		
-		function image ($file, $type, $size, $output = NULL, $quality = NULL) {
-			
-			if (is_null($type)) $type = 'resize';
-			if (is_null($size)) $size = 100;
-			if (is_null($output)) $output = 'jpg';
-			if (is_null($quality)) $quality = 75;
-			
-			// -- format variables
-			$type = strtolower($type);
-			$output = strtolower($output);
-			if (is_array($size)) {
-				$maxW = intval($size[0]);
-				$maxH = intval($size[1]);
-			} else {
-				$maxScale = intval($size);
+		
+		
+		
+		//----------------------------------------
+		function image ($file,  $size, $quality = NULL ) {
+			//toDel
+			if (is_null($output)) {
+				$output = 'jpg';
 			}
 			
-			// -- check sizes
-			if (isset($maxScale)) {
-				if (!$maxScale) {
-					$this->error("Max scale must be set");
-				}
-			} else {
-				if (!$maxW || !$maxH) {
-					$this->error("Size width and height must be set");
-					return;
-				}
-				if ($type == 'resize') {
-					$this->error("Provide only one number for size");
-				}
-			}
-			
-			// -- check output
-			if ($output != 'jpg' && $output != 'png' && $output != 'gif') {
-				$this->error("Cannot output file as " . strtoupper($output));
-			}
-			
-			if (is_numeric($quality)) {
-				$quality = intval($quality);
-				if ($quality > 100 || $quality < 1) {
-					$quality = 75;
-				}
-			} else {
+
+			if ( $quality = null ) {
 				$quality = 75;
 			}
 			
+	
 			// -- get some information about the file
 			$uploadSize = getimagesize($file['tmp_name']);
 			$uploadWidth  = $uploadSize[0];
 			$uploadHeight = $uploadSize[1];
 			$uploadType = $uploadSize[2];
-			
-			if ($uploadType != 1 && $uploadType != 2 && $uploadType != 3) {
-				$this->error ("File type must be GIF, PNG, or JPG to resize");
-			}
-			
+				if ($uploadType != 1 && $uploadType != 2 && $uploadType != 3) {
+					$this->error (__("File type must be GIF, PNG, or JPG to resize",true) );
+				}		
 			switch ($uploadType) {
 				case 1: $srcImg = imagecreatefromgif($file['tmp_name']); break;
 				case 2: $srcImg = imagecreatefromjpeg($file['tmp_name']); break;
 				case 3: $srcImg = imagecreatefrompng($file['tmp_name']); break;
-				default: $this->error ("File type must be GIF, PNG, or JPG to resize");
+				default: $this->error (__("File type must be GIF, PNG, or JPG to resize",true) );
 			}
+			
+									
+			foreach( $size as $k => $v ) {
+				
+			}
+			
+			
 						
 			switch ($type) {
 			
@@ -316,19 +304,21 @@
 			if ($write) {
 				$this->result = basename($this->_name);
 			} else {
-				$this->error("Could not write file");
+				$this->error(__("Could not write file",true) );
 				//$this->error("Could not write " . $this->_name . " to " . $this->_destination); original
 			}
 		}
 		
-		function newname ($file) {
+		
+		//----------------------------------------
+		function newName ($file) {
 			return time() . "." . $this->ext($file);
 		}
-		
-		function uniquename ($file) {
+		//----------------------------------------
+		function uniqueName ($file) {
 			$parts = pathinfo($file);
 			$dir = $parts['dirname'];
-			$file = ereg_replace('[^[:alnum:]_.-]','',$parts['basename']);
+			//$parts['basename']
 			$ext = $parts['extension'];
 			if ($ext) {
 				$ext = '.'.$ext;
@@ -340,7 +330,7 @@
 			}
 			return $dir.DS.$file.$i.$ext;
 		}
-		
+		//---------------------------------
 		function upload_error ($errorobj) {
 			$error = false;
 			switch ($errorobj) {

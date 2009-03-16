@@ -58,16 +58,13 @@ class Album extends AppModel {
 				$this->data['Album']['image'] = $data['Album']['image'];
 			}
 			
-			$this->data['Album']['path'] = md5( $this->data['Album']['user_id'].'and'.time() );
-			if( @mkdir('img/gallery/'.$this->data['Album']['path'] ) ) {
+
 				if ($this->save($this->data)) {				
 					return true;
 				} else {
 					return false;
 				}
-			} else {
-				return false;
-			}	
+
 	}
 	//----------------------------------------------------------------
 	function afterSave() {

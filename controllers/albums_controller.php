@@ -22,6 +22,7 @@ class AlbumsController extends AppController {
 		$currentUser=$this->Auth->user('id');
 		if( $currentUser != null ){
 			$currentAlbum = $this->Album->find('first',array('conditions'=> array('Album.user_id' => $currentUser), 'order' => array('Album.created DESC'),'contain'=>'Image' ) );
+			$this->set( 'path',$this->Auth->user('uuid') );
 			$this->set('currentAlbum',$currentAlbum);
 			//$this->render('useralbum');
 		}
@@ -50,25 +51,46 @@ class AlbumsController extends AppController {
 //--------------------------------------------------------------------
 	function add() {
 		if (!empty($this->data)) {
-			/*
+			
 			if ($this->RequestHandler->isAjax()) {
+				
+				if( !is_dir('img/'.Configure::read('farm').'/'.$this->Auth->user('uuid') ) ) {
+					if (!@mkdir( 'img/'.Configure::read('farm').'/'.$this->Auth->user('uuid') ) ) {
+						echo __('Not possible to create album now, try again later');
+						$this->autoRender = false;
+			 			exit();						
+					}
+				}
+				
+				$this->data['Album']['user_id'] = $this->Auth->user('id');
+				if( $this->data['Album']['name'] == null ) {
+					 $this->data['Album']['name'] = 'newAlbum';
+				}
+				$this->data['Album']['image'] = 'default.jpg';
+				
 				if ($this->Album->save($this->data)) {
-						echo "successSSS\n<br />";
+					$this->Acl->allow( array('model' => 'User', 'foreign_key' => $this->Auth->User('id') ), array('model' => 'Album', 'foreign_key' => $this->Album->id),'*' );
+					echo "success\n<br />";
 				} else {
 					//debug($this->Album->invalidFields());
 					//$this->layout = 'default';
 					//$this->Session->setFlash(__('The Album could not be saved. Please, try again.', true));
 					$errors=$this->Album->invalidFields();
-					//echo $errors['name'];//__('The Album could not be saved. Please, try again.');
+					echo $errors['name'];//__('The Album could not be saved. Please, try again.');
 					echo __('The Album could not be saved. Please, try again.',true);
 				}
+				
+				
 				Configure::write('debug', 0);
 				$this->autoRender = false;
 			 	exit();
 			}
-			*/
-			$this->data['Album']['user_id'] = $this->Auth->user('id');
-
+			
+				$this->data['Album']['user_id'] = $this->Auth->user('id');
+				if( $this->data['Album']['name'] == null ) {
+					 $this->data['Album']['name'] = 'newAlbum';
+				}
+				$this->data['Album']['image'] = 'default.jpg';
 			//debug($this->data);
 			if($this->Album->newAlbum( $this->data ) ) {
 				$this->Session->setFlash(__('The Album has been saved', true));

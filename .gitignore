@@ -9,11 +9,6 @@ tmp/sessions/*
 tmp/logs/*
 plugins/*
 webroot/files/**/*
-webroot/img/catalog/*
-webroot/img/catalog/s/*
-webroot/img/catalog/b/*
-webroot/img/gallery/*
-webroot/img/gallery/s/*
-webroot/img/gallery/b/*
+webroot/img/gallery1/*
 !empty
 !.gitignore

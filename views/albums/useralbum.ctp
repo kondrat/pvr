@@ -6,10 +6,8 @@
 				<div style="z-index: 1;  position: relative;">				
 					<div id="op2" style="position:absolute; float: left; height:470px; width: 630px;background-color: #333; opacity: 0.3;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); top: 100px, left: 0px;z-index: 90"></div>
 					<?php if( isset($currentAlbum['Image']) && $currentAlbum['Image'] != array() ): ?>
-					<?php $b = array_pop($currentAlbum['Image']);
-							//echo '<h1>'.debug($b).'</h1>';
-					 ?>
-						<div style="height:470px; width:630px;"><?php echo $html->image('gallery/5deafc7ed6e2376111837c18e2d13f4a/b/'.$b['image'],array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
+						<?php $b = array_pop($currentAlbum['Image']);?>
+						<div style="height:470px; width:630px;"><?php echo $html->image('gallery1/'.$path.DS.$b['image'],array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
 					<?php else: ?>
 						<div style="height:470px; width:630px;"><?php echo $html->image('backImg.jpg',array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
 					<?php endif ?>

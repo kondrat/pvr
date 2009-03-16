@@ -43,10 +43,12 @@ class UsersController extends AppController {
 							$this->Cookie->write('Auth.User', $cookie, true, '+3 hours');
 							unset($this->data['User']['remember_me']);
 						}
-
          			}
 
 					if ($this->referer()=='/') {
+						if( $this->User->Album->find('count',array('conditions'=> array('Album.user_id'=> $this->Auth->user('id') ), 'order'=>'desc') ) < '1' ) {
+							$this->redirect( array('controller'=>'albums','action'=>'add') );
+						}
 						$this->redirect( array('controller'=>'albums','action'=>'useralbum') );	
 					} else {
 						$this->redirect( $this->Auth->redirect() );
@@ -54,7 +56,7 @@ class UsersController extends AppController {
 			
 			} else {
 				$this->data['User']['password'] = null;
-				$this->Session->setFlash("Проверьте ваш логин и пароль",'default', array('class' => 'nomargin flash'));
+				$this->Session->setFlash(__('Check your login and password',true),'default', array('class' => 'nomargin flash'));
 			}
 		} else {
 			if( !is_null( $this->Session->read('Auth.User.username') ) ){
@@ -79,30 +81,34 @@ class UsersController extends AppController {
     }
 //--------------------------------------------------------------------
 	function reg() {
-		//debug($this->data);
+
 		$this->pageTitle = 'Регистрация';
 		
 		if ( !empty($this->data) ) {
 		
-			$this->User->create();
+			$uuid = $this->data['User']['uuid'] = uniqid();
 
 			if ( $this->User->save( $this->data) ) {
 				
 				$a = $this->User->read();
-				
+				$this->Auth->login($a);
+				$this->Session->setFlash(__('New user\'s accout has been created',true));
 				unset($this->data);
 				$this->data['Album']['user_id']=$this->User->id;
 				$this->data['Album']['name'] = 'newAlbum';
 				$this->data['Album']['image'] = 'default.jpg';
-				$this->User->Album->create();
 				
-				if($this->User->Album->save($this->data) ){
+				if( @mkdir('img/'.Configure::read('farm').'/'.$uuid ) ){
+					if( !$this->User->Album->newAlbum($this->data) ) {
+						$this->redirect(array('controller' => 'album','action'=>'add'),null,true);
+					}
+				} else {
+					$this->redirect(array('controller' => 'album','action'=>'add'),null,true);
 				}
-				$this->Album->firstAlbum($this->data);
 
 				//debug($a);
-				$this->Auth->login($a);
-               	$this->redirect('/users/thanks');
+				
+               	//$this->redirect('/users/thanks');
          	} else {
          		// Failed, clear password field
 				$this->data['User']['password1'] = null;
