@@ -30,7 +30,7 @@ jQuery(document).ready( function() {
 							$('#ttt').fadeOut(600);
 							if( data.img != null) {
 
-								$('#mainImage').attr({src: "/pvr/img/gallery/"+data.path+"/b/"+data.img}).fadeTo(5000,0.8);
+								$('#mainImage').attr({src: "/pvr/img/gallery1/"+data.path+"/"+data.img+".jpg"}).fadeTo(5000,0.8);
 								$('#op2').fadeTo(1000,0).fadeTo(5000,0.5);
 								var oldImg = $('#mainImage').attr('src');	
 							} else {

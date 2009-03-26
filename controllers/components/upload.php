@@ -28,44 +28,34 @@
 		  * upload
 		  * - handle uploads of any type
 		  *		@ file - a file (file to upload) $_FILES[FILE_NAME]
-		  *		@ path - string (where to upload to)
-		  *		@ name [optional] - override saved filename
-		  *		@ rules [optional] - how to handle file types
-		  *			- rules['type'] = string ('resize','resizemin','resizecrop','crop')
-		  *			- rules['size'] = array (x, y) or single number
-		  *			- rules['output'] = string ('gif','png','jpg')
-		  *			- rules['quality'] = integer (quality of output image)
+		  *		@ destination - string (where to upload to)
+		  *		@ qlt= integer (quality of output image)
 		  *		@ allowed [optional] - allowed filetypes
 		  *			- defaults to 'jpg','jpeg','gif','png'
-		  *	ex:
-		  * 	$upload = new upload($_FILES['MyFile'], 'uploads');
+		  *		@ org - should we save original or not
 		  *
 		  */
 		
-		function upload ($file, $destination, $org = false) {
+		function upload ($file, $destination, $org = false, $qlt = null) {
 			
 			$this->result = false;
 			$this->errors = false;
 			
 			// -- save parameters
-			$this->_file = $file;
+			//$this->_file = $file;
 
 			$this->_destination = $destination;
 			
-			if (!is_null($rules)) {
-				$this->_rules = $rules;
-			}
-			
-			if (!is_null($allowed)) { 
-				$this->_allowed = $allowed; 
-			} else { 
-				$this->_allowed = array('jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'); 
-			}
+
+			$this->_allowed = array('jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'); 
+
 			
 			// -- hack dir if '/' not provided
 			if (substr($this->_destination,-1) != DS) {
 				$this->_destination .= DS;
 			}
+			
+			
 			// -- check that FILE array is even set
 			if ( isset($file) && is_array($file) && !$this->upload_error($file['error'])) {
 				
@@ -84,18 +74,17 @@
 
 				
 				// -- error if not correct extension
-				if(!in_array($this->ext($fileName),$this->_allowed)){
+				if(!in_array( $this->ext($file['name']), $this->_allowed)){
 					$this->error( __("File type not allowed.",true) );
 				} else { 
 				
 					// -- it's been uploaded with php
 					if (is_uploaded_file($fileTmp)) {
-						
-						
+											
 						// -- how are we handling this file
-						if ($rules == NULL) {
+						if ($org == true) {
 							// -- where to put the file?
-							$output = $fileName;
+							$output = $destination . $file['name'];
 							// -- just upload it
 							if (move_uploaded_file($fileTmp, $output)) {
 								chmod($output, 0644);
@@ -103,34 +92,27 @@
 							} else {
 								$this->error(__("Could not move '$fileName' to '$destination'",true) );
 							}
+						}	
 							
+						
+						// -- gd lib check
+						if (function_exists("imagecreatefromjpeg")) {
 							
+
+													
+								$size = array( 'sq' => '75', 'thm' => '100', 'sml' => '240', 'md' => '630', 'lrg' => '1024' );
+															
+								
+								$this->image($file, $size, $qlt );
+								
+								
+								
+				
 						} else {
-							// -- gd lib check
-							if (function_exists("imagecreatefromjpeg")) {
-								
-								
-								if (!isset($rules['output'])) {
-									$rules['output'] = NULL;
-								}
-								if (!isset($rules['quality'])) {
-									$rules['quality'] = NULL;
-								}
-								
-								
-								
-								
-									$size = array('sq' => '100', 'thm' => array('100','75'), 'sml' => array('180','240'), 'md' => array('500','375'), 'lrg' => array('630','470') );							
-									
-									$this->image($this->_file, $size, $quality );
-									
-									
-									
-					
-							} else {
-								$this->error(__("GD library is not installed",true) );
-							}
+							$this->error(__("GD library is not installed",true) );
 						}
+						
+						
 					} else {
 						$this->error(__("Possible file upload problem",true) );
 					}
@@ -141,23 +123,31 @@
 				$this->error(__('Problem with file upload: '.$this->upload_error($file['error']),true) );
 			}
 
+
+
+
+
 			if( $this->errors != false ) {
 				return 1;
 			} else {
 				return 2;
 			}
 			
+			
+			
+			
 		}
 
-		// -- return the extension of a file	
-		function ext ($file) {
-			$ext = trim(substr($file,strrpos($file,".")+1,strlen($file)));
-			return $ext;
-		}
+
+
+		
+		
 		
 		// -- add a message to stack (for outside checking)
 		function error ($message) {
-			if (!is_array($this->errors)) $this->errors = array();
+			if (!is_array($this->errors)) {
+				$this->errors = array();
+			}
 			array_push($this->errors, $message);
 		}	
 		
@@ -165,15 +155,13 @@
 		
 		
 		//----------------------------------------
-		function image ($file,  $size, $quality = NULL ) {
-			//toDel
-			if (is_null($output)) {
-				$output = 'jpg';
-			}
-			
+		function image ($file,  $size, $qlt = null ) {
 
-			if ( $quality = null ) {
-				$quality = 75;
+			$output = 'jpg';	
+			$resultSize = array();
+			
+			if ( $qlt == null ) {
+				$qlt = 75;
 			}
 			
 	
@@ -183,7 +171,7 @@
 			$uploadHeight = $uploadSize[1];
 			$uploadType = $uploadSize[2];
 				if ($uploadType != 1 && $uploadType != 2 && $uploadType != 3) {
-					$this->error (__("File type must be GIF, PNG, or JPG to resize",true) );
+					$this->error (__("$uploadSize[2] File type must be GIF, PNG, or JPG to resize",true) );
 				}		
 			switch ($uploadType) {
 				case 1: $srcImg = imagecreatefromgif($file['tmp_name']); break;
@@ -192,144 +180,132 @@
 				default: $this->error (__("File type must be GIF, PNG, or JPG to resize",true) );
 			}
 			
+			
+			
+			
+			
+			
+			
+			$size = array( 'sq' => '75', 'thm' => '100', 'sml' => '240', 'md' => '630', 'lrg' => '1024' );
+			//$size = array( 'md' => '500' );
 									
 			foreach( $size as $k => $v ) {
-				
-			}
-			
-			
+				switch($k) {
+					
+					case('sq'):	
+							
+							$newX = $newY = $v;		
+							// -- resize to max, then crop to center
+							$ratioX = $v / $uploadWidth;
+							$ratioY = $v / $uploadHeight;
+							
+							if ($ratioX < $ratioY) { 
+								$srcX = round(($uploadWidth - ($v / $ratioY) )/2);
+								$srcY = 0;
+								$srcWidth = round($v / $ratioY);
+								$srcHeight = $uploadHeight;
+							} else { 
+								$srcX = 0;
+								$srcY = round( ($uploadHeight - ($v / $ratioX) )/2);
+								$srcWidth = $uploadWidth;
+								$srcHeight = round($v / $ratioX);
+							}
+							
+							$dstImg = imagecreatetruecolor($v, $v);
+							imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $newX, $newY, $srcWidth, $srcHeight);
+							// -- try to write
+							$write = imagejpeg($dstImg, $this->_name.'-'.$k.'.jpg', $qlt);
+							imagedestroy($dstImg);
+						break;
+					
+					default:
+ 
+							if ($uploadWidth >= $uploadHeight) {
+								
+								if( $uploadWidth >= $v ) {
+									$newX = $v;
+									$newY = ($newX*$uploadHeight)/$uploadWidth;
+								} else {									
+									if($k == 'lrg'|| $k == 'thm') {
+										$newX = $uploadWidth;
+										$newY = $uploadHeight;
+									} else {
+										break;
+									}
+								}
+								
+							} else {
+								if( $uploadHeight >= $v ) {
+									$newY = $v;
+									$newX = ($newY*$uploadWidth)/$uploadHeight;
+								} else {
+									if($k == 'lrg' || $k == 'thm') {
+										$newX = $uploadWidth;
+										$newY = $uploadHeight;
+									} else {
+										break;
+									}
+								}					
+							}
 						
-			switch ($type) {
-			
-				case 'resize':
-					# Maintains the aspect ration of the image and makes sure that it fits
-					# within the maxW and maxH (thus some side will be smaller)
-					// -- determine new size
-					if ($uploadWidth > $maxScale || $uploadHeight > $maxScale) {
-						if ($uploadWidth > $uploadHeight) {
-							$newX = $maxScale;
-							$newY = ($uploadHeight*$newX)/$uploadWidth;
-						} else if ($uploadWidth < $uploadHeight) {
-							$newY = $maxScale;
-							$newX = ($newY*$uploadWidth)/$uploadHeight;
-						} else if ($uploadWidth == $uploadHeight) {
-							$newX = $newY = $maxScale;
-						}
-					} else {
-						$newX = $uploadWidth;
-						$newY = $uploadHeight;
-					}
-					
-					$dstImg = imagecreatetruecolor($newX, $newY);
-					imagecopyresampled($dstImg, $srcImg, 0, 0, 0, 0, $newX, $newY, $uploadWidth, $uploadHeight);
-					
-					break;
-					
-				case 'resizemin':
-					# Maintains aspect ratio but resizes the image so that once
-					# one side meets its maxW or maxH condition, it stays at that size
-					# (thus one side will be larger)
-					#get ratios
-					$ratioX = $maxW / $uploadWidth;
-					$ratioY = $maxH / $uploadHeight;
+							$dstImg = imagecreatetruecolor($newX, $newY);
+							imagecopyresampled($dstImg, $srcImg, 0, 0, 0, 0, $newX, $newY, $uploadWidth, $uploadHeight);
+							
+							// -- try to write
+							$write = imagejpeg($dstImg, $this->_name.'-'.$k.'.jpg', $qlt);
+							$resultSize[$k] = 1;
+							imagedestroy($dstImg);
 
-					#figure out new dimensions
-					if (($uploadWidth == $maxW) && ($uploadHeight == $maxH)) {
-						$newX = $uploadWidth;
-						$newY = $uploadHeight;
-					} else if (($ratioX * $uploadHeight) > $maxH) {
-						$newX = $maxW;
-						$newY = ceil($ratioX * $uploadHeight);
-					} else {
-						$newX = ceil($ratioY * $uploadWidth);		
-						$newY = $maxH;
-					}
-
-					$dstImg = imagecreatetruecolor($newX,$newY);
-					imagecopyresampled($dstImg, $srcImg, 0, 0, 0, 0, $newX, $newY, $uploadWidth, $uploadHeight);
-				
-					break;
-				
-				case 'resizecrop':
-					// -- resize to max, then crop to center
-					$ratioX = $maxW / $uploadWidth;
-					$ratioY = $maxH / $uploadHeight;
-
-					if ($ratioX < $ratioY) { 
-						$newX = round(($uploadWidth - ($maxW / $ratioY))/2);
-						$newY = 0;
-						$uploadWidth = round($maxW / $ratioY);
-						$uploadHeight = $uploadHeight;
-					} else { 
-						$newX = 0;
-						$newY = round(($uploadHeight - ($maxH / $ratioX))/2);
-						$uploadWidth = $uploadWidth;
-						$uploadHeight = round($maxH / $ratioX);
-					}
+						break;
 					
-					$dstImg = imagecreatetruecolor($maxW, $maxH);
-					imagecopyresampled($dstImg, $srcImg, 0, 0, $newX, $newY, $maxW, $maxH, $uploadWidth, $uploadHeight);
-					
-					break;
-				
-				case 'crop':
-					// -- a straight centered crop
-					$startY = ($uploadHeight - $maxH)/2;
-					$startX = ($uploadWidth - $maxW)/2;
 
-					$dstImg = imageCreateTrueColor($maxW, $maxH);
-					ImageCopyResampled($dstImg, $srcImg, 0, 0, $startX, $startY, $maxW, $maxH, $maxW, $maxH);
-				
-					break;
-				
-				default: $this->error ("Resize function \"$type\" does not exist");
-			}	
-		
-			// -- try to write
-			switch ($output) {
-				case 'jpg':
-					$write = imagejpeg($dstImg, $this->_name, $quality);
-					break;
-				case 'png':
-					$write = imagepng($dstImg, $this->_name . ".png", $quality);
-					break;
-				case 'gif':
-					$write = imagegif($dstImg, $this->_name . ".gif", $quality);
-					break;
+				}								
+
+				// -- clean up
+				 
+
 			}
+
 			
-			// -- clean up
-			imagedestroy($dstImg);
+
 			
-			if ($write) {
-				$this->result = basename($this->_name);
+			if ( $write ) {
+				//debug($write);
+				if ( ($resultSize['md'] == 1 ) ) {
+					$this->result = basename($this->_name).'-md';
+				} else {
+					$this->result = basename($this->_name).'-lrg';
+				}
 			} else {
 				$this->error(__("Could not write file",true) );
 				//$this->error("Could not write " . $this->_name . " to " . $this->_destination); original
 			}
 		}
 		
-		
 		//----------------------------------------
-		function newName ($file) {
-			return time() . "." . $this->ext($file);
+		// -- return the extension of a file	
+		function ext ($file) {
+			$parts = pathinfo($file);
+			$dir = $parts['dirname'];
+			$ext = $parts['extension'];
+			//$ext = trim(substr($file,strrpos($file,".")+1,strlen($file)));
+			return $ext;
 		}
+
 		//----------------------------------------
 		function uniqueName ($file) {
 			$parts = pathinfo($file);
 			$dir = $parts['dirname'];
-			//$parts['basename']
 			$ext = $parts['extension'];
 			if ($ext) {
 				$ext = '.'.$ext;
-				$file = substr($file,0,-strlen($ext));
+				$file = mt_rand(10000,99999).'-'.uniqid();
 			}
-			$i = 0;
-			while (file_exists($dir.DS.$file.$i.$ext)) {
-				$i++;
-			}
-			return $dir.DS.$file.$i.$ext;
+			
+			return $dir.DS.$file;
 		}
+		
+		
 		//---------------------------------
 		function upload_error ($errorobj) {
 			$error = false;

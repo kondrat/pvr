@@ -15,7 +15,10 @@ p.album_image a img {
 	background-color: white;
 	padding: 0px;
 }
-
+.centerImg {
+	margin: 0 auto;
+	width: 630px;
+}
 div.album img {
 	padding: 2px 5px 5px 0px;
 	background: url('../img/shadow2.png') no-repeat	;
@@ -33,3 +36,4 @@ div.album img {
 	font-weight: bold;
 	font-size: 20pt;
 }
+

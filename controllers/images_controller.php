@@ -47,7 +47,6 @@ class ImagesController extends AppController {
 			$file = $this->data['Image']['userfile'];
 			//debug($file);
 			if ( !is_array($file) || $file == array() ||$file['error'] == 4) {
-
 				echo '{"message":"'.__('Image wasn\'t uploaded',true).'"}';
 				$this->autoRender = false;
 				exit();			
@@ -58,12 +57,16 @@ class ImagesController extends AppController {
 							case(0):
 								$result = $this->Upload->upload($file, $destination, $org );
 								if ($result != 1) {
+									//debug($this->Upload->result);
 									$this->data['Image']['image'] = $this->Upload->result;
+									
 								}
 								break;
+								/*
 							case(1):
 								$result = $this->Upload->upload($file, $destinationS, null, array('type' => 'resizecrop', 'size' => array('100', '100') ) ); 
 								break;
+								*/
 						}
 						if ( $result == 1 ) {
 							// display error
