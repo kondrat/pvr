@@ -262,20 +262,25 @@
 				}								
 
 				// -- clean up
-				 
+				$resultImg['img'][$k]['height'] = $newY;
+				$resultImg['img'][$k]['width'] = $newX; 
 
 			}
 
+			$resultImg['img']['img'] = basename($this->_name);
 			
 
 			
 			if ( $write ) {
+				$this->result = serialize($resultImg);
 				//debug($write);
+				/*
 				if ( ($resultSize['md'] == 1 ) ) {
 					$this->result = basename($this->_name).'-md';
 				} else {
 					$this->result = basename($this->_name).'-lrg';
 				}
+				*/
 			} else {
 				$this->error(__("Could not write file",true) );
 				//$this->error("Could not write " . $this->_name . " to " . $this->_destination); original

@@ -98,8 +98,13 @@ class ImagesController extends AppController {
 						$this->Image->create();
 						if ($this->Image->save($this->data)) {
 
-										
-								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $this->data['Image']['image'],'path'=> $this->Auth->user('uuid') );
+								$imgToReturn = 	unserialize($this->data['Image']['image']);
+								if ($imgToReturn['img']['md'] != array() ) {
+									$img = $imgToReturn['img']['img'].'-md';
+								} else {
+									$img = $imgToReturn['img']['img'].'-lrg';
+								}	
+								$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $img,'path'=> $this->Auth->user('uuid') );
 								echo json_encode($arr);						
 								$this->autoRender = false;
 				 				exit();
