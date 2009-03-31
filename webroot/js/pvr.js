@@ -51,3 +51,13 @@ jQuery(document).ready( function() {
 $(document).ready( function(){
   $('.rounded').corners();
 });
+$(document).ready(function(){	
+	$("#slider").easySlider(			
+		prevText: 'Previous',
+		nextText: 'Next',		
+		firstShow: true,
+		lastShow: true,
+		vertical: false, 
+		continuous: true 	
+	);
+});

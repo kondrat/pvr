@@ -10,6 +10,7 @@
 		echo $html->meta('icon');
 		echo $html->css('pvr');
 		echo $html->css('screen');
+		echo $html->css('slider');
 		//echo $html->css('print');
 		echo '<!--[if IE]>';
 		echo $html->css('ie');
@@ -18,6 +19,7 @@
 		echo $javascript->link('jquery-1.3.2.min');
 		echo $javascript->link('jquery.form');
 		echo $javascript->link('jquery.corners.min');
+		echo $javascript->link('easySlider1.5');
 		echo $javascript->link('pvr');
 		echo $scripts_for_layout;
 	?>

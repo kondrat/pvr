@@ -1,5 +1,3 @@
-
-<h2><?php __('User Album');?></h2>
 	<div class="clearfix">
 		<div class="span-16 imageBack" style="">
 			<div style="position: relative;">
@@ -16,17 +14,29 @@
 								$img = $c['img']['img'].'-lrg.jpg';
 								$width = $c['img']['lrg']['width'];
 							}
-							debug($img);
+							//debug($img);
 						?>						
 								<div>
 									<p>
 										<?php echo $html->image('gallery1/'.$path.'/'.$img,array('style'=>'width:'.$width.'px','id'=>'mainImage',"class"=>"centerImg") );?>
 									</p>
-								</div>							
+								</div>
+								<div class="span-12" style="position:absolute;top: 400px; height: 75px;" id="slider">
+									<ul>
+									<?php foreach($currentAlbum['Image'] as $imagSq ): ?>
+										<?php $im = unserialize($imagSq['image']); ?>	
+										<li>								
+											<?php echo $html->image( 'gallery1/'.$path.'/'.$im['img']['img'].'-sq.jpg' ); ?>
+										</li>
+										<?php //debug($image);?>
+									<?php endforeach ?>	
+									</ul>							
+								</div>
+							
 					<?php else: ?>
 						<div style="height:470px; width:630px;"><?php echo $html->image('backImg.jpg',array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
 					<?php endif ?>
-					
+
 				</div>
 				<div class="span-10 prepend-8 last" style="position:absolute; top: 30px; right: 0px; z-index: 20;">
 				
