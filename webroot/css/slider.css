@@ -10,8 +10,8 @@
 			list-style:none;
 			}	
 		#slider, #slider li{ 
-			height:220px;
-			width:696px;
+			/*height:220px;*/
+			/*width:696px;*/
 			overflow:hidden;
 			}	
 		#slider{ 
@@ -23,19 +23,20 @@
 			height:77px;
 			position:absolute;
 			left:-25px;
-			top:71px;
+			top:405px;
 			}	
 		#nextBtn{ 
-			left:701px;
+			left:515px;
+			z-index:500;
 			}														
 		#prevBtn a, #nextBtn a{  
 			display:block;
 			width:30px;
 			height:77px;
-			background:url(../images/btn_prev.gif) no-repeat 0 0;	
+			background:url(../img/btn_prev.gif) no-repeat 0 0;	
 			}	
 		#nextBtn a{ 
-			background:url(../images/btn_next.gif) no-repeat 0 0;	
+			background:url(../img/btn_next.gif) no-repeat 0 0;	
 			}								
 	
 	/* // slider */													

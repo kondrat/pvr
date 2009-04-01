@@ -19,6 +19,7 @@
 		echo $javascript->link('jquery-1.3.2.min');
 		echo $javascript->link('jquery.form');
 		echo $javascript->link('jquery.corners.min');
+		//echo $javascript->link('jquery.corner');
 		echo $javascript->link('easySlider1.5');
 		echo $javascript->link('pvr');
 		echo $scripts_for_layout;
@@ -52,7 +53,7 @@
 		    <div class="span-16">
 		    	<div class="clearfix">
 			        <div class="span-8">
-			            <div style="background-color: #ccc; padding-left: 20px;">
+			            <div class="rounded" style="background-color: #ccc; padding-left: 20px;">
 							<?php
 								//debug($this->params);
 								if ($session->check('Auth.User.username')) {

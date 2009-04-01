@@ -21,12 +21,13 @@
 										<?php echo $html->image('gallery1/'.$path.'/'.$img,array('style'=>'width:'.$width.'px','id'=>'mainImage',"class"=>"centerImg") );?>
 									</p>
 								</div>
-								<div class="span-12" style="position:absolute;top: 400px; height: 75px;" id="slider">
+								<div class="span-12 rounded" style="padding: 7px 20px;position:absolute;top: 400px; height: 75px;background-color:#008080;" id="slider">
+								
 									<ul>
 									<?php foreach($currentAlbum['Image'] as $imagSq ): ?>
 										<?php $im = unserialize($imagSq['image']); ?>	
 										<li>								
-											<?php echo $html->image( 'gallery1/'.$path.'/'.$im['img']['img'].'-sq.jpg' ); ?>
+											<?php echo $html->image( 'gallery1/'.$path.'/'.$im['img']['img'].'-sq.jpg',array() ); ?>
 										</li>
 										<?php //debug($image);?>
 									<?php endforeach ?>	
