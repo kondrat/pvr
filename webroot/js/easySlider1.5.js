@@ -59,8 +59,10 @@
 		this.each(function() {  
 			var obj = $(this); 				
 			var s = $("li", obj).length;
+			
 			var w = $("li", obj).width(); 
 			var h = $("li", obj).height(); 
+			//alert(h);
 			obj.width(w); 
 			obj.height(h); 
 			obj.css("overflow","hidden");

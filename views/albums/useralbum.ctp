@@ -2,9 +2,10 @@
 		<div class="span-16 imageBack" style="">
 			<div style="position: relative;">
 				<div style="z-index: 1;  position: relative;">				
-					<div id="op2" style="position:absolute; float: left;width: 630px; height:100%;background-color: #333; opacity: 0.3;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); top: 100px, left: 0px;z-index: 90"></div>
+					<div id="op2" style="position:absolute; float: left;width: 630px; height:100%;background-color: #333; opacity: 0.3;filter: alpha(opacity=50); top: 100px, left: 0px;z-index: 90"></div>
 					<?php if( isset($currentAlbum['Image']) && $currentAlbum['Image'] != array() ): ?>
 						<?php 
+							$withFirst = $currentAlbum['Image'];
 							$b =  array_pop($currentAlbum['Image']) ;
 							$c = unserialize($b['image']);
 							if ( isset($c['img']['md']) && $c['img']['md'] != array() ) {
@@ -21,17 +22,19 @@
 										<?php echo $html->image('gallery1/'.$path.'/'.$img,array('style'=>'width:'.$width.'px','id'=>'mainImage',"class"=>"centerImg") );?>
 									</p>
 								</div>
-								<div class="span-12 rounded" style="padding: 7px 20px;position:absolute;top: 400px; height: 75px;background-color:#008080;" id="slider">
-								
-									<ul>
-									<?php foreach($currentAlbum['Image'] as $imagSq ): ?>
-										<?php $im = unserialize($imagSq['image']); ?>	
-										<li>								
-											<?php echo $html->image( 'gallery1/'.$path.'/'.$im['img']['img'].'-sq.jpg',array() ); ?>
-										</li>
-										<?php //debug($image);?>
-									<?php endforeach ?>	
-									</ul>							
+								<div class="slider rounde...">
+									<div class="insideSlider rounde..." style="" id="slider">								
+										<ul>
+										<?php //$withFirst = reset($currentAlbum['Image']);?>
+										<?php foreach( array_reverse( $withFirst ,true ) as $imagSq ): ?>
+											<?php $im = unserialize($imagSq['image']); ?>	
+											<li>								
+												<?php echo $html->image( 'gallery1/'.$path.'/'.$im['img']['img'].'-sq.jpg',array() ); ?>
+											</li>
+											<?php //debug($image);?>
+										<?php endforeach ?>	
+										</ul>							
+									</div>
 								</div>
 							
 					<?php else: ?>
@@ -39,11 +42,11 @@
 					<?php endif ?>
 
 				</div>
-				<div class="span-10 prepend-8 last" style="position:absolute; top: 30px; right: 0px; z-index: 20;">
+				<div class="span-12 prepend-8 last" style="position:absolute; top: 30px; right: 0px; z-index: 20;">
 				
 					<div class="imgInput rounded">
 						<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
-							<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>__('Upload Image',true) ) ); ?>
+							<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>false ) ); ?>
 							<?php if( isset($currentAlbum['Album']['id']) ): ?>
 								<?php echo $form->hidden( 'album_id', array('value'=> $currentAlbum['Album']['id']) ); ?>
 							<?php endif ?>

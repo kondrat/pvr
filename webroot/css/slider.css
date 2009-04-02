@@ -15,28 +15,28 @@
 			overflow:hidden;
 			}	
 		#slider{ 
-			margin-left:5px;
+			/*height: 85px;*/
 			}	
 		#prevBtn, #nextBtn{ 
 			display:block;
 			width:30px;
 			height:77px;
 			position:absolute;
-			left:-25px;
-			top:405px;
+			left:-30px;
+			top:5px;
 			}	
 		#nextBtn{ 
-			left:515px;
+			left:539px;
 			z-index:500;
 			}														
 		#prevBtn a, #nextBtn a{  
 			display:block;
 			width:30px;
 			height:77px;
-			background:url(../img/btn_prev.gif) no-repeat 0 0;	
+			background:url(../img/btn_prev.png) no-repeat 0 0;	
 			}	
 		#nextBtn a{ 
-			background:url(../img/btn_next.gif) no-repeat 0 0;	
+			background:url(../img/btn_next.png) no-repeat 0 0;	
 			}								
 	
 	/* // slider */													

@@ -33,13 +33,32 @@ div.album img {
 }
 /*ajax*/
 #storyTextUpload {
-	color: #eee;
-	font-weight: bold;
-	font-size: 20pt;
+	color: #ff5e5e;
+	/*font-weight: bold;*/
+	font-size: 15pt;
+	background-color: #ccc;
+	width: 320px;
 }
 .imgInput {
-	background-color: #008080;
+	background-color: #4a4a4a;
 	padding: 10px;
 	width: 300px;
 	opacity: 0.8;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=85);
+	cursor: move; 
+}
+.slider {
+	margin: -100px 10px 0px 45px;
+	padding: 7px ;
+	width: 525px;
+	height: 75px;
+	background-color:#4a4a4a;
+	z-index: 15500;
+	position:absolute;
+	top: 450px;
+	/*opacity: 0.5;*/
+	cursor: move;
+}
+.insideSlider {
+	opacity: 1;
 }

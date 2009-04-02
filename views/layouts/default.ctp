@@ -18,6 +18,8 @@
 		//echo $html->css('cake.generic');
 		echo $javascript->link('jquery-1.3.2.min');
 		echo $javascript->link('jquery.form');
+		echo $javascript->link('ui.core');
+		echo $javascript->link('ui.draggable');
 		echo $javascript->link('jquery.corners.min');
 		//echo $javascript->link('jquery.corner');
 		echo $javascript->link('easySlider1.5');

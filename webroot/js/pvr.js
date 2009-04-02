@@ -23,15 +23,22 @@ jQuery(document).ready( function() {
 			dataType:  'json',			
 			success: 
 					function(data) {
-							$('#storyTextUpload').hide().html(data.message).fadeIn();
+							$('#storyTextUpload').hide().html("<p class='rounded' style='padding:5px;'>"+data.message+"</p>").fadeIn();
 
-							$('#storyTextUpload').fadeOut(5000);
+							$('#storyTextUpload').fadeOut(10000);
 											 					
 							$('#ttt').fadeOut(600);
 							if( data.img != null) {
-
-								$('#mainImage').attr({src: "/pvr/img/gallery1/"+data.path+"/"+data.img+".jpg"}).fadeTo(5000,0.8);
-								$('#op2').fadeTo(1000,0).fadeTo(5000,0.5);
+								//$('#mainImage').fadeOut(5000);
+								$('#mainImage').attr({style: "width:"+data.imgWidth})
+								$('#mainImage').attr({src: "/pvr/img/gallery1/"+data.path+"/"+data.img+".jpg"}).fadeTo(500,0).fadeTo(5000,1);
+								//$('#mainImage').fadeIn(5000,0.8);
+								$('#op2').fadeTo(1000,0).fadeTo(5000,0.5).fadeTo(5000,0);
+								
+								$("#slider ul").prepend("<li style='float:left;height: 75px; width: 75px;'></li>");
+								//alert("<img src='/pvr/img/gallery1/"+data.path+"/"+data.thumb+".jpg />");
+								$("#slider ul li:first").html("<img src='/pvr/img/gallery1/"+data.path+"/"+data.thumb+".jpg' />").hide().fadeIn(5000);
+								// <img src='/pvr/img/gallery1/"+data.path+"/"+data.thumb+".jpg
 								var oldImg = $('#mainImage').attr('src');	
 							} else {
 								$('#mainImage').attr({src: oldImg }).fadeTo(5000,0.8);
@@ -64,4 +71,8 @@ $(document).ready(function(){
 		//vertical: false, 
 		//continuous: false 	
 	);
+});
+$(document).ready( function(){
+  $('.slider').draggable(); 
+  $('.imgInput').draggable();
 });
