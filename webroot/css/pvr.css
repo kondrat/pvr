@@ -34,17 +34,18 @@ div.album img {
 /*ajax*/
 #storyTextUpload {
 	color: #ff5e5e;
+	margin: 5px 12px;
 	/*font-weight: bold;*/
 	font-size: 15pt;
 	background-color: #ccc;
-	width: 320px;
+	/*width: 320px;*/
 }
 .imgInput {
 	background-color: #4a4a4a;
 	padding: 10px;
 	width: 300px;
 	opacity: 0.8;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=85);
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
 	cursor: move; 
 }
 .slider {
