@@ -9,6 +9,33 @@
 	margin: 10px 0 0 0;
 	padding: 53px 90px;
 }
+
+/*form classes*/
+.error-message {
+	color: red;
+	font-weight: bold;
+}
+#UserUsername, #UserPassword1, #UserPassword2,#UserEmail {
+	width: 206px;
+	margin-bottom: 1em;
+}
+#UserGroupId {
+	margin: 0;
+}
+#usernameWrap label, label {
+	margin: 0;
+	float: right;
+}
+#ajimg {
+	margin: 0;
+	padding: 0;
+}
+.labak {
+
+}
+#regSubmit {
+	
+}
 /*albums calsses*/
 p.album_image a img {
 	border: 1px solid #777 ;
@@ -34,19 +61,28 @@ div.album img {
 /*ajax*/
 #storyTextUpload {
 	color: #ff5e5e;
-	margin: 5px 12px;
 	/*font-weight: bold;*/
 	font-size: 15pt;
 	background-color: #ccc;
 	/*width: 320px;*/
 }
 .imgInput {
+	position: relative;
 	background-color: #4a4a4a;
 	padding: 10px;
 	width: 300px;
 	opacity: 0.8;
 	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
 	cursor: move; 
+}
+.imgInputMove {
+	position: absolute;
+	top: 25px;
+	left: 250px;
+	font-weight: bold;
+	font-size: larger;
+	background-color: #FF8080;
+	padding: 0px 3px;
 }
 .slider {
 	margin: -100px 10px 0px 45px;

@@ -10,7 +10,7 @@
 			list-style:none;
 			}	
 		#slider, #slider li{ 
-			/*height:220px;*/
+			height:75px;
 			/*width:696px;*/
 			overflow:hidden;
 			}	

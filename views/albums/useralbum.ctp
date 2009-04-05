@@ -55,6 +55,7 @@
 							<?php endif ?>
 							<?php echo $form->submit('tuda',array('id' => 'tuda') );?>
 						<?php echo $form->end();?>
+						<div class="imgInputMove rounded"><?php __('Move');?></div>
 						<div class="rounded" style="visibility: hidden;" id="storyTextUpload"></div>
 					</div>
 					

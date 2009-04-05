@@ -25,9 +25,9 @@ jQuery(document).ready( function() {
 			dataType:  'json',			
 			success: 
 					function(data) {
-							$('#storyTextUpload').hide().css({'visibility' : 'visible'}).html("<p class='rounded' style='padding:5px;'>"+data.message+"</p>").fadeIn();
+							$('#storyTextUpload').hide().css({'margin':'5px 12px 0 12px','visibility' : 'visible'}).html("<p class='rounded' style='padding:5px;'>"+data.message+"</p>").fadeIn();
 
-							$('#storyTextUpload').fadeOut(10000);
+							$('#storyTextUpload').fadeOut(7000);
 											 					
 							$('#ttt').fadeOut(600);
 							if( data.img != null) {
@@ -85,6 +85,7 @@ $(document).ready(function(){
 		//continuous: false 	
 	);
 });
+
 $(document).ready( function(){
   $('.slider').draggable(); 
   $('.imgInput').draggable();

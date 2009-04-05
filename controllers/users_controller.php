@@ -5,7 +5,7 @@ $mrClean = new Sanitize();
 class UsersController extends AppController {
 	//var $uses = array('User');
 	var $name = 'Users';
-	var $helpers = array('Form', 'Html');
+	var $helpers = array('Form');
 	var $components = array( 'userReg');
 	var $pageTitle = 'Данные пользователя';
 	var $paginate = array('limit' => 5);
@@ -81,10 +81,14 @@ class UsersController extends AppController {
     }
 //--------------------------------------------------------------------
 	function reg() {
-
+		
+		if($this->Auth->user('id')) {
+			$this->redirect('/',null,true);
+		}
+		
 		$this->pageTitle = 'Регистрация';
 		
-		if ( !empty($this->data) ) {
+		if ( !empty($this->data) ) {			
 		
 			$uuid = $this->data['User']['uuid'] = uniqid();
 
@@ -100,29 +104,56 @@ class UsersController extends AppController {
 				
 				if( @mkdir('img/'.Configure::read('farm').'/'.$uuid ) ){
 					if( !$this->User->Album->newAlbum($this->data) ) {
-						$this->redirect(array('controller' => 'album','action'=>'add'),null,true);
+						$this->redirect(array('controller' => 'albums','action'=>'add'),null,true);
 					}
 				} else {
-					$this->redirect(array('controller' => 'album','action'=>'add'),null,true);
+					$this->redirect(array('controller' => 'albums','action'=>'add'),null,true);
 				}
 
 				//debug($a);
 				
-               	//$this->redirect('/users/thanks');
+               	$this->redirect(array('controller' => 'albums','action'=>'useralbum'),null,true);
          	} else {
          		// Failed, clear password field
 				$this->data['User']['password1'] = null;
 				$this->data['User']['password2'] = null;
 				$this->Session->setFlash('Новый аккаунт не был создан');
 			}
-		} else {
-			if( !is_null( $this->Session->read('Auth.User.username') ) ) {
-				$this->redirect($this->Auth->redirect());
-			}				
 		}
+		
 		$this->set('groups', $this->User->Group->find('list'));
 
 	}
+	//ajax staff
+		function userNameCheck() {
+			$errors = array();
+			//don't foreget about santization and trimm
+			if (!empty($this->data) && $this->data['User']['username'] != null) {
+				if ($this->RequestHandler->isAjax()) {
+					$this->User->set( $this->data );
+					$errors = $this->User->invalidFields();
+					if($errors == array()) {
+						$type = 1;
+						$errors['username'] = 'Login is free';
+					} else {
+						$type = 0;
+					}
+					echo json_encode(array('hi'=> $errors['username'], 'typ'=> $type));
+					
+							Configure::write('debug', 0);
+							$this->autoRender = false;
+				 			exit();						
+						
+				}
+			} else {
+					echo json_encode(array('hi'=> 'This field cannot be left blank', 'typ'=> 0));
+					
+							Configure::write('debug', 0);
+							$this->autoRender = false;
+				 			exit();	
+			}		
+		}
+//--------------------------------------------------------------------
 	function thanks() {
 	}
 //--------------------------------------------------------------------
