@@ -1,64 +1,30 @@
 <?php echo $javascript->link('reg',false);?>
 <div class="inner_page">
-	<h2><?php __('Sign Up');?></h2>
-	<?php echo $form->create('User', array('action' => 'reg' ) ); ?>
-
-
-				<?php echo $form->input('username', array('div'=>array("id"=>"usernameWrap") ) ); ?>
-
+	<fieldset>
+		<legend><?php __('Sign Up');?></legend>
+		<?php echo $form->create('User', array('action' => 'reg' ) ); ?>
+	
+	
+					<?php echo $form->input('username', array('div'=>array("id"=>"usernameWrap","class"=>"formWrap"),'label'=>__('Username',true) ) ); ?>
+	
+	
+					<?php echo $form->input('password1' , array('type' => 'password','div'=>array("id"=>"passWrap","class"=>"formWrap"), 'label'=>__('Password',true) ) ); ?>
+	
+	
+					<?php echo $form->input('password2' , array('type' => 'password','div'=>array("id"=>"pass2Wrap","class"=>"formWrap"), 'label'=>__('Confirm Password',true) ) ); ?>
+	
+	
+					<?php echo $form->input('email' , array('div'=>array("id"=>"emailWrap","class"=>"formWrap"), 'label'=>__('Email',true) ) ); ?>
+	
+			
+					<?php echo $form->input('group_id' , array('div'=>array("id"=>"groupWrap","class"=>"formWrap"), 'label'=>__('group_id',true) ) ); ?>
+	
 		
-		<div class="input text required clearfix" id="passWrap">
-			<div class="labak span-3">
-				<?php echo $form->label('password',__('Password',true));?>
-			</div>
-			<div class="span-6 last">
-				<?php echo $form->input('password1' , array('type' => 'password','div'=>false, 'label'=>false,'error'=>false ) ); ?>
-			</div>
-			
-				<?php echo $form->error('password1');?>
-			
-		</div>		
+		</fieldset>	
+				<div class="submit clearfix">	
+					<?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'regSubmit','class'=>'span-3') ); ?>
+				</div>
 		
-		<div class="input text required clearfix" id="pass2Wrap">
-			<div class="labak span-3">
-				<?php echo $form->label('password2',__('Confirm Password',true));?>
-			</div>
-			<div class="span-6 last">
-				<?php echo $form->input('password2' , array('type' => 'password','div'=>false, 'label'=>false,'error'=>false ) ); ?>
-			</div>
-			
-				<?php echo $form->error('password2');?>
-			
-		</div>		
-
-			
-		<div class="input text required clearfix" id="emailWrap">
-			<div class="labak span-3">
-				<?php echo $form->label('email',__('Email',true));?>
-			</div>
-			<div class="span-6 last">
-				<?php echo $form->input('email' , array('div'=>false, 'label'=>false,'error'=>false ) ); ?>
-			</div>
-			
-				<?php echo $form->error('email');?>
-			
-		</div>	
-		
-		
-			        
-		<div class="input text required clearfix" id="groupWrap">
-			<div class="labak span-3">
-				<?php echo $form->label('group_id',__('group_id',true));?>
-			</div>
-			<div class="span-6 last">
-				<?php echo $form->input('group_id' , array('div'=>false, 'label'=>false ) ); ?>
-			</div>
-		</div>	
-		
-		<div class=" clearfix">	
-			<?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'regSubmit','class'=>'span-3') ); ?>
-		</div>
-
 	<?php echo $form->end(); ?>
 </div>
 
