@@ -14,24 +14,41 @@
 .error-message {
 	color: red;
 	font-weight: bold;
+	margin-left: 12em;
 }
 #UserUsername, #UserPassword1, #UserPassword2,#UserEmail {
 	width: 206px;
-	margin-bottom: 1em;
 }
 #UserGroupId {
 	margin: 0;
+} 
+.formWrap label {
+	margin: 0 1em 0 0;
+	float: left;
+	width: 11em;
+	text-align: right; 
 }
-#usernameWrap label, label {
+div.formWrap  {
+	background-color: inherit;
+	border:0;
 	margin: 0;
-	float: right;
+	padding: 0 0 1em 0;
+}
+div.formWrap input.form-error {
+	background-color: #FBC2C4;
+}
+.submit {
+	margin: 1em 0 1em 13.5em;
 }
 #ajimg {
-	margin: 0;
+	margin: 0 0 0 12em;
 	padding: 0;
+	height: 15px;
 }
-.labak {
-
+.greenMessage{
+	margin: 0 0 0 12em;
+	padding: 0;
+	height: 15px;
 }
 #regSubmit {
 	
