@@ -3,18 +3,28 @@ class User extends AppModel {
 	var $name = 'User';
 //--------------------------------------------------------------------
 	var $validate = array(
-							'username' => array( 'alphaNumeric' => array( 
+							'username' => array(
+												
+												'notEmpty' => array(
+																	'rule' => 'notEmpty',
+																	'message' => 'This field cannot be left blank',
+																	),
+																								
+												'alphaNumeric' => array( 
 																		'rule' => 'alphaNumeric',
 																		'required' => true,
-																		'message' => 'Только буквы и цифры'
+																		'message' => 'Usernames must only contain letters and numbers.'
 																		),
+												
 												'betweenRus' => array(
 																	'rule' => array( 'betweenRus', 2, 15, 'username'),
-																	'message' => 'От 2 до 15 букв'
+																	'message' => 'Username must be between 2 and 15 characters long.',
+																	'last' => true
 																	),
 												'checkUnique' => array( 
 																		'rule' =>  array('checkUnique', 'username'),
-																		'message' => 'Этот логин уже занят'
+																		'message' => 'This username has already been taken.',
+																		
 																	),
 												),
 																						
@@ -34,11 +44,14 @@ class User extends AppModel {
 															'rule' => array( 'email', false), //check the validity of the host. to set true.
 															'message' => 'Этот Email не существует',
 															),
+												/*
 												'checkUnique' => array(           
 																		'rule' =>  array('checkUnique', 'email'),
 																		'message' => 'Этот Email уже занят'
 																		),
+												*/
 											),
+							
 							/*
 							'phone' => array(
 												
@@ -66,20 +79,7 @@ class User extends AppModel {
 																	'message' => 'От 3 до 15 букв'
 																	)
 												),
-							'company' => array( 'alphaNumeric' => array( 
-																		'rule' => array('custom', '/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd} ]+$/mu'),
-																		'message' => 'Только буквы и цифры'
-																		),
-												'betweenRus' => array(
-																	'rule' => array( 'betweenRus', 2, 15, 'company'),
-																	'message' => 'От 2 до 15 букв'
-																	)
-												),
-							'website' => array(
-												'rule' => 'url',
-												'allowEmpty' => true,
-												'message' => 'Неправильный URL'
-												),
+
 							*/
 																										 
 						  );

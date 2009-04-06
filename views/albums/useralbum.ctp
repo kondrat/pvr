@@ -2,7 +2,7 @@
 		<div class="span-16 imageBack" style="">
 			<div style="position: relative;">
 				<div style="z-index: 1;  position: relative;">				
-					<div id="op2" style="position:absolute; float: left;width: 630px; height:100%;background-color: #333; opacity: 0.3;filter: alpha(opacity=50); top: 100px, left: 0px;z-index: 90"></div>
+
 					<?php if( isset($currentAlbum['Image']) && $currentAlbum['Image'] != array() ): ?>
 						<?php 
 							$withFirst = $currentAlbum['Image'];
@@ -16,7 +16,10 @@
 								$width = $c['img']['lrg']['width'];
 							}
 							//debug($img);
-						?>						
+						?>
+
+						<div id="op2"></div>
+						
 								<div>
 									<p>
 										<?php echo $html->image('gallery1/'.$path.'/'.$img,array('style'=>'width:'.$width.'px','id'=>'mainImage',"class"=>"centerImg") );?>
@@ -43,7 +46,7 @@
 
 				</div>
 				<div class="span-12 prepend-8 last" style="position:absolute; top: 30px; right: 0px; z-index: 20;">
-				
+					
 					<div class="imgInput rounded">
 						<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 							<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>false ) ); ?>
@@ -52,11 +55,13 @@
 							<?php endif ?>
 							<?php echo $form->submit('tuda',array('id' => 'tuda') );?>
 						<?php echo $form->end();?>
+						<div class="imgInputMove rounded"><?php __('Move');?></div>
+						<div class="rounded" style="visibility: hidden;" id="storyTextUpload"></div>
 					</div>
 					
-					<div id="storyTextUpload"></div>
+					
 				</div>
-				<div id="ttt" style="position:absolute; top: 230px; right: 200px; z-index: 30;"></div>
+				<div id="ttt" style="position:absolute; top: 230px; right: 250px; z-index: 30;"></div>
 			</div>	
 		</div>
 	</div>
