@@ -2,17 +2,10 @@
 <div class="inner_page">
 	<h2><?php __('Sign Up');?></h2>
 	<?php echo $form->create('User', array('action' => 'reg' ) ); ?>
-		<div class="input text required clearfix" id="usernameWrap">
-			<div class="labak span-3">
-				<?php echo $form->label('username',__('Username',true));?>
-			</div>
-			<div class="span-6 last">
-				<?php echo $form->input('username', array('div'=>false, 'label'=>false,'error'=>false ) ); ?>
-			</div>
-			
-				<?php echo $form->error('username',null,array());?>
-			
-		</div>
+
+
+				<?php echo $form->input('username', array('div'=>array("id"=>"usernameWrap") ) ); ?>
+
 		
 		<div class="input text required clearfix" id="passWrap">
 			<div class="labak span-3">
