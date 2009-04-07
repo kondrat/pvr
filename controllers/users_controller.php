@@ -134,7 +134,7 @@ class UsersController extends AppController {
 					$errors = $this->User->invalidFields();
 					if($errors == array()) {
 						$type = 1;
-						$errors['username'] = 'Login is free';
+						$errors['username'] = __('Login is free',true);
 					} else {
 						$type = 0;
 					}
@@ -146,7 +146,7 @@ class UsersController extends AppController {
 						
 				}
 			} else {
-					echo json_encode(array('hi'=> 'This field cannot be left blank', 'typ'=> 0));
+					echo json_encode(array('hi'=> __('This field cannot be left blank',true), 'typ'=> 0));
 					
 							Configure::write('debug', 0);
 							$this->autoRender = false;

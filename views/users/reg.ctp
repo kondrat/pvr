@@ -1,4 +1,5 @@
-<?php echo $javascript->link('reg',false);?>
+<?php echo $javascript->link(array('jquery.validate.pack','localization/messages_ru','reg'),false);?>
+
 <div class="inner_page">
 	<fieldset>
 		<legend><?php __('Sign Up');?></legend>
@@ -14,7 +15,7 @@
 					<?php echo $form->input('password2' , array('type' => 'password','div'=>array("id"=>"pass2Wrap","class"=>"formWrap"), 'label'=>__('Confirm Password',true) ) ); ?>
 	
 	
-					<?php echo $form->input('email' , array('div'=>array("id"=>"emailWrap","class"=>"formWrap"), 'label'=>__('Email',true) ) ); ?>
+					<?php echo $form->input('email' , array('div'=>array("id"=>"emailWrap","class"=>"formWrap"),"class"=>"email required", 'label'=>__('Email',true) ) ); ?>
 	
 			
 					<?php echo $form->input('group_id' , array('div'=>array("id"=>"groupWrap","class"=>"formWrap"), 'label'=>__('group_id',true) ) ); ?>

@@ -1,13 +1,38 @@
 jQuery(document).ready( function(){
 
-	//$('.error-message').parent('div').addClass('error');
-
+				$("#UserRegForm").validate({
+					
+			    focusInvalid: false,
+			    focusCleanup: true,
+			    errorElement: "div",
+			    errorClass: "error-message",
+			    rules: {
+	
+				      UserEmail: {
+				      	required: true,
+				      	minlength: 2,
+				      	email: true
+				      }
+			    },
+			    messages: {
+	
+				     	UserEmail: {
+				        required: "Нужно указать email адрес",
+				        email: "Email адрес должен быть корректным"
+				      }
+			    }/*
+			    errorPlacement: function(error, element) {
+			      var er = element.attr("id");
+			      error.appendTo( er );
+			    }	 
+			    */ 
+			});
 
 
 
 	$('#UserUsername').blur( function() {
 		
-		$('#usernameWrap').append('<div id="ajimg"><img src="/pvr/img/ajax-loader2.gif" /></div>');
+		$('#usernameWrap').append('<div id="ajimg"><img src="/pvr/img/ajax-loader3.gif" /></div>');
 		$('#usernameWrap .error-message').remove();
 		$('#usernameWrap input').removeClass('form-error');		
 		
