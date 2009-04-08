@@ -1,4 +1,4 @@
-<?php echo $javascript->link(array('jquery.validate.pack','localization/messages_ru','reg'),false);?>
+<?php echo $javascript->link(array('reg','localization/messages_ru'),false);?>
 
 <div class="inner_page">
 	<fieldset>
