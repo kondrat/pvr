@@ -96,7 +96,14 @@ jQuery(document).ready( function(){
 
 
 
-
+			$("form").submit(function() {
+			  if ($("input:first").val() == "correct") {
+			    $("span").text("Проверяем...").show();
+			    return true;
+			  }
+				alert('wrong');
+			  return false;
+			});
 
 
 
