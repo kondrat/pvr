@@ -6,52 +6,61 @@ class User extends AppModel {
 							'username' => array(
 												
 												'notEmpty' => array(
-																	'rule' => 'notEmpty',
-																	'message' => 'This field cannot be left blank',
-																	),
+																						'rule' => 'notEmpty',
+																						'message' => 'This field cannot be left blank',
+																						),
 																								
 												'alphaNumeric' => array( 
-																		'rule' => 'alphaNumeric',
-																		'required' => true,
-																		'message' => 'Usernames must only contain letters and numbers.'
-																		),
+																							'rule' => 'alphaNumeric',
+																							'required' => true,
+																							'message' => 'Usernames must only contain letters and numbers.'
+																							),
 												
 												'betweenRus' => array(
-																	'rule' => array( 'betweenRus', 2, 15, 'username'),
-																	'message' => 'Username must be between 2 and 15 characters long.',
-																	'last' => true
-																	),
+																							'rule' => array( 'betweenRus', 2, 15, 'username'),
+																							'message' => 'Username must be between 2 and 15 characters long.',
+																							'last' => true
+																							),
 												'checkUnique' => array( 
-																		'rule' =>  array('checkUnique', 'username'),
-																		'message' => 'This username has already been taken.',
-																		
-																	),
-												),
+																							'rule' =>  array('checkUnique', 'username'),
+																							'message' => 'This username has already been taken.',
+																							
+																							),
+															),
 																						
 							'password1' => array( 'betweenRus' => array(
-																	'rule' => array( 'betweenRus', 2, 15,'password1'),
-																	'message' => 'От 2 до 15 букв'
-																	)
-												),
+																													'rule' => array( 'betweenRus', 2, 15,'password1'),
+																													'message' => 'От 2 до 15 букв'
+																													)
+																	),
 							'password2' => array( 'passidentity' => array(
-																		'rule' => array( 'passidentity', '$this->data' ),
-																		'message' => 'Пароли не совпадают'
-																		)
-												),
+																													'rule' => array( 'passidentity', '$this->data' ),
+																													'message' => 'Пароли не совпадают'
+																													)
+																	),
 							
 																																							
 							'email' => array( 'email' => array( 
-															'rule' => array( 'email', false), //check the validity of the host. to set true.
-															'message' => 'Этот Email не существует',
+																								'rule' => array( 'email', false), //check the validity of the host. to set true.
+																								'message' => 'Этот Email не существует',
+																								),
+																								/*
+																								'checkUnique' => array(           
+																														'rule' =>  array('checkUnique', 'email'),
+																														'message' => 'Этот Email уже занят'
+																														),
+																								*/
 															),
-												/*
-												'checkUnique' => array(           
-																		'rule' =>  array('checkUnique', 'email'),
-																		'message' => 'Этот Email уже занят'
-																		),
-												*/
+							'captcha' => array( 'notEmpty' => array(
+																										'rule' => 'notEmpty',
+																										'message' => 'This field cannot be left blank',
+																										'last'=>true,
+																										),
+																'alphaNumeric' => array(
+																									'rule' => 'alphaNumeric',
+																									'message' => 'Usernames must only contain letters and numbers.'
+																),
 											),
-							
 							/*
 							'phone' => array(
 												

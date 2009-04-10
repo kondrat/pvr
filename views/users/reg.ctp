@@ -16,11 +16,21 @@
 	
 	
 					<?php echo $form->input('email' , array('div'=>array("id"=>"emailWrap","class"=>"formWrap"),"class"=>"email required", 'label'=>__('Email',true) ) ); ?>
+					
+					<div class="capchaImg clearfix">
 	
-			
+							<?php echo $html->image( array('controller'=>'users','action'=>'kcaptcha',time() ),array('id'=>'capImg') );?>
+
+						
+						<div class="capReset">
+							<p><?php echo $html->image('icons/001_39.png');?></p>
+						</div>
+					</div>					
+					
+					<?php echo $form->input('captcha', array('div'=> array("id"=>"captchaWrap","class"=>"formWrap"), 'label' => 'Please type the text') );	?>
+
 					<?php echo $form->input('group_id' , array('div'=>array("id"=>"groupWrap","class"=>"formWrap"), 'label'=>__('group_id',true) ) ); ?>
 	
-		
 		</fieldset>	
 				<div class="submit clearfix">	
 					<?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'regSubmit','class'=>'span-3') ); ?>

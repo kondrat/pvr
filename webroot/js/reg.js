@@ -93,8 +93,13 @@ jQuery(document).ready( function(){
 	)
 
 
+		$('.capReset p img, #capImg').click( function() {
+				var Stamp = new Date();
+				$('#capImg').attr( {src: "/pvr/users/kcaptcha/"+Stamp.getTime()});
+			}
+		)
 
-
+		/*
 
 			$("form").submit(function() {
 			  if ($("input:first").val() == "correct") {
@@ -104,7 +109,7 @@ jQuery(document).ready( function(){
 				alert('wrong');
 			  return false;
 			});
-
+		*/
 
 
 

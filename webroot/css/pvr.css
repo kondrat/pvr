@@ -116,3 +116,23 @@ div.album img {
 .insideSlider {
 	opacity: 1;
 }
+.capchaImg {
+	margin: 0 0 1em 12em;
+}
+.capchaImg img {
+	border: 1px solid #7f9db9;
+	float:left;
+	
+}
+.capchaImg p img {
+	border: none;
+	margin: 0;
+	cursor: pointer;
+}
+.capReset {
+	float: left;
+	margin: 19px;
+}
+#capImg {
+	cursor: pointer;
+}

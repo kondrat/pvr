@@ -6,13 +6,13 @@ class UsersController extends AppController {
 	//var $uses = array('User');
 	var $name = 'Users';
 	var $helpers = array('Form');
-	var $components = array( 'userReg');
+	var $components = array( 'userReg','kcaptcha');
 	var $pageTitle = 'Данные пользователя';
 	var $paginate = array('limit' => 5);
 
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow( 'logout', 'reg', 'reset', 'acoset','aroset','permset','buildAcl');
+        $this->Auth->allow( 'logout', 'reg','kcaptcha', 'reset', 'acoset','aroset','permset','buildAcl');
         //to Del:
         $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
@@ -89,7 +89,11 @@ class UsersController extends AppController {
 		$this->pageTitle = 'Регистрация';
 		
 		if ( !empty($this->data) ) {			
-		
+		if ( strtolower($this->data['User']['captcha']) == strtolower( $this->Session->read('captcha')) ) {
+			echo 'ya kroot';
+		} else {
+			echo 'ya ne kroot';
+		}
 			$uuid = $this->data['User']['uuid'] = uniqid();
 
 			if ( $this->User->save( $this->data) ) {
@@ -153,6 +157,16 @@ class UsersController extends AppController {
 				 			exit();	
 			}		
 		}
+		//kcaptcha stuff
+    function kcaptcha() {
+        $this->kcaptcha->render(); 
+    } 
+    function kcaptchaReset() {
+    	Configure::write('debug', 0);
+    	$this->autoRender = false;
+     	$this->kcaptcha->render(); 
+     	exit();
+    } 
 //--------------------------------------------------------------------
 	function thanks() {
 	}
