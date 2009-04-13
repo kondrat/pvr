@@ -87,13 +87,24 @@ class UsersController extends AppController {
 		}
 		
 		$this->pageTitle = 'Регистрация';
+
+
+
 		
-		if ( !empty($this->data) ) {			
+		if ( !empty($this->data) ) {
+			
+			
+		
+			
+		$this->data['User']['captcha2'] = $this->Session->read('captcha');
+		/*				
 		if ( strtolower($this->data['User']['captcha']) == strtolower( $this->Session->read('captcha')) ) {
 			echo 'ya kroot';
 		} else {
 			echo 'ya ne kroot';
 		}
+		*/
+		
 			$uuid = $this->data['User']['uuid'] = uniqid();
 
 			if ( $this->User->save( $this->data) ) {
@@ -119,8 +130,9 @@ class UsersController extends AppController {
                	$this->redirect(array('controller' => 'albums','action'=>'useralbum'),null,true);
          	} else {
          		// Failed, clear password field
-				$this->data['User']['password1'] = null;
-				$this->data['User']['password2'] = null;
+				//$this->data['User']['password1'] = null;
+				//$this->data['User']['password2'] = null;
+				$this->data['User']['captcha'] = null;
 				$this->Session->setFlash('Новый аккаунт не был создан');
 			}
 		}

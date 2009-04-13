@@ -55,11 +55,16 @@ class User extends AppModel {
 																										'rule' => 'notEmpty',
 																										'message' => 'This field cannot be left blank',
 																										'last'=>true,
-																										),
-																'alphaNumeric' => array(
-																									'rule' => 'alphaNumeric',
-																									'message' => 'Usernames must only contain letters and numbers.'
-																),
+																	),
+																	'alphaNumeric' => array(
+																										'rule' => 'alphaNumeric',
+																										'message' => 'Usernames must only contain letters and numbers.'
+																	),
+																	'equalCaptcha' => array(
+        																						'rule' => array('equalCaptcha','$this->data'  ),  
+        																						'message' => 'Wrong value provided'
+    															),
+//$this->data['User']['captcha2']
 											),
 							/*
 							'phone' => array(
@@ -152,6 +157,14 @@ class User extends AppModel {
 //--------------------------------------------------------------------														
 	function passidentity($data) {
  		if ( $this->data['User']['password1'] != $this->data['User']['password2'] ) {		
+        	return false;
+    	}
+    	return true;
+   	}
+   	
+//--------------------------------------------------------------------														
+	function equalCaptcha($data) {
+ 		if ( $this->data['User']['captcha'] != $this->data['User']['captcha2'] ) {		
         	return false;
     	}
     	return true;

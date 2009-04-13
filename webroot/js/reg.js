@@ -51,7 +51,7 @@ jQuery(document).ready( function(){
 			$('#pass2Wrap').removeClass("error");
 			$('#pass2Wrap input').removeClass('form-error');
 			//alert(passToCheck);
-			if(passToCheck != $('#UserPassword2').val() ) {
+			if( $('#UserPassword1').val() != $('#UserPassword2').val() ) {
 				$('#pass2Wrap').append('<div id="passerror" class="error-message">Passwords must be equal</div>');
 				$('#pass2Wrap').addClass("error");
 				$('#pass2Wrap input').addClass('form-error');
@@ -64,7 +64,10 @@ jQuery(document).ready( function(){
 		tt();			
 		}
 	)
-
+	$('#UserPassword2').keyup( function() {
+		tt();			
+		}
+	)
 
 
 
@@ -95,21 +98,29 @@ jQuery(document).ready( function(){
 
 		$('.capReset p img, #capImg').click( function() {
 				var Stamp = new Date();
-				$('#capImg').attr( {src: "/pvr/users/kcaptcha/"+Stamp.getTime()});
+				$('#capImg').hide().attr( {src: "/pvr/users/kcaptcha/"+Stamp.getTime()}).fadeIn('slow');
 			}
 		)
 
-		/*
+	
 
 			$("form").submit(function() {
-			  if ($("input:first").val() == "correct") {
-			    $("span").text("Проверяем...").show();
-			    return true;
-			  }
-				alert('wrong');
-			  return false;
+				$('#captchaWrap .error-message').remove();
+				$('#captchaWrap').removeClass("error");
+				$('#captchaWrap input').removeClass('form-error');
+			  if ($("#UserCaptcha").val() == 0) {
+			  	
+						$('#captchaWrap').append('<div id="emailerror" class="error-message">Must not be empty</div>');
+						$('#captchaWrap').addClass("error");
+						$('#captchaWrap input').addClass('form-error');
+					
+					return false;
+			  } else {
+					//alert($("#UserUsername").val());
+			 		return true;
+			 	}
 			});
-		*/
+
 
 
 

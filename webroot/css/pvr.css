@@ -136,3 +136,11 @@ div.album img {
 #capImg {
 	cursor: pointer;
 }
+.capPlace {
+	/*background-image: url(../img/bg.jpg);*/
+	background-color: #eee;
+	border: none;
+	width: 122px;
+	height: 62px;
+	float: left;
+}

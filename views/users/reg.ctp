@@ -19,7 +19,7 @@
 					
 					<div class="capchaImg clearfix">
 	
-							<?php echo $html->image( array('controller'=>'users','action'=>'kcaptcha',time() ),array('id'=>'capImg') );?>
+						<div class="capPlace"><?php echo $html->image( array('controller'=>'users','action'=>'kcaptcha',time() ),array('id'=>'capImg') );?></div>
 
 						
 						<div class="capReset">
