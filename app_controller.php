@@ -21,7 +21,7 @@ class AppController extends Controller {
             $this->Auth->loginAction = array('admin' => false, 'controller' => 'users', 'action' => 'login');
 
         } 
-
+				
 	}
 	
 	function isAuthorized() {

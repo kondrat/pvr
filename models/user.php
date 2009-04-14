@@ -7,23 +7,23 @@ class User extends AppModel {
 												
 												'notEmpty' => array(
 																						'rule' => 'notEmpty',
-																						'message' => 'This field cannot be left blank',
+																						//'message' => 'This field cannot be left blank',
 																						),
 																								
 												'alphaNumeric' => array( 
 																							'rule' => 'alphaNumeric',
 																							'required' => true,
-																							'message' => 'Usernames must only contain letters and numbers.'
+																							//'message' => 'Usernames must only contain letters and numbers.'
 																							),
 												
 												'betweenRus' => array(
 																							'rule' => array( 'betweenRus', 2, 15, 'username'),
-																							'message' => 'Username must be between 2 and 15 characters long.',
+																						//	'message' => 'Username must be between 2 and 15 characters long.',
 																							'last' => true
 																							),
 												'checkUnique' => array( 
 																							'rule' =>  array('checkUnique', 'username'),
-																							'message' => 'This username has already been taken.',
+																						//	'message' => 'This username has already been taken',
 																							
 																							),
 															),

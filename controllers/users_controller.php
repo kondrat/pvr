@@ -6,7 +6,7 @@ class UsersController extends AppController {
 	//var $uses = array('User');
 	var $name = 'Users';
 	var $helpers = array('Form');
-	var $components = array( 'userReg','kcaptcha');
+	var $components = array( 'Security','userReg','kcaptcha');
 	var $pageTitle = 'Данные пользователя';
 	var $paginate = array('limit' => 5);
 
@@ -17,6 +17,11 @@ class UsersController extends AppController {
         $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
+        
+        // swiching off Security component for ajax call
+				if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
+     			$this->Security->enabled = false; 
+     		}
     }
 //--------------------------------------------------------------------
 	function index() {
@@ -142,7 +147,10 @@ class UsersController extends AppController {
 	}
 	//ajax staff
 		function userNameCheck() {
+
 			$errors = array();
+			Configure::write('debug', 0);
+			$this->autoRender = false;
 			//don't foreget about santization and trimm
 			if (!empty($this->data) && $this->data['User']['username'] != null) {
 				if ($this->RequestHandler->isAjax()) {

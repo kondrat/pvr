@@ -16,12 +16,12 @@ jQuery(document).ready( function(){
 
 jQuery(document).ready( function() {
 	
-		$('#tuda').click( function(){ $('#ttt').html('<img src="/pvr/img/ajax-loader.gif" />').hide().fadeIn('slow'); } );
+		$('#tuda').click( function(){ $('#ttt').html('<img src="'+path+'/img/ajax-loader.gif" />').hide().fadeIn('slow'); } );
 		
 		var oldImg = $('#mainImage').attr('src');
 							
 		$("#storyEditForm").ajaxForm({
-			url: '/pvr/images/addAjax',	
+			url: path+'/images/addAjax',	
 			dataType:  'json',			
 			success: 
 					function(data) {
@@ -33,7 +33,7 @@ jQuery(document).ready( function() {
 							if( data.img != null) {
 								
 								$('#mainImage').attr({style: "width:"+data.imgWidth})
-								$('#mainImage').attr({src: "/pvr/img/gallery1/"+data.path+"/"+data.img+".jpg"}).fadeTo(500,0).fadeTo(5000,1);
+								$('#mainImage').attr({src: path+"/img/gallery1/"+data.path+"/"+data.img+".jpg"}).fadeTo(500,0).fadeTo(5000,1);
 								var margin = '0 0 0 ' +((630 - data.imgWidth)/2) + 'px';
 								var Op2style = 	{
 													'margin':margin,
@@ -50,7 +50,7 @@ jQuery(document).ready( function() {
 								
 								$("#slider ul").prepend("<li style='float:left;height: 75px; width: 75px;'></li>");
 
-								$("#slider ul li:first").html("<img src='/pvr/img/gallery1/"+data.path+"/"+data.thumb+".jpg' />").hide().fadeIn(5000);
+								$("#slider ul li:first").html("<img src='"+path+"/img/gallery1/"+data.path+"/"+data.thumb+".jpg' />").hide().fadeIn(5000);
 
 								var oldImg = $('#mainImage').attr('src');	
 							} else {

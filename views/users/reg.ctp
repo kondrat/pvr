@@ -6,7 +6,17 @@
 		<?php echo $form->create('User', array('action' => 'reg' ) ); ?>
 	
 	
-					<?php echo $form->input('username', array('div'=>array("id"=>"usernameWrap","class"=>"formWrap"),'label'=>__('Username',true) ) ); ?>
+					<?php echo $form->input('username', array('div'=>array("id"=>"usernameWrap","class"=>"formWrap"),'label'=>__('Username',true)
+										/*
+										'error' => array(
+																		'notEmpty' => __('This field cannot be left blank',true),
+											        			'alphanumeric' => __('Only alphabets and numbers allowed', true),
+											        			'betweenRus' => __('Username must be between 2 and 15 characters long', true),
+											        			'checkUnique' => __('This username has already been taken',true),
+				        										)	
+				        		*/			
+					 			) ); 
+					?>
 	
 	
 					<?php echo $form->input('password1' , array('type' => 'password','div'=>array("id"=>"passWrap","class"=>"formWrap"), 'label'=>__('Password',true) ) ); ?>

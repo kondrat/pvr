@@ -16,8 +16,14 @@
 	font-weight: bold;
 	margin-left: 12em;
 }
-#UserUsername, #UserPassword1, #UserPassword2,#UserEmail {
+#UserUsername, #UserPassword, #UserPassword1, #UserPassword2,#UserEmail {
 	width: 206px;
+}
+div.input {
+	margin-bottom: 1em;
+}
+#UserLoginForm fieldset {
+	width: 212px;
 }
 #UserGroupId {
 	margin: 0;
@@ -119,10 +125,8 @@ div.album img {
 .capchaImg {
 	margin: 0 0 1em 12em;
 }
-.capchaImg img {
-	border: 1px solid #7f9db9;
-	float:left;
-	
+#UserCaptcha {
+	width: 116px;	
 }
 .capchaImg p img {
 	border: none;
@@ -131,7 +135,7 @@ div.album img {
 }
 .capReset {
 	float: left;
-	margin: 19px;
+	margin: 19px 19px 0 19px;
 }
 #capImg {
 	cursor: pointer;
@@ -139,8 +143,9 @@ div.album img {
 .capPlace {
 	/*background-image: url(../img/bg.jpg);*/
 	background-color: #eee;
-	border: none;
-	width: 122px;
-	height: 62px;
+	border: 1px solid #7f9db9;
+	
+	width: 120px;
+	height: 60px;
 	float: left;
 }

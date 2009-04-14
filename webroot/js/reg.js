@@ -98,7 +98,7 @@ jQuery(document).ready( function(){
 
 		$('.capReset p img, #capImg').click( function() {
 				var Stamp = new Date();
-				$('#capImg').hide().attr( {src: "/pvr/users/kcaptcha/"+Stamp.getTime()}).fadeIn('slow');
+				$('#capImg').hide().attr( {src: path+"/users/kcaptcha/"+Stamp.getTime()}).fadeIn('slow');
 			}
 		)
 
@@ -122,12 +122,15 @@ jQuery(document).ready( function(){
 			});
 
 
+		$("img").error(function(){
+		  $(this).hide();
+		});
 
 
 	
 	$('#UserUsername').blur( function() {
 
-		$('#usernameWrap').append('<div id="ajimg"><img src="/pvr/img/ajax-loader3.gif" /></div>');
+		$('#usernameWrap').append('<div id="ajimg"><img src="'+path+'/img/ajax-loader3.gif" /></div>');
 		$('#usernameWrap .error-message').remove();
 		$('#usernameWrap input').removeClass('form-error');				
 		$('#response').remove();
@@ -142,9 +145,11 @@ jQuery(document).ready( function(){
 	        			$('#usernameWrap').addClass("error");
 	        			$('#response').addClass('error-message');
 	        			$('#usernameWrap input').addClass('form-error');
+	        			
 	        		} else {
 	        			$('#response').addClass('greenMessage');
 	        			$('#response').css({'color':'green','font-weight':'bold'});
+	        			//alert(data.typ+'2');
 	        		}					
 					$('#ajimg').remove();
 	          	},
