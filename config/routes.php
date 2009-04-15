@@ -31,10 +31,34 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+ 
+ $defaultLang = Configure::read('Languages.default');
+
+	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
+	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	//Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
+	
+			$routes = array(
+									array('/', array('controller' => 'pages', 'action' => 'display', 'home'), array()),
+									array('/pages/*', array('controller' => 'pages', 'action' => 'display')),
+									array('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)),
+
+			);
+			
+			foreach ($routes as $route) {
+			        //$route[1]['theme'] = 'default'; // default layout
+			        $route[1]['lang'] = $defaultLang;
+			        $route[2]['lang'] = '[a-z]{2}';
+			        Router::connect($route[0], $route[1], $route[2]);
+			        Router::connect('/:lang' . $route[0], $route[1], $route[2]);
+							/*
+							//from book.cakephp.org
+			        $route[1]['theme'] = 'mobile';
+			        Router::connect('/m' . $route[0], $route[1], $route[2]);
+			        Router::connect('/m/:lang' . $route[0], $route[1], $route[2]);
+			        */
+			}
 ?>

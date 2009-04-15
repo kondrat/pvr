@@ -29,40 +29,40 @@ class User extends AppModel {
 															),
 																						
 							'password1' => array( 'betweenRus' => array(
-																													'rule' => array( 'betweenRus', 2, 15,'password1'),
-																													'message' => 'От 2 до 15 букв'
+																													'rule' => array( 'betweenRus', 4, 10,'password1'),
+																													//'message' => 'Username must be between 4 and 10 characters long'
 																													)
 																	),
 							'password2' => array( 'passidentity' => array(
 																													'rule' => array( 'passidentity', '$this->data' ),
-																													'message' => 'Пароли не совпадают'
+																													//'message' => 'Please verify your password again'
 																													)
 																	),
 							
 																																							
 							'email' => array( 'email' => array( 
 																								'rule' => array( 'email', false), //check the validity of the host. to set true.
-																								'message' => 'Этот Email не существует',
+																								//'message' => 'Your email address does not appear to be valid',
 																								),
 																								/*
 																								'checkUnique' => array(           
 																														'rule' =>  array('checkUnique', 'email'),
-																														'message' => 'Этот Email уже занят'
+																														'message' => 'This Email has already been taken'
 																														),
 																								*/
 															),
 							'captcha' => array( 'notEmpty' => array(
 																										'rule' => 'notEmpty',
-																										'message' => 'This field cannot be left blank',
+																										//'message' => 'This field cannot be left blank',
 																										'last'=>true,
 																	),
 																	'alphaNumeric' => array(
 																										'rule' => 'alphaNumeric',
-																										'message' => 'Usernames must only contain letters and numbers.'
+																										//'message' => 'Only contain letters and numbers'
 																	),
 																	'equalCaptcha' => array(
-        																						'rule' => array('equalCaptcha','$this->data'  ),  
-        																						'message' => 'Wrong value provided'
+        																						'rule' => array('equalCaptcha','$this->data'),  
+        																						//'message' => 'Please, correct the code'
     															),
 //$this->data['User']['captcha2']
 											),

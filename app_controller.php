@@ -7,6 +7,32 @@ class AppController extends Controller {
 //--------------------------------------------------------------------
 	function beforeFilter() {
 		
+	// to study	
+	
+		$defaultLang = Configure::read('Languages.default');
+		$this->params['theme'] = isset($this->params['theme'])?$this->params['theme']:'default';
+		$this->params['lang'] = isset($this->params['lang'])?$this->params['lang']:$defaultLang;
+		
+		Configure::write('Config.language', $this->params['lang']);
+		
+		if (isset($this->params['lang']) ) {
+			debug($this->params['lang']);
+		}
+		
+		if ( ($this->name != 'App') && !in_array($this->params['lang'], Configure::read('Languages.all')) ) {
+			$this->Session->setFlash(__('Whoops, not a valid language.', true));
+			return $this->redirect($this->Session->read('referer'), 301, true);
+		}
+		if (isset($this->Node)) {
+			$this->Node->setLanguage($this->params['lang']);
+		} elseif (isset($this->{$this->modelClass}->Node)) {
+			$this->{$this->modelClass}->Node->setLanguage($this->params['lang']);
+		}
+
+	//to study
+	
+	
+		
         if( isset($this->Auth) ) {
 								
             if($this->viewPath == 'pages' && $this->params['action'] != 'admin_index') {

@@ -1,17 +1,22 @@
 jQuery(document).ready( function(){
-	
-	//alert(options);
-	//alert( $.tester() );
+
 	var passToCheck = null;
 	var options = null;
-	var settings = { validate: false, limit: 5, name: "foo",required: "This fieuired." };
+	var settings = {
+							required: "This field cannot be left blank",
+							betweenRus: "Username must be between 4 and 10 characters long",
+							passidentity: "Please verify your password again",
+							email: "Your email address does not appear to be valid",
+								
+		 };
+	
+	//if we have localization file in heading
 	if( jQuery().messages ) {
 		var options = $().messages();
 	}
 
 	var local = $.extend(settings, options);
-	
-	//alert(local['limit']);
+
 
 	$('#UserPassword1').blur( function() {
 		
@@ -27,9 +32,9 @@ jQuery(document).ready( function(){
 					if( $('#UserPassword2').val() != 0 ) {
 						tt();
 					}
-			} else if( $('#UserPassword1').val().length <= 2 || $('#UserPassword1').val().length >= 5 ) {
+			} else if( $('#UserPassword1').val().length <= 4 || $('#UserPassword1').val().length >= 10 ) {
 					passToCheck = null
-					$('#passWrap').append('<div id="passerror" class="error-message">Must not be between 2 and 5 chars</div>');
+					$('#passWrap').append('<div id="passerror" class="error-message">'+local['betweenRus']+'</div>');
 					$('#passWrap').addClass("error");
 					$('#passWrap input').addClass('form-error');
 					if( $('#UserPassword2').val() != 0 ) {
@@ -52,7 +57,7 @@ jQuery(document).ready( function(){
 			$('#pass2Wrap input').removeClass('form-error');
 			//alert(passToCheck);
 			if( $('#UserPassword1').val() != $('#UserPassword2').val() ) {
-				$('#pass2Wrap').append('<div id="passerror" class="error-message">Passwords must be equal</div>');
+				$('#pass2Wrap').append('<div id="passerror" class="error-message">'+local['passidentity']+'</div>');
 				$('#pass2Wrap').addClass("error");
 				$('#pass2Wrap input').addClass('form-error');
 			}		
@@ -77,7 +82,7 @@ jQuery(document).ready( function(){
 			$('#emailWrap input').removeClass('form-error');
 			
 			if( $('#UserEmail').val() == 0 ) {
-					$('#emailWrap').append('<div id="emailerror" class="error-message">Email must not be empty</div>');
+					$('#emailWrap').append('<div id="emailerror" class="error-message">'+local['required']+'</div>');
 					$('#emailWrap').addClass("error");
 					$('#emailWrap input').addClass('form-error');
 
@@ -87,7 +92,7 @@ jQuery(document).ready( function(){
 						$('#emailWrap').removeClass("error");
 						$('#emailWrap input').removeClass('form-error');
 					} else {
-						$('#emailWrap').append('<div id="emailerror" class="error-message">Wrong email</div>');
+						$('#emailWrap').append('<div id="emailerror" class="error-message">'+local['email']+'</div>');
 						$('#emailWrap').addClass("error");
 						$('#emailWrap input').addClass('form-error');
 					}
@@ -98,7 +103,7 @@ jQuery(document).ready( function(){
 
 		$('.capReset p img, #capImg').click( function() {
 				var Stamp = new Date();
-				$('#capImg').hide().attr( {src: path+"/users/kcaptcha/"+Stamp.getTime()}).fadeIn('slow');
+				$('#capImg').attr( {src: path+"/users/kcaptcha/"+Stamp.getTime()});
 			}
 		)
 
@@ -110,7 +115,7 @@ jQuery(document).ready( function(){
 				$('#captchaWrap input').removeClass('form-error');
 			  if ($("#UserCaptcha").val() == 0) {
 			  	
-						$('#captchaWrap').append('<div id="emailerror" class="error-message">Must not be empty</div>');
+						$('#captchaWrap').append('<div id="emailerror" class="error-message">'+local['required']+'</div>');
 						$('#captchaWrap').addClass("error");
 						$('#captchaWrap input').addClass('form-error');
 					

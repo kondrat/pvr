@@ -91,7 +91,7 @@ class UsersController extends AppController {
 			$this->redirect('/',null,true);
 		}
 		
-		$this->pageTitle = 'Регистрация';
+		$this->pageTitle = __('SignUp',true);
 
 
 
@@ -138,7 +138,7 @@ class UsersController extends AppController {
 				//$this->data['User']['password1'] = null;
 				//$this->data['User']['password2'] = null;
 				$this->data['User']['captcha'] = null;
-				$this->Session->setFlash('Новый аккаунт не был создан');
+				$this->Session->setFlash(__('New user\'s accout hasn\'t been created',true) , 'default', array('class' => 'error') );
 			}
 		}
 		

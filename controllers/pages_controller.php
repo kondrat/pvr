@@ -56,7 +56,7 @@ class PagesController extends AppController {
  * @access public
  */
 	var $uses = array();
-	
+	var $components = array('Security');
 	//var $cacheAction ;//= "1 hour";
 	//var $cacheAction = array('display/' => '60000');
 
