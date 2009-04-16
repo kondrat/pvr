@@ -35,15 +35,17 @@
 
 		    	<p>
 		    		<?php 
-		    			echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'display')).'&nbsp';
+		    			echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'display','home')).'&nbsp';
 		    			if ( $session->check('Auth.User.id') ){
-		    				echo $html->link('logout',array('controller'=>'users','action'=>'logout')).'&nbsp';
+		    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout')).'&nbsp';
 		    			} else {
-		    				echo $html->link('login',array('controller'=>'users','action'=>'login')).'&nbsp';
+		    				echo $html->link(__('Login',true),array('controller'=>'users','action'=>'login')).'&nbsp';
 		    			}
-		    			echo $html->link('group',array('controller'=>'groups','action'=>'index')).'&nbsp';
-		    			echo $html->link('album',array('controller'=>'albums','action'=>'index')).'&nbsp';
-		    			echo $html->link('image',array('controller'=>'images','action'=>'index')).'&nbsp';
+		    			echo $html->link(__('Groups',true),array('controller'=>'groups','action'=>'index')).'&nbsp';
+		    			echo $html->link(__('Albums',true),array('controller'=>'albums','action'=>'index')).'&nbsp';
+		    			echo $html->link(__('Images',true),array('controller'=>'images','action'=>'index')).'&nbsp';
+		    			echo $html->link("Eng",array('home','lang'=>'en')).'&nbsp';
+		    			echo $html->link("Рус",array('home','lang'=>'ru')).'&nbsp';
 		    		?>
 		    	</p>
 		    </div>

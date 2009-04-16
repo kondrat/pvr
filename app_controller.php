@@ -1,4 +1,5 @@
 <?php
+
 class AppController extends Controller {
 	var $components = array( 'Acl','Auth', 'RequestHandler', 'Email', 'Cookie','DebugKit.Toolbar');
     var $helpers = array('Javascript', 'Html', 'Form', 'Cache');
@@ -6,22 +7,21 @@ class AppController extends Controller {
    	//var $uses = array('');
 //--------------------------------------------------------------------
 	function beforeFilter() {
-		
+
 	// to study	
 	
 		$defaultLang = Configure::read('Languages.default');
-		$this->params['theme'] = isset($this->params['theme'])?$this->params['theme']:'default';
+
+		//$this->params['theme'] = isset($this->params['theme'])?$this->params['theme']:'default';
 		$this->params['lang'] = isset($this->params['lang'])?$this->params['lang']:$defaultLang;
-		
+		//debug($this->params['lang']);
 		Configure::write('Config.language', $this->params['lang']);
 		
-		if (isset($this->params['lang']) ) {
-			debug($this->params['lang']);
-		}
+
 		
 		if ( ($this->name != 'App') && !in_array($this->params['lang'], Configure::read('Languages.all')) ) {
 			$this->Session->setFlash(__('Whoops, not a valid language.', true));
-			return $this->redirect($this->Session->read('referer'), 301, true);
+			//return $this->redirect($this->Session->read('referer'), 301, true);
 		}
 		if (isset($this->Node)) {
 			$this->Node->setLanguage($this->params['lang']);
@@ -30,7 +30,6 @@ class AppController extends Controller {
 		}
 
 	//to study
-	
 	
 		
         if( isset($this->Auth) ) {

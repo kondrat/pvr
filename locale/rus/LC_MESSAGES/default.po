@@ -1,0 +1,57 @@
+"Project-Id-Version: CakePHP language demon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-09-10 11:01+0200\n"
+"Last-Translator: Vyacheslav Enis <venis@difane.com>\n"
+"Language-Team: Difane team <support@difane.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 16bit\n"
+
+msgid	"View" 
+msgstr 	"Смотреть"
+
+msgid	"Edit" 
+msgstr 	"Редактировать"
+
+msgid	"Home" 
+msgstr 	"Домой"
+
+msgid	"Login" 
+msgstr 	"Вход"
+
+msgid	"Logout" 
+msgstr 	"Выйти"
+
+msgid	"remember me?" 
+msgstr 	"Запомнить?"
+
+msgid	"Forgot your password?" 
+msgstr 	"Забыли пароль?"
+
+msgid	"Sign in" 
+msgstr 	"Логин"
+
+msgid	"Sign Up" 
+msgstr 	"Регистрация"
+
+msgid	"Resend Activation Email" 
+msgstr 	"Активировать заново"
+
+msgid	"Password" 
+msgstr 	"Пароль"
+
+msgid	"Confirm Password" 
+msgstr 	"Подтвердить пароль"
+
+msgid	"Check your login and password" 
+msgstr 	"Проверте логин и пароль"
+
+msgid	"Groups" 
+msgstr 	"Группы"
+
+msgid	"Albums" 
+msgstr 	"Альбомы"
+
+msgid	"Images" 
+msgstr 	"Фото"
+

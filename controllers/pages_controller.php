@@ -76,27 +76,17 @@ class PagesController extends AppController {
  * @param mixed What page to display
  * @access public
  */
-	function display() {		
-		//$this->cacheAction = "100 hours";
-		$path = func_get_args();	
-		if (!count($path)) {
-			if ($this->Auth->user('id')) {
-				$this->redirect(array('controller'=>'pages','action'=>'homepage'));
-			}else{
-				$this->redirect('/');
-			}
-		}
-		
-		
+	function display() {
+		$path = func_get_args();
+		//debug($path);
 		$count = count($path);
+		if (!$count) {
+			$this->redirect('/');
+		}
 		$page = $subpage = $title = null;
 
 		if (!empty($path[0])) {
-			if ($this->Auth->user('id')&&$path[0]=='home') {
-				$page = 'homepage';
-			}else{
-				$page = $path[0];
-			}
+			$page = $path[0];
 		}
 		if (!empty($path[1])) {
 			$subpage = $path[1];

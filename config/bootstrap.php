@@ -41,10 +41,11 @@
  *
  */
 //EOF
-		Configure::write('Languages.default', 'en');
+		
+		Configure::write('Languages.default', 'ru');
 		$langs = array('ar', 'en', 'fa', 'fr', 'de', 'es', 'pt', 'nl', 'id', 'it', 'ja', 'bg', 'hu', 'pl', 'cz', 'cn', 'ko',
 		       	'ro', 'ms', 'tw', 'ru', 'el', 'tr');
 		sort($langs);
 		Configure::write('Languages.all', $langs);
-
+	
 ?>
