@@ -30,7 +30,7 @@ class UsersController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function login() {
-		$this->pageTitle = 'ВХОД В ЛИЧНЫЙ КАБИНЕТ';
+		$this->pageTitle = __('Login',true);
 	
 		if( !empty($this->data) ) {
 
@@ -39,23 +39,31 @@ class UsersController extends AppController {
             	// Retrieve user data
 
              		
-             		if ( $this->Auth->user() ) {
+           		if ( $this->Auth->user() ) {
              			$this->data['User']['remember_me'] = true;
-						if ( !empty($this->data) && $this->data['User']['remember_me'] ) {
-							$cookie = array();
-							$cookie['username'] = $this->data['User']['username'];
-							$cookie['password'] = $this->data['User']['password'];
-							$this->Cookie->write('Auth.User', $cookie, true, '+3 hours');
-							unset($this->data['User']['remember_me']);
-						}
+										if ( !empty($this->data) && $this->data['User']['remember_me'] ) {
+											$cookie = array();
+											$cookie['username'] = $this->data['User']['username'];
+											$cookie['password'] = $this->data['User']['password'];
+											$this->Cookie->write('Auth.User', $cookie, true, '+3 hours');
+											unset($this->data['User']['remember_me']);
+										}
          			}
 
 					if ($this->referer()=='/') {
 						if( $this->User->Album->find('count',array('conditions'=> array('Album.user_id'=> $this->Auth->user('id') ), 'order'=>'desc') ) < '1' ) {
 							$this->redirect( array('controller'=>'albums','action'=>'add') );
 						}
-						$this->redirect( array('controller'=>'albums','action'=>'useralbum') );	
+						echo 'here';
+						exit;
+						$this->redirect( array('controller'=>'albums','action'=>'useralbum', 'lang'=> $this->params['lang'] ) );	
 					} else {
+						//echo 'here';
+					//	debug($this->Auth->redirect());
+						//debug($this->referer());
+						if ( isset($this->params['lang']) ) {
+							//echo $this->params['lang'];
+						}
 						$this->redirect( $this->Auth->redirect() );
 					}
 			

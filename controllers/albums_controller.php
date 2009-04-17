@@ -30,7 +30,7 @@ class AlbumsController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function view($id = null) {
-		
+		echo 'avia';
 		$aroAlias = 'user1::3';
 		$acoAlias = 'Album::'.$id;
 
@@ -43,6 +43,8 @@ class AlbumsController extends AppController {
 			$this->set('album', $this->Album->read(null, $id));
 			//debug($aroAlias.' '.$acoAlias);
 		} else {
+			echo 'stop';
+			exit;
 			$this->redirect(array('controller'=>'albums','action'=>'index') );
 		}
 		

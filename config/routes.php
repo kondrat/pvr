@@ -33,6 +33,8 @@
  */
  
  $defaultLang = Configure::read('Languages.default');
+ $defaultLang = 'en';
+
 
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
@@ -44,9 +46,10 @@
 	
 			
 			$routes = array(
-									array('/', array('controller' => 'pages', 'action' => 'display', 'home'), array()),
+									//array('/', array('controller' => 'pages', 'action' => 'display', 'home'), array()),
 									//array('/pages/*', array('controller' => 'pages', 'action' => 'display')),
 									array('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)),
+									//array('/:controller/:action/*', array(), array()),
 
 			);
 			
@@ -56,11 +59,15 @@
 			        $route[1]['lang'] = $defaultLang;
 			        $route[2]['lang'] = '[a-z]{2}';
 			         // debug($route[1]);
-			        //Router::connect($route[0], $route[1], $route[2]);
+			       // Router::connect($route[0], $route[1], $route[2]);
 			        Router::connect('/:lang' . $route[0], $route[1], $route[2]);
 
 			}
-
+			
+			Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'), array());
+			Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+			Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
+			                       
 			Router::connect('/:lang/',
 			                       array('controller' => 'pages', 'action' => 'display', 'home'),
 			                       array('lang' => '[a-z]{2}'));

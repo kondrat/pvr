@@ -42,7 +42,7 @@
  */
 //EOF
 		
-		Configure::write('Languages.default', 'ru');
+		Configure::write('Languages.default', 'en');
 		$langs = array('ar', 'en', 'fa', 'fr', 'de', 'es', 'pt', 'nl', 'id', 'it', 'ja', 'bg', 'hu', 'pl', 'cz', 'cn', 'ko',
 		       	'ro', 'ms', 'tw', 'ru', 'el', 'tr');
 		sort($langs);

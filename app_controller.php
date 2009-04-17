@@ -13,15 +13,31 @@ class AppController extends Controller {
 		$defaultLang = Configure::read('Languages.default');
 
 		//$this->params['theme'] = isset($this->params['theme'])?$this->params['theme']:'default';
-		$this->params['lang'] = isset($this->params['lang'])?$this->params['lang']:$defaultLang;
-		//debug($this->params['lang']);
-		Configure::write('Config.language', $this->params['lang']);
+		//$this->params['lang'] = isset($this->params['lang'])?$this->params['lang']:$defaultLang;
 		
-
+		//debug($this->params);
+		if ( isset($this->params['url']) ) {
+			$url = '';
+		}
+		
+		if ( !isset($this->params['lang']) && !$this->Session->check('langSes') ) {
+			$this->params['lang'] = $defaultLang;
+		} elseif ( isset($this->params['lang'])&& $this->params['lang'] == null) {
+			$this->params['lang'] = $defaultLang;
+		} 
+		/*
+		elseif ( $this->Session->check('langSes') ) {
+			$this->params['lang'] = $this->Session->read('langSes');
+		}
+		*/
+		Configure::write('Config.language', $this->params['lang']);
+		//debug(Configure::read('Config.language'));
+		//$this->Session->write('langSes',$this->params['lang']);
+		
 		
 		if ( ($this->name != 'App') && !in_array($this->params['lang'], Configure::read('Languages.all')) ) {
 			$this->Session->setFlash(__('Whoops, not a valid language.', true));
-			//return $this->redirect($this->Session->read('referer'), 301, true);
+			$this->redirect('/', 301, true);
 		}
 		if (isset($this->Node)) {
 			$this->Node->setLanguage($this->params['lang']);
