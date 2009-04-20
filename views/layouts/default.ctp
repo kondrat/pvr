@@ -35,7 +35,11 @@
 
 		    	<p>
 		    		<?php 
-		    			echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'display','home')).'&nbsp';
+		    			if ( $this->params['lang'] != Configure::read('Languages.default') ) {
+		    				echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'display','home')).'&nbsp';
+		    			} else { 
+		    				echo $html->link(__('Home',true),'/').'&nbsp';
+		    			}
 		    			if ( $session->check('Auth.User.id') ){
 		    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout')).'&nbsp';
 		    			} else {
@@ -44,8 +48,8 @@
 		    			echo $html->link(__('Groups',true),array('controller'=>'groups','action'=>'index')).'&nbsp';
 		    			echo $html->link(__('Albums',true),array('controller'=>'albums','action'=>'index')).'&nbsp';
 		    			echo $html->link(__('Images',true),array('controller'=>'images','action'=>'index')).'&nbsp';
-		    			echo $html->link("Eng",array('home','lang'=>'en')).'&nbsp';
-		    			echo $html->link("Рус",array('home','lang'=>'ru')).'&nbsp';
+		    			echo $html->link("Eng",array('lang'=>'en')).'&nbsp';
+		    			echo $html->link("Рус",array('lang'=>'ru')).'&nbsp';
 		    		?>
 		    	</p>
 		    </div>

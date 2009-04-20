@@ -33,7 +33,6 @@
  */
  
  $defaultLang = Configure::read('Languages.default');
- $defaultLang = 'en';
 
 
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
@@ -43,35 +42,17 @@
 	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	//Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 	
-	
-			
-			$routes = array(
-									//array('/', array('controller' => 'pages', 'action' => 'display', 'home'), array()),
-									//array('/pages/*', array('controller' => 'pages', 'action' => 'display')),
-									array('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)),
-									//array('/:controller/:action/*', array(), array()),
 
-			);
 			
-			foreach ($routes as $route) {
-			        //$route[1]['theme'] = 'default'; // default layout
-			      
-			        $route[1]['lang'] = $defaultLang;
-			        $route[2]['lang'] = '[a-z]{2}';
-			         // debug($route[1]);
-			       // Router::connect($route[0], $route[1], $route[2]);
-			        Router::connect('/:lang' . $route[0], $route[1], $route[2]);
-
-			}
+			Router::connect('edit/*',array('controller' => 'images', 'action' => 'edit'),array());
+			Router::connect('/:lang/edit/*',array('controller' => 'images', 'action' => 'edit'),array('lang'=>'[a-z]{2}'));
 			
-			Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'), array());
 			Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 			Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
-			                       
-			Router::connect('/:lang/',
-			                       array('controller' => 'pages', 'action' => 'display', 'home'),
-			                       array('lang' => '[a-z]{2}'));
-
+			
+			Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'), array());			                       
+			Router::connect('/:lang/', array('controller' => 'pages', 'action' => 'display', 'home'),array('lang' => '[a-z]{2}'));
+			
 			Router::connect('/:lang/:controller/:action/*',
 			                       array(),
 			                       array('lang' => '[a-z]{2}'));			

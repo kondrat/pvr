@@ -10,22 +10,22 @@ class AppController extends Controller {
 	
 		$defaultLang = Configure::read('Languages.default');
 		
-		$this->L10n = new L10n();
-		debug($this->L10n->get(null));
+		
 
-		debug(env('HTTP_ACCEPT_LANGUAGE'));
+		//debug(env('HTTP_ACCEPT_LANGUAGE'));
 		
 		if ( !isset($this->params['lang']) && !$this->Session->check('langSes') ) {
+			
 			$this->params['lang'] = $defaultLang;
 			$this->Session->write('langSes',$defaultLang);
-			$this->Session->write('testSes', 'case1');
-			
+
 		} elseif ( !isset($this->params['lang']) && $this->Session->check('langSes') ) {
 			$this->params['lang'] = $this->Session->read('langSes');
-			$this->Session->write('testSes', 'case2');
+			//$this->Session->write('testSes', 'case2');
 		} 
 
-		
+		//debug(Configure::read('Config.language'));
+		//debug(Configure::version());
 		Configure::write('Config.language', $this->params['lang']);
 		$this->Session->write('langSes',$this->params['lang']);
 		
