@@ -13,6 +13,9 @@ msgstr 	"Смотреть"
 msgid	"Edit" 
 msgstr 	"Редактировать"
 
+msgid	"Delete" 
+msgstr 	"Удалить"
+
 msgid	"Home" 
 msgstr 	"Домой"
 

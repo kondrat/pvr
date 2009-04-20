@@ -7,46 +7,35 @@ class AppController extends Controller {
    	//var $uses = array('');
 //--------------------------------------------------------------------
 	function beforeFilter() {
-
-	// to study	
 	
 		$defaultLang = Configure::read('Languages.default');
-
-		//$this->params['theme'] = isset($this->params['theme'])?$this->params['theme']:'default';
-		//$this->params['lang'] = isset($this->params['lang'])?$this->params['lang']:$defaultLang;
 		
-		//debug($this->params);
-		if ( isset($this->params['url']) ) {
-			$url = '';
-		}
+		$this->L10n = new L10n();
+		debug($this->L10n->get(null));
+
+		debug(env('HTTP_ACCEPT_LANGUAGE'));
 		
 		if ( !isset($this->params['lang']) && !$this->Session->check('langSes') ) {
 			$this->params['lang'] = $defaultLang;
-		} elseif ( isset($this->params['lang'])&& $this->params['lang'] == null) {
-			$this->params['lang'] = $defaultLang;
-		} 
-		/*
-		elseif ( $this->Session->check('langSes') ) {
+			$this->Session->write('langSes',$defaultLang);
+			$this->Session->write('testSes', 'case1');
+			
+		} elseif ( !isset($this->params['lang']) && $this->Session->check('langSes') ) {
 			$this->params['lang'] = $this->Session->read('langSes');
-		}
-		*/
+			$this->Session->write('testSes', 'case2');
+		} 
+
+		
 		Configure::write('Config.language', $this->params['lang']);
-		//debug(Configure::read('Config.language'));
-		//$this->Session->write('langSes',$this->params['lang']);
+		$this->Session->write('langSes',$this->params['lang']);
 		
 		
 		if ( ($this->name != 'App') && !in_array($this->params['lang'], Configure::read('Languages.all')) ) {
+			unset($this->params['lang']);
+			$this->Session->del('langSes');
 			$this->Session->setFlash(__('Whoops, not a valid language.', true));
 			$this->redirect('/', 301, true);
 		}
-		if (isset($this->Node)) {
-			$this->Node->setLanguage($this->params['lang']);
-		} elseif (isset($this->{$this->modelClass}->Node)) {
-			$this->{$this->modelClass}->Node->setLanguage($this->params['lang']);
-		}
-
-	//to study
-	
 		
         if( isset($this->Auth) ) {
 								

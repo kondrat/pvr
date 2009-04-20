@@ -13,13 +13,14 @@ class UsersController extends AppController {
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow( 'logout', 'reg','kcaptcha', 'reset', 'acoset','aroset','permset','buildAcl');
+          
         //to Del:
         $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
         // swiching off Security component for ajax call
-				if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
+			if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
      			$this->Security->enabled = false; 
      		}
     }
@@ -54,8 +55,8 @@ class UsersController extends AppController {
 						if( $this->User->Album->find('count',array('conditions'=> array('Album.user_id'=> $this->Auth->user('id') ), 'order'=>'desc') ) < '1' ) {
 							$this->redirect( array('controller'=>'albums','action'=>'add') );
 						}
-						echo 'here';
-						exit;
+						//echo 'here';
+						//exit;
 						$this->redirect( array('controller'=>'albums','action'=>'useralbum', 'lang'=> $this->params['lang'] ) );	
 					} else {
 						//echo 'here';
@@ -82,15 +83,15 @@ class UsersController extends AppController {
 
 //--------------------------------------------------------------------
     function logout() {
-    	//$tempUserName = ucwords($this->Session->read('Auth.User.username')). ' logged out now';
-    	$tempUserName = $this->Session->read('Auth.User.username'). ' вышел из системы';
+    	    	
+    	$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
     	//$this->Session->del();
         $this->Auth->logout();
         $this->Session->del('Order');
         $this->Session->del('userCart');
         $this->Cookie->del('Auth.User');
         $this->Session->setFlash( $tempUserName, 'default', array('class' => 'nomargin flash') );
-        $this->redirect( $this->Auth->redirect() );        
+        $this->redirect( '/'.Configure::read('Config.language'),null,true);        
     }
 //--------------------------------------------------------------------
 	function reg() {
