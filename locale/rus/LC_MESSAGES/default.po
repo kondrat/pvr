@@ -37,11 +37,20 @@ msgstr 	"Логин"
 msgid	"Sign Up" 
 msgstr 	"Регистрация"
 
+msgid	"Submit" 
+msgstr 	"Послать"
+
 msgid	"Resend Activation Email" 
 msgstr 	"Активировать заново"
 
 msgid	"Password" 
 msgstr 	"Пароль"
+
+msgid	"Username" 
+msgstr 	"Имя"
+
+msgid	"Please type in the code" 
+msgstr 	"Введите код"
 
 msgid	"Confirm Password" 
 msgstr 	"Подтвердить пароль"
@@ -57,4 +66,7 @@ msgstr 	"Альбомы"
 
 msgid	"Images" 
 msgstr 	"Фото"
+
+msgid	"Move" 
+msgstr 	"Сдвинуть"
 

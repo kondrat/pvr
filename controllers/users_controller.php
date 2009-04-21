@@ -55,26 +55,21 @@ class UsersController extends AppController {
 						if( $this->User->Album->find('count',array('conditions'=> array('Album.user_id'=> $this->Auth->user('id') ), 'order'=>'desc') ) < '1' ) {
 							$this->redirect( array('controller'=>'albums','action'=>'add') );
 						}
-						//echo 'here';
-						//exit;
-						$this->redirect( array('controller'=>'albums','action'=>'useralbum', 'lang'=> $this->params['lang'] ) );	
+
+						$this->redirect( array('controller'=>'albums','action'=>'useralbum' ),null,true );	
 					} else {
-						//echo 'here';
-					//	debug($this->Auth->redirect());
-						//debug($this->referer());
-						if ( isset($this->params['lang']) ) {
-							//echo $this->params['lang'];
-						}
+
 						$this->redirect( $this->Auth->redirect() );
 					}
 			
 			} else {
+
 				$this->data['User']['password'] = null;
 				$this->Session->setFlash(__('Check your login and password',true),'default', array('class' => 'nomargin flash'));
 			}
 		} else {
 			if( !is_null( $this->Session->read('Auth.User.username') ) ){
-				
+
 				$this->redirect( $this->Auth->redirect() );			
 			}
 		}
@@ -91,7 +86,7 @@ class UsersController extends AppController {
         $this->Session->del('userCart');
         $this->Cookie->del('Auth.User');
         $this->Session->setFlash( $tempUserName, 'default', array('class' => 'nomargin flash') );
-        $this->redirect( '/'.Configure::read('Config.language'),null,true);        
+        $this->redirect( '/',null,true);        
     }
 //--------------------------------------------------------------------
 	function reg() {
@@ -351,20 +346,23 @@ class UsersController extends AppController {
 	}
 //-------------------------------------------------------------------
 	function acoset() {
-		$this->Acl->Aco->create(array('parent_id' => 30, 'alias' => 'Album::'.'4','model'=>'Album','foreign_key' => '4' ));
+		exit;
+		//$this->Acl->Aco->create(array('parent_id' => 30, 'alias' => 'Album::'.'4','model'=>'Album','foreign_key' => '4' ));
+		$this->Acl->Aco->create(array('parent_id' => 114, 'alias' => 'admin_index','model'=>null,'foreign_key' => null ));
 		$this->Acl->Aco->save();
 		echo 'aro ok';
 		die;
 	}
 	
 	function aroset() {
+		exit;
 		$this->Acl->Aro->create( array('parent_id' => 1, 'foreign_key' => 1, 'model'=> 'User') );
 		$this->Acl->Aro->save();
 		echo 'aro ok';
 		die;
 	}
 	function permset() {
-		
+		exit;
 		$this->Acl->allow(array( 'foreign_key' => 4, 'model'=> 'Group'),'Albums/add' );
 
 		echo 'prem ok';
@@ -376,6 +374,7 @@ class UsersController extends AppController {
  * @return void
  */
     function buildAcl() {
+    	exit;
         $log = array();
  
         $aco =& $this->Acl->Aco;

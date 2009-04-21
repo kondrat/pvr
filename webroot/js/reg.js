@@ -32,7 +32,7 @@ jQuery(document).ready( function(){
 					if( $('#UserPassword2').val() != 0 ) {
 						tt();
 					}
-			} else if( $('#UserPassword1').val().length <= 4 || $('#UserPassword1').val().length >= 10 ) {
+			} else if( $('#UserPassword1').val().length <= 3 || $('#UserPassword1').val().length >= 10 ) {
 					passToCheck = null
 					$('#passWrap').append('<div id="passerror" class="error-message">'+local['betweenRus']+'</div>');
 					$('#passWrap').addClass("error");

@@ -9,9 +9,6 @@ class AppController extends Controller {
 	function beforeFilter() {
 	
 		$defaultLang = Configure::read('Languages.default');
-		
-		
-
 		//debug(env('HTTP_ACCEPT_LANGUAGE'));
 		
 		if ( !isset($this->params['lang']) && !$this->Session->check('langSes') ) {
@@ -53,8 +50,8 @@ class AppController extends Controller {
         } 
 				
 	}
-	
-	function isAuthorized() {
+	/*
+		function isAuthorized() {
 
             if ($this->Auth->user('group_id') == '1') {
                 return true;
@@ -63,15 +60,13 @@ class AppController extends Controller {
             }
         return true;
     }
-
+	*/
 //--------------------------------------------------------------------
 
 	function beforeRender() {
-		if( ( (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') or isset($this->params['admin']) ) && $this->Session->read('Auth.User.role') == 'admin' ) {			
+		if( isset($this->params['prefix']) && $this->params['prefix'] == 'admin' ) {	
 			$this->layout = 'admin';
-		}
-		
-		
+		}		
 		
 	}
 

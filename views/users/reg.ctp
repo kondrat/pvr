@@ -1,7 +1,6 @@
 <?php echo $javascript->link(array('reg','localization/messages_ru'),false);?>
 
 <div class="inner_page">
-
 	<fieldset>
 		<legend><?php __('Sign Up');?></legend>
 		<?php $session->flash(); ?>

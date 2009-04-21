@@ -50,12 +50,13 @@
 			Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 			Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 			
-			Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'), array());			                       
-			Router::connect('/:lang/', array('controller' => 'pages', 'action' => 'display', 'home'),array('lang' => '[a-z]{2}'));
-			
+			Router::connect('/', array('controller' => 'albums', 'action' => 'useralbum'), array());			                       
+			Router::connect('/:lang/', array('controller' => 'albums', 'action' => 'useralbum'),array('lang' => '[a-z]{2}'));
+					
+			Router::connect('/:lang/admin/:controller/:action/*',
+			                       array('admin' => true),
+			                       array('lang' => '[a-z]{2}'));			
 			Router::connect('/:lang/:controller/:action/*',
 			                       array(),
-			                       array('lang' => '[a-z]{2}'));			
-			
-			
+			                       array('lang' => '[a-z]{2}'));	
 ?>

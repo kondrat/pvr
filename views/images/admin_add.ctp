@@ -1,7 +1,7 @@
 <div class="images form">
 <?php echo $form->create('Image');?>
 	<fieldset>
- 		<legend><?php __('Add Image');?></legend>
+ 		<legend><?php __('Add Demo Photo');?></legend>
 	<?php
 		echo $form->input('album_id');
 		echo $form->input('name');

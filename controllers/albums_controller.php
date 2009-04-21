@@ -3,7 +3,7 @@ class AlbumsController extends AppController {
 
 	var $name = 'Albums';
 	var $helpers = array('Html', 'Form');
-
+	var $components = array('Security');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow( 'index','useralbum');
@@ -17,7 +17,6 @@ class AlbumsController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function useralbum() {
-
 		$currentUser = null;
 		$currentUser=$this->Auth->user('id');
 		if( $currentUser != null ){
@@ -25,6 +24,8 @@ class AlbumsController extends AppController {
 			$this->set( 'path',$this->Auth->user('uuid') );
 			$this->set('currentAlbum',$currentAlbum);
 			//$this->render('useralbum');
+		} else {
+			$this->render('homealbum');
 		}
 		//$this->set('albums', $currentAlbum );
 	}

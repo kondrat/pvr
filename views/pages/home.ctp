@@ -1,5 +1,4 @@
 <div class="inner_page">
-	<h1> Pvr </h1>
 	<?php if( !$session->check('Auth.User.id') ): ?>
 	<div class="clearfix">
 		<div class="push-1 span-6 append-1">
