@@ -2,24 +2,24 @@
 
 	<br />
 	<div class="mainAdminPage">
-		<p style="margin-bottom: 0.5em"> Управление Demo ФотоАльбомом </p>
-		<?php echo $html->link('Посмотреть альбомы', array('controller' => 'albums', 'action' => 'index') ) ?>
+		<p style="margin-bottom: 0.5em"> <?php __('Demo album control');?> </p>
+		<?php echo $html->link(__('Show me albums',true), array('controller' => 'albums', 'action' => 'index') ) ?>
 			<br />
-		<?php echo $html->link(__('Add Demo photo',true), array('controller' => 'images', 'action' => 'add') ) ?>	
+		<?php echo $html->link(__('Add Demo photo',true), array('controller' => 'images', 'action' => 'addDemo') ) ?>	
 	</div>	
 	
 		<hr />	
 	<div class="mainAdminPage">
-		<p style="margin-bottom: 0.5em">Данные администратора</p>
-		<?php echo $html->link('Изменить пароль', array('controller' => 'users', 'action' => 'newpassword') ) ?>
+		<p style="margin-bottom: 0.5em"><?php __('Admin data');?></p>
+		<?php echo $html->link(__('Reset Password',true), array('controller' => 'users', 'action' => 'newpassword') ) ?>
 		<br />
-		<?php echo $html->link('Посмотреть данные', array('controller' => 'users', 'action' => 'view') ) ?>	
+		<?php echo $html->link(__('Show me data',true), array('controller' => 'users', 'action' => 'view') ) ?>	
 	</div>
 		
 		<hr />		
 	<div class="mainAdminPage">
-		<p style="margin-bottom: 0.5em"> Управление кешированием</p>
-		<?php echo $html->link('Отчистить Cache', array('controller' => 'users', 'action' => 'clearcache') ) ?>	
+		<p style="margin-bottom: 0.5em"><?php __('Cache control');?></p>
+		<?php echo $html->link(__('Clear Cache',true), array('controller' => 'users', 'action' => 'clearcache') ) ?>	
 	</div>
 	
 		<br />			

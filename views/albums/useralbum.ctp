@@ -3,7 +3,7 @@
 			<div style="position: relative;">
 				<div style="z-index: 1;  position: relative;">				
 
-					<?php if( isset($currentAlbum['Image']) && $currentAlbum['Image'] != array() ): ?>
+						<?php if( isset($currentAlbum['Image']) && $currentAlbum['Image'] != array() ): ?>
 						<?php 
 							$withFirst = $currentAlbum['Image'];
 							$b =  array_pop($currentAlbum['Image']) ;

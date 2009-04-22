@@ -35,8 +35,9 @@
 
 		    	<p>
 		    		<?php 
-
-		    			echo $html->link(__('Home',true),array('controller'=>'albums','action'=>'useralbum')).'&nbsp';
+							echo $html->link(__('Watch site',true),array('controller'=>'albums','action'=>'useralbum','admin'=>false),array('style'=>'color:#ffaeae;font-weight:bold')).'&nbsp';
+							
+		    			echo $html->link(__('Home',true),array('controller'=>'pages','action'=>'index')).'&nbsp';
 
 		    			if ( $session->check('Auth.User.id') ){
 		    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout','admin'=>false)).'&nbsp';

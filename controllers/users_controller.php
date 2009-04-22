@@ -346,9 +346,9 @@ class UsersController extends AppController {
 	}
 //-------------------------------------------------------------------
 	function acoset() {
-		exit;
+		//exit;
 		//$this->Acl->Aco->create(array('parent_id' => 30, 'alias' => 'Album::'.'4','model'=>'Album','foreign_key' => '4' ));
-		$this->Acl->Aco->create(array('parent_id' => 114, 'alias' => 'admin_index','model'=>null,'foreign_key' => null ));
+		$this->Acl->Aco->create(array('parent_id' => 41, 'alias' => 'admin_add_demo','model'=>null,'foreign_key' => null ));
 		$this->Acl->Aco->save();
 		echo 'aro ok';
 		die;

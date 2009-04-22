@@ -1,4 +1,8 @@
 <div class="inner_page">
+	<div class="span-16">
+		<div style="position: relative;">
+		</div>
+	</div>
 	<?php if( !$session->check('Auth.User.id') ): ?>
 	<div class="clearfix">
 		<div class="push-1 span-6 append-1">
