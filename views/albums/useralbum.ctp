@@ -41,7 +41,7 @@
 								</div>
 							
 					<?php else: ?>
-						<div style="height:470px; width:630px;"><?php echo $html->image('backImg.jpg',array('style'=>'','height'=>'470px','weight'=>'630px;','id'=>'mainImage') );?></div>
+						<div><p><?php echo $html->image('backImg.jpg',array('style'=>'','id'=>'mainImage','class'=>'centerImg') );?></p></div>
 					<?php endif ?>
 
 				</div>
