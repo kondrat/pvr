@@ -63,7 +63,7 @@
 		    <div class="span-16">
 		    	<div class="clearfix">
 			        <div class="span-8">
-			            <div class="rounded" style="background-color: #ccc; padding-left: 20px;">
+			            <div class="rounded." style="background-color: #ccc; padding-left: 20px;">
 							<?php
 								//debug($this->params);
 								if ($session->check('Auth.User.username')) {

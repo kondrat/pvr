@@ -1,14 +1,8 @@
 .inner_page {
 	background-color: #eee;
 	border: 1px solid #ccc;
-	padding: 5px;
 }
-.signup {
-	border: 1px solid #ccc;
-	background-color: #efe;	
-	margin: 10px 0 0 0;
-	padding: 53px 90px;
-}
+
 
 /*form classes*/
 .error-message {
@@ -59,6 +53,89 @@ div.formWrap input.form-error {
 #regSubmit {
 	
 }
+/*login*/
+div.loginFormSlider {
+	margin-top: 20px;
+	background-color: #4A4A4A;
+	border: 7px solid #ccc;
+	opacity: 0.8;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	padding: 0 0 10px 10px;
+	cursor: move; 
+	width: 230px;
+}
+.gTest {
+	font-weight: bold;
+	font-size: larger;
+	color: green;
+	position: absolute;
+	top: 20px;
+	left: 30px;
+}
+div.loginFormSlider label {
+	color: #FF8080;
+	opacity: 1;
+	background: url('./img/icons/back1.png') repeat;
+}
+.loginFormSlider .submit{
+		margin: 4px 0 0 0px;
+}
+.loginFormSlider div.input{
+		margin-bottom: 0px;
+}
+.lfs p{
+	position: absolute;
+	top: 115px;
+	left: 80px;
+}
+.lfs p a{
+	color: #FF8080;
+	font-weight: bold;
+	text-decoration: none;
+	margin: 15px;
+}
+
+.lfs p a:hover{
+	text-decoration: underline;
+	color:red;
+}
+.lfs .imgInputMove {
+	cursor: move;
+	top: 73px;
+	left: 220px;
+}
+
+
+.signup {
+	border: 1px solid #ccc;
+	background-color: #efe;	
+	margin: 20px 0 0 0;
+	background-color: #4A4A4A;
+	border: 7px solid #ccc;
+	opacity: 0.8;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	cursor: move; 
+	height: 118px;
+}
+.innerSignup {
+	background-color:#000000;
+	margin:40px;
+	padding:10px 10px 10px 10px;
+	text-align:center;
+}
+.innerSignup a{
+	color:#FF8080;
+	font-weight: bold;
+	text-align: center;
+	text-decoration:none;
+}
+
+.innerSignup a:hover{
+	color:red;
+	text-decoration:underline;
+}  
+
+
 /*albums calsses*/
 p.album_image a img {
 	border: 1px solid #777 ;

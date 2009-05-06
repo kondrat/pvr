@@ -226,7 +226,7 @@
 						break;
 					default:
 							$newX = 630;
-							$newY = 550;
+							$newY = 470;
 							
 							$ratio = $newY/$newX;
 							

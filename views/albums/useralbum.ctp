@@ -47,7 +47,7 @@
 				</div>
 				<div class="span-12 prepend-8 last" style="position:absolute; top: 30px; right: 0px; z-index: 20;">
 					
-					<div class="imgInput rounded">
+					<div class="imgInput rounded" >
 						<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 							<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>false ) ); ?>
 							<?php if( isset($currentAlbum['Album']['id']) ): ?>

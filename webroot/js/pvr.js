@@ -89,4 +89,5 @@ $(document).ready(function(){
 $(document).ready( function(){
   $('.slider').draggable(); 
   $('.imgInput').draggable();
+	$('.lfs, .signup').draggable();
 });
