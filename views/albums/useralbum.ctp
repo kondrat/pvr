@@ -26,7 +26,7 @@
 									</p>
 								</div>
 								<div class="slider rounde...">
-									<div class="insideSlider rounde..." style="" id="slider">								
+									<div class="insideSlider rounded." style="" id="slider">								
 										<ul>
 										<?php //$withFirst = reset($currentAlbum['Image']);?>
 										<?php foreach( array_reverse( $withFirst ,true ) as $imagSq ): ?>
@@ -47,15 +47,15 @@
 				</div>
 				<div class="span-12 prepend-8 last" style="position:absolute; top: 30px; right: 0px; z-index: 20;">
 					
-					<div class="imgInput rounded" >
+					<div class="imgInput rounded." >
 						<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 							<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>false ) ); ?>
 							<?php if( isset($currentAlbum['Album']['id']) ): ?>
 								<?php echo $form->hidden( 'album_id', array('value'=> $currentAlbum['Album']['id']) ); ?>
 							<?php endif ?>
-							<?php echo $form->submit('tuda',array('id' => 'tuda') );?>
+							<?php echo $form->submit(__('Upload',true),array('id' => 'tuda') );?>
 						<?php echo $form->end();?>
-						<div class="imgInputMove rounded"><?php __('Move');?></div>
+						<div class="imgInputMove rounded."><?php __('Move');?></div>
 						<div class="rounded" style="visibility: hidden;" id="storyTextUpload"></div>
 					</div>
 					
@@ -70,5 +70,3 @@
 			<li><?php echo $html->link(__('New Album', true), array('action'=>'add')); ?></li>
 		</ul>
 	</div>
-
-

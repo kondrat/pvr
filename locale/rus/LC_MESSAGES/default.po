@@ -73,3 +73,8 @@ msgstr 	"Фото"
 msgid	"Move" 
 msgstr 	"Сдвинуть"
 
+msgid	"Upload" 
+msgstr 	"Загрузить"
+
+msgid	"Upload now (without registration)" 
+msgstr 	"Загрузить БЕЗ регистрации"

@@ -85,9 +85,26 @@ $(document).ready(function(){
 		//continuous: false 	
 	);
 });
-
+// Тест на юник
 $(document).ready( function(){
   $('.slider').draggable(); 
   $('.imgInput').draggable();
-	$('.lfs, .signup').draggable();
+	$('.lfs, .signup, .fastUpload').draggable();
+});
+
+$(function() {
+	setInterval(
+			function() {
+				active = $('#slideshow img.active');
+				active = active.length ? active : $('#slideshow img:last');
+				next = active.next().length ? active.next() : $('#slideshow img:first');
+				active.addClass('previous');
+				anim = [{ opacity: 0.0 }, { opacity: 1.0 }];
+				
+				next.css(anim[0]).addClass('active').animate(anim[1], 1000, function() {
+					active.removeClass('active previous');
+				});
+			},
+			150000
+	 );
 });

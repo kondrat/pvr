@@ -3,7 +3,7 @@ class AlbumsController extends AppController {
 
 	var $name = 'Albums';
 	var $helpers = array('Html', 'Form');
-	var $components = array('Security');
+	var $components = array('Security','Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow( 'index','useralbum');
@@ -25,6 +25,27 @@ class AlbumsController extends AppController {
 			$this->set('currentAlbum',$currentAlbum);
 			//$this->render('useralbum');
 		} else {
+			$key = md5(uniqid(rand(), true));
+			
+			if( !$this->Cookie->read('guestKey')) {		
+				/*		
+				if( !$this->Session->check('guestKey') ) {				
+					$this->Session->write('guestKey2', $key );			
+				}	
+				*/	
+				$this->Cookie->write('guestKey',$key,false, '360 days');			
+				if ( $this->Cookie->read('guestKey') && isset($_COOKIE['CakeCookie']['guestKey']) && $_COOKIE['CakeCookie']['guestKey'] != null ) {
+					$this->set('guestKey22',$this->Cookie->read('guestKey'));
+					//debug($_COOKIE);
+				} else {
+					//$this->Cookie->destroy();
+					echo 'blin';
+				}
+			};
+			debug($_COOKIE);
+			debug($this->Cookie->read('guestKey'));
+			$this->set('guestKey',$this->Cookie->read('guestKey'));
+			
 			$this->render('homealbum');
 		}
 		//$this->set('albums', $currentAlbum );

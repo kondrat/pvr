@@ -105,7 +105,7 @@
 	
 
 		    <div class="span-24">
-		        Footer
+		        PVR &copy;<?php echo date('Y');?>
 		    </div>
 		
 	</div>

@@ -1,7 +1,24 @@
 .inner_page {
 	background-color: #eee;
 	border: 1px solid #ccc;
+	position: relative;
+	height:470px;
 }
+.inner_page img.demoImg {
+	position:absolute;
+}
+
+#slideshow img {
+	z-index:1;
+}
+
+#slideshow img.active {
+	z-index:3;
+}
+#slideshow img.previous {
+	z-index:2;
+}
+
 
 
 /*form classes*/
@@ -14,7 +31,8 @@
 	width: 206px;
 }
 div.input {
-	margin-bottom: 1em;
+	/*margin-bottom: 1em;*/
+	float:left;
 }
 #UserLoginForm fieldset {
 	width: 212px;
@@ -50,17 +68,15 @@ div.formWrap input.form-error {
 	padding: 0;
 	height: 15px;
 }
-#regSubmit {
-	
-}
+
 /*login*/
 div.loginFormSlider {
+	z-index: 10;
 	margin-top: 20px;
 	background-color: #4A4A4A;
 	border: 7px solid #ccc;
 	opacity: 0.8;
 	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
-	padding: 0 0 10px 10px;
 	cursor: move; 
 	width: 230px;
 }
@@ -73,20 +89,30 @@ div.loginFormSlider {
 	left: 30px;
 }
 div.loginFormSlider label {
-	color: #FF8080;
+	/*color: #FF8080;*/
+	color:red;
 	opacity: 1;
-	background: url('./img/icons/back1.png') repeat;
+	/*background: url('./img/icons/back1.png') repeat;*/
+
+	padding: 0 20px 0 4px ;
+}
+div.loginFormInput{
+	background-color:#000;
+	padding:0 0 15px 10px;
 }
 .loginFormSlider .submit{
-		margin: 4px 0 0 0px;
+		margin:5px 0 5px 10px;
 }
 .loginFormSlider div.input{
 		margin-bottom: 0px;
 }
+.lfs {
+	z-index: 10;
+}
 .lfs p{
 	position: absolute;
-	top: 115px;
-	left: 80px;
+	top: 130px;
+	left: 75px;
 }
 .lfs p a{
 	color: #FF8080;
@@ -98,6 +124,8 @@ div.loginFormSlider label {
 .lfs p a:hover{
 	text-decoration: underline;
 	color:red;
+	background-color:#000;
+	padding: 2px 6px;
 }
 .lfs .imgInputMove {
 	cursor: move;
@@ -107,6 +135,7 @@ div.loginFormSlider label {
 
 
 .signup {
+	z-index: 10;
 	border: 1px solid #ccc;
 	background-color: #efe;	
 	margin: 20px 0 0 0;
@@ -115,16 +144,16 @@ div.loginFormSlider label {
 	opacity: 0.8;
 	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
 	cursor: move; 
-	height: 118px;
+	height: 70px;
 }
 .innerSignup {
 	background-color:#000000;
-	margin:40px;
 	padding:10px 10px 10px 10px;
 	text-align:center;
 }
 .innerSignup a{
-	color:#FF8080;
+	/*color:#FF8080;*/
+	color:red;
 	font-weight: bold;
 	text-align: center;
 	text-decoration:none;
@@ -158,27 +187,32 @@ div.album img {
 	color:#2361C7;
 	font-weight: bold;
 }
-/*ajax*/
+/*ajax upload*/
 #storyTextUpload {
 	color: #ff5e5e;
-	/*font-weight: bold;*/
 	font-size: 15pt;
 	background-color: #ccc;
-	/*width: 320px;*/
+}
+.imgInput .submit {
+	margin: 0;
+} 
+#tuda{
+	margin: 0 0 0 20px;
 }
 .imgInput {
 	position: relative;
 	background-color: #4a4a4a;
+	border: 6px solid #ccc;
 	padding: 10px;
-	width: 300px;
+	width: 340px;
 	opacity: 0.8;
 	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
 	cursor: move; 
 }
 .imgInputMove {
 	position: absolute;
-	top: 25px;
-	left: 250px;
+	top: -20px;
+	left: 170px;
 	font-weight: bold;
 	font-size: larger;
 	background-color: #FF8080;
@@ -225,4 +259,25 @@ div.album img {
 	width: 120px;
 	height: 60px;
 	float: left;
+}
+.fastUpload {
+	z-index: 10;
+	opacity: 0.8;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	cursor: move;
+	width: 350px;
+	background-color: #4A4A4A;
+	border: 6px solid #ccc;
+	position: absolute;
+	top: 350px;
+	left: 50px;
+}
+.fastUpload input {
+	margin: 0 0 0 10px;
+}
+.uploadNow {
+	color:red;
+	font-weight:bold;
+	background-color: #000;
+	padding: 10px;
 }
