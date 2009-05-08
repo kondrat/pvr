@@ -27,23 +27,16 @@ class AlbumsController extends AppController {
 		} else {
 			$key = md5(uniqid(rand(), true));
 			
-			if( !$this->Cookie->read('guestKey')) {		
-				/*		
+			if( !$this->Cookie->read('guestKey')) {							
 				if( !$this->Session->check('guestKey') ) {				
-					$this->Session->write('guestKey2', $key );			
-				}	
-				*/	
+					$this->Session->write('guestKey', $key );			
+				}						
 				$this->Cookie->write('guestKey',$key,false, '360 days');			
-				if ( $this->Cookie->read('guestKey') && isset($_COOKIE['CakeCookie']['guestKey']) && $_COOKIE['CakeCookie']['guestKey'] != null ) {
-					$this->set('guestKey22',$this->Cookie->read('guestKey'));
-					//debug($_COOKIE);
-				} else {
-					//$this->Cookie->destroy();
-					echo 'blin';
-				}
-			};
-			debug($_COOKIE);
-			debug($this->Cookie->read('guestKey'));
+			} else {
+				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
+			}
+			//debug($_COOKIE);
+			//debug($this->Cookie->read('guestKey'));
 			$this->set('guestKey',$this->Cookie->read('guestKey'));
 			
 			$this->render('homealbum');
@@ -215,5 +208,5 @@ class AlbumsController extends AppController {
 	}
 
 }
-
+// Тест на юник
 ?>

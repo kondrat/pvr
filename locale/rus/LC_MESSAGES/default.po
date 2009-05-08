@@ -55,6 +55,9 @@ msgstr 	"Имя"
 msgid	"Please type in the code" 
 msgstr 	"Введите код"
 
+msgid	"Couldn\'t see" 
+msgstr 	"Не вижу код"
+
 msgid	"Confirm Password" 
 msgstr 	"Подтвердить пароль"
 

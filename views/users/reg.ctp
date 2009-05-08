@@ -51,7 +51,7 @@
 
 						
 						<div class="capReset">
-							<p><?php echo $html->image('icons/001_39.png');?></p>
+							<p><?php echo $html->image('icons/001_39.png');?><span><?php __('Couldn\'t see');?></span></p>
 						</div>
 					</div>					
 					

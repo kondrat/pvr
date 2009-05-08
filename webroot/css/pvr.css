@@ -119,6 +119,7 @@ div.loginFormInput{
 	font-weight: bold;
 	text-decoration: none;
 	margin: 15px;
+	padding: 2px 6px;
 }
 
 .lfs p a:hover{
@@ -132,7 +133,9 @@ div.loginFormInput{
 	top: 73px;
 	left: 220px;
 }
-
+.lfs input {
+	font-weight: bold;
+}
 
 .signup {
 	z-index: 10;
@@ -247,7 +250,18 @@ div.album img {
 .capReset {
 	float: left;
 	margin: 19px 19px 0 19px;
+	position:relative;
 }
+.capReset span {
+	color:grey;
+	font-size:smaller;
+	font-weight:bold;
+	left:-5px;
+	position:absolute;
+	top:25px;
+	width:150px;
+}
+
 #capImg {
 	cursor: pointer;
 }

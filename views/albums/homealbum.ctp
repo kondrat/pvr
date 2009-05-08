@@ -1,4 +1,4 @@
-
+<?php echo $javascript->link('pvr_homealbum',false);?>
 
 <div class="inner_page" >
 	<div id="slideshow">
@@ -54,18 +54,18 @@
 						<div class="uploadNow"><?php __('Upload now (without registration)');?></div>
 						<?php echo $form->create('Image', array( 'name'=>'storyEditForm','id'=>'storyEditForm', 'type' => 'file') );?>
 							<?php echo $form->input('Image.userfile', array('type'=>'file', 'label'=>false ) ); ?>
-							<?php if( isset($currentAlbum['Album']['id']) ): ?>
-								<?php echo $form->hidden( 'album_id', array('value'=> $currentAlbum['Album']['id']) ); ?>
+							<?php if( isset($guestKey) ): ?>
+								<?php echo $form->hidden( 'key', array('value'=> $guestKey) ); ?>
 							<?php endif ?>
 							<?php echo $form->submit(__('Upload',true),array('id' => 'tuda') );?>
 						<?php echo $form->end();?>
 						<div class="imgInputMove"><?php //__('Move');?></div>
-						<div class="rounded" style="visibility: hidden;" id="storyTextUpload"></div>
+						<div class="" style="visibility: hidden;" id="storyTextUpload"></div>
 				</div>
 			</div>
 					
 
 	
-
+<!--Тест Ю -->
 
 </div>

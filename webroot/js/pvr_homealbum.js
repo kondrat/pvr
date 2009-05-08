@@ -1,18 +1,3 @@
-jQuery(document).ready( function(){
-	$('.addAlbum').click(function(){
-
-		$(this).parents("form:first").ajaxSubmit({
-			success: function(responseText, responseCode) {
-					$('#ajax-save-message').hide().html(responseText).fadeIn();					
-					//$('#ajax-save-message').fadeOut(5000);
-				},
-			resetForm: true
-			});
-		return false;
-	})
-});
-
-
 
 jQuery(document).ready( function() {
 	
@@ -21,11 +6,11 @@ jQuery(document).ready( function() {
 		var oldImg = $('#mainImage').attr('src');
 							
 		$("#storyEditForm").ajaxForm({
-			url: path+'/images/addAjax',	
+			url: path+'/images/addAjaxHome',	
 			dataType:  'json',			
 			success: 
 					function(data) {
-							$('#storyTextUpload').hide().css({'margin':'5px 12px 0 12px','visibility' : 'visible'}).html("<p class='rounded' style='padding:5px;'>"+data.message+"</p>").fadeIn();
+							$('#storyTextUpload').hide().css({'margin':'5px 12px 10px 12px','visibility' : 'visible'}).html("<p style='margin: 0; padding:5px; '>"+data.message+"</p>").fadeIn();
 
 							$('#storyTextUpload').fadeOut(7000);
 											 					
@@ -71,7 +56,6 @@ jQuery(document).ready( function() {
 
 $(document).ready( function(){
   $('.rounded').corners('5px');
-  //$('.rounded').corner();
 });
 
 
@@ -87,8 +71,8 @@ $(document).ready(function(){
 });
 // Тест на юник
 $(document).ready( function(){
-  $('.slider').draggable(); 
-  $('.imgInput').draggable();
+  //$('.slider').draggable(); 
+  //$('.imgInput').draggable();
 	$('.lfs, .signup, .fastUpload').draggable();
 });
 
@@ -105,6 +89,6 @@ $(function() {
 					active.removeClass('active previous');
 				});
 			},
-			150000
+			15000
 	 );
 });

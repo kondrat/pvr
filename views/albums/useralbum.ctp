@@ -1,3 +1,5 @@
+<?php echo $javascript->link('pvr_useralbum',false);?>
+
 	<div class="clearfix">
 		<div class="span-16 imageBack" style="">
 			<div style="position: relative;">

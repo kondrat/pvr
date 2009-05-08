@@ -22,9 +22,8 @@
 		echo $javascript->link('ui.core');
 		echo $javascript->link('ui.draggable');
 		echo $javascript->link('jquery.corners.min');
-		//echo $javascript->link('jquery.corner');
 		echo $javascript->link('easySlider1.5');
-		echo $javascript->link('pvr');
+		//echo $javascript->link('pvr');
 		echo $scripts_for_layout;
 	?>
 </head>

@@ -3,7 +3,7 @@ class ImagesController extends AppController {
 
 	var $name = 'Images';
 	var $helpers = array('Html', 'Form');
-	var $components = array('Upload','UploadDemo');
+	var $components = array('Upload','UploadDemo','Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow('index','add');
@@ -11,7 +11,7 @@ class ImagesController extends AppController {
         $this->Auth->allowedActions = array('*');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
-    }
+	}
 //--------------------------------------------------------------------
 
 	function index() {
@@ -124,6 +124,100 @@ class ImagesController extends AppController {
 		}
 
 
+	}
+//--------------------------------------------------------------------
+	function addAjaxHome() {
+		
+		Configure::write('debug', 0);
+
+			if (!empty($this->data) ) {
+	
+				$file = array();
+				// set the upload destination folder
+				$destination = WWW_ROOT.'img'.DS.Configure::read('farm').DS.'guest'.DS;
+				//debug($destination );
+
+				// grab the file
+				$file = $this->data['Image']['userfile'];
+				//debug($file);
+				$ttt = $this->Cookie->read('guestKey');
+				if ( !is_array($file) || $file == array() ||$file['error'] == 4) {
+					//echo '{"message":"'.__('Image wasn\'t uploaded',true).'"}';
+					echo '{"message":"'.$ttt.'"}';
+					$this->autoRender = false;
+					exit();			
+				} else {									
+						// upload the image using the upload component
+	
+									$result = $this->Upload->upload($file, $destination, $org );
+									if ($result != 1) {
+										//debug($this->Upload->result);
+										$this->data['Image']['image'] = $this->Upload->result;
+										
+									}
+	
+							
+							if ( $result == 1 ) {
+								// display error
+								$errors = $this->Upload->errors;
+								// piece together errors
+								if( is_array($errors) ) { 
+									$errors = implode("<br />",$errors); 
+								}
+									//echo $errors;
+									echo '{"message":"'.$errors.'"}';
+									$this->autoRender = false;
+					 				exit();
+							}					
+						
+							
+				}		
+				
+				if ( isset($this->data['Image']['image']) && $this->data['Image']['image'] != null ){
+					
+					
+					
+							if ( $this->Session->check('Album.Id') ) {
+								$this->data['Image']['album_id'] = $this->Session->read('Album.Id');
+							} else {
+								$this->data['Image']['album_id'] = $this->data['Image']['album_id'];
+							}
+							
+							$this->Image->create();
+							if ($this->Image->save($this->data)) {
+	
+									$imgToReturn = 	unserialize($this->data['Image']['image']);
+									if ($imgToReturn['img']['md'] != array() ) {
+										$img = $imgToReturn['img']['img'].'-md';
+										$widthImg = $imgToReturn['img']['md']['width'];
+									} else {
+										$img = $imgToReturn['img']['img'].'-lrg';
+									}
+									$thumb = $imgToReturn['img']['img'].'-sq';	
+									$arr = array ('message'=> __('The Image has been saved',true), 'img'=> $img,'thumb'=> $thumb,'path'=> $this->Auth->user('uuid'),'imgWidth'=> $widthImg );
+									echo json_encode($arr);						
+									$this->autoRender = false;
+					 				exit();
+					 						
+								//$this->Session->setFlash( __('The Image has been saved', true) );
+								//$this->redirect( array('controller' => 'albums','action' => 'useralbum',$this->data['Image']['album_id']) );
+							} else {					
+								//$this->Session->setFlash(__('The Image could not be saved. Please, try again.', true));
+								if ($this->Upload->result != null) {
+									@unlink($destination.$this->Upload->result);
+									$this->autoRender = false;
+									$arr = array ('message'=> __('The Image could not be saved. Please, try again.',true), 'kon'=> 'test');
+									echo json_encode($arr);	
+					 				exit();
+								}
+							}
+							
+	
+	
+				}
+				
+				
+			}
 	}
 //--------------------------------------------------------------------
 	function edit($id = null) {
