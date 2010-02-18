@@ -42,16 +42,18 @@
 	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	//Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 	
+	
+			//Router::connectNamed(array('lang'));
+
 
 			
-			Router::connect('edit/*',array('controller' => 'images', 'action' => 'edit'),array());
+			Router::connect('/editit/*',array('controller' => 'images', 'action' => 'edit'));
 			Router::connect('/:lang/edit/*',array('controller' => 'images', 'action' => 'edit'),array('lang'=>'[a-z]{2}'));
 			
 			Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 			Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 			
-			Router::connect('/', array('controller' => 'albums', 'action' => 'useralbum'), array());			                       
-			Router::connect('/:lang/', array('controller' => 'albums', 'action' => 'useralbum'),array('lang' => '[a-z]{2}'));
+						                       
 					
 			Router::connect('/:lang/admin/:controller/:action/*',
 			                       array('admin' => true),
@@ -59,4 +61,7 @@
 			Router::connect('/:lang/:controller/:action/*',
 			                       array(),
 			                       array('lang' => '[a-z]{2}'));	
+			Router::connect('/:lang/', array('controller' => 'albums', 'action' => 'useralbum','lang'=>false),array('pass' => array('lang'),'lang' => '[a-z]+'));
+			Router::connect('/', array('controller' => 'albums', 'action' => 'useralbum'), array());
+
 ?>

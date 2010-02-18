@@ -1,8 +1,8 @@
 <?php
 
 class AppController extends Controller {
-	var $components = array( 'Acl','Auth', 'RequestHandler', 'Email', 'Cookie','DebugKit.Toolbar');
-	var $helpers = array('Javascript','Html', 'Form', 'Cache');
+	var $components = array( 'Session','Acl','Auth', 'RequestHandler', 'Email', 'Cookie','DebugKit.Toolbar');
+	var $helpers = array('Session','Javascript','Html', 'Form', 'Cache');
 	var $publicControllers = array('pages', 'test');
 	//var $uses = array('');
 //--------------------------------------------------------------------
@@ -29,7 +29,7 @@ class AppController extends Controller {
 		
 		if ( ($this->name != 'App') && !in_array($this->params['lang'], Configure::read('Languages.all')) ) {
 			unset($this->params['lang']);
-			$this->Session->del('langSes');
+			$this->Session->delete('langSes');
 			$this->Session->setFlash(__('Whoops, not a valid language.', true));
 			$this->redirect('/', 301, true);
 		}

@@ -13,3 +13,4 @@ webroot/img/gallery1/*
 webroot/img/demo/*
 !empty
 !.gitignore
+*~

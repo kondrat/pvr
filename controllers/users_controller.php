@@ -82,9 +82,9 @@ class UsersController extends AppController {
     	$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
     	//$this->Session->del();
         $this->Auth->logout();
-        $this->Session->del('Order');
-        $this->Session->del('userCart');
-        $this->Cookie->del('Auth.User');
+        $this->Session->delete('Order');
+        $this->Session->delete('userCart');
+        $this->Cookie->delete('Auth.User');
         $this->Session->setFlash( $tempUserName, 'default', array('class' => 'nomargin flash') );
         $this->redirect( '/',null,true);        
     }
@@ -276,7 +276,7 @@ class UsersController extends AppController {
 			$this->Session->setFlash('Invalid id for User');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if ( $this->User->del($id) ) {
+		if ( $this->User->delete($id) ) {
 			$this->Session->setFlash('User #'.$id.' deleted');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
@@ -330,7 +330,7 @@ class UsersController extends AppController {
 			$this->Session->setFlash('Invalid id for User');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if ( $this->User->del($id) ) {
+		if ( $this->User->delete($id) ) {
 			$this->Session->setFlash('User #'.$id.' deleted');
 			$this->redirect(array('action'=>'index'), null, true);
 		}

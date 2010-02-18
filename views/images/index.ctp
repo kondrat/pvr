@@ -46,7 +46,8 @@ foreach ($images as $image):
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $image['Image']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $image['Image']['id'])); ?>
+			<span>...and...</span>
+			<?php echo $html->link(__('Edit', true), array('controller'=>'images','action'=>'edit', $image['Image']['id'])); ?>
 			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $image['Image']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $image['Image']['id'])); ?>
 		</td>
 	</tr>
