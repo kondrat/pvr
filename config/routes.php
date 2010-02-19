@@ -60,8 +60,10 @@
 			                       array('lang' => '[a-z]{2}'));			
 			Router::connect('/:lang/:controller/:action/*',
 			                       array(),
-			                       array('lang' => '[a-z]{2}'));	
-			Router::connect('/:lang/', array('controller' => 'albums', 'action' => 'useralbum','lang'=>false),array('pass' => array('lang'),'lang' => '[a-z]+'));
+			                       array('lang' => '[a-z]{2}'));
+			                       	
 			Router::connect('/', array('controller' => 'albums', 'action' => 'useralbum'), array());
+			Router::connect('/:lang', array('controller' => 'albums', 'action' => 'useralbum','lang'=>false),array('pass' => array('lang'),'lang' => '[a-z]+'));
+			
 
 ?>
